@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Markdown 的一些问题 | m2shad0w</title>
+  <title>spark-01 | m2shad0w</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="from 垠神把我之前的博文基本上转换成了 markdown 格式。我发现 markdown 虽然在编辑器里看起来比 HTML 清晰一些，但也有一些不足。
-这些 markup 语言的格式都有点像我本科的时候给我爸做的一种“标准化试卷标记语言”（因为他是中学英语老师）。当时我写了一个1000来行的 Perl 脚本，可以把这种简单的标记语言转换成美观的 LaTeX 格式文档，并且带有友好的 Tk 图形">
+  <meta name="description" content="基本安装简介Apache Spark 是一个快速、通用的计算机集群系统。它提供高度优化 Java, Scala, Python and R 的高级接口来支持一般的执行流程，同时支持丰富的高层及的工具集合，包括 [Spark SQL](#)
+来处理关系型数据，[MLlib](#)来处理机器学习，[GraphX](#)来处理图运算，[Spark Streaming](#)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown 的一些问题">
-<meta property="og:url" content="http://m2shad0w.com/2015/07/14/Markdown 的一些问题/index.html">
+<meta property="og:title" content="spark-01">
+<meta property="og:url" content="http://m2shad0w.com/2015/12/21/how_to_use_spark_00/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="from 垠神把我之前的博文基本上转换成了 markdown 格式。我发现 markdown 虽然在编辑器里看起来比 HTML 清晰一些，但也有一些不足。
-这些 markup 语言的格式都有点像我本科的时候给我爸做的一种“标准化试卷标记语言”（因为他是中学英语老师）。当时我写了一个1000来行的 Perl 脚本，可以把这种简单的标记语言转换成美观的 LaTeX 格式文档，并且带有友好的 Tk 图形">
-<meta property="og:image" content="http://www.yinwang.org/images/markdown-mistake.png">
-<meta property="og:updated_time" content="2015-12-21T02:09:18.000Z">
+<meta property="og:description" content="基本安装简介Apache Spark 是一个快速、通用的计算机集群系统。它提供高度优化 Java, Scala, Python and R 的高级接口来支持一般的执行流程，同时支持丰富的高层及的工具集合，包括 [Spark SQL](#)
+来处理关系型数据，[MLlib](#)来处理机器学习，[GraphX](#)来处理图运算，[Spark Streaming](#)">
+<meta property="og:updated_time" content="2015-12-21T04:07:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown 的一些问题">
-<meta name="twitter:description" content="from 垠神把我之前的博文基本上转换成了 markdown 格式。我发现 markdown 虽然在编辑器里看起来比 HTML 清晰一些，但也有一些不足。
-这些 markup 语言的格式都有点像我本科的时候给我爸做的一种“标准化试卷标记语言”（因为他是中学英语老师）。当时我写了一个1000来行的 Perl 脚本，可以把这种简单的标记语言转换成美观的 LaTeX 格式文档，并且带有友好的 Tk 图形">
+<meta name="twitter:title" content="spark-01">
+<meta name="twitter:description" content="基本安装简介Apache Spark 是一个快速、通用的计算机集群系统。它提供高度优化 Java, Scala, Python and R 的高级接口来支持一般的执行流程，同时支持丰富的高层及的工具集合，包括 [Spark SQL](#)
+来处理关系型数据，[MLlib](#)来处理机器学习，[GraphX](#)来处理图运算，[Spark Streaming](#)">
   
     <link rel="alternative" href="/atom.xml" title="m2shad0w" type="application/atom+xml">
   
@@ -203,11 +202,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Markdown 的一些问题" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-how_to_use_spark_00" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/14/Markdown 的一些问题/" class="article-date">
-  	<time datetime="2015-07-13T16:00:00.000Z" itemprop="datePublished">2015-07-14</time>
+      <a href="/2015/12/21/how_to_use_spark_00/" class="article-date">
+  	<time datetime="2015-12-21T02:04:35.000Z" itemprop="datePublished">2015-12-21</time>
 </a>
     </div>
   
@@ -220,7 +219,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Markdown 的一些问题
+      spark-01
     </h1>
   
 
@@ -229,12 +228,12 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinking/">thinking</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/thinking/">thinking</a>
+	<a class="article-category-link" href="/categories/bigdata/">bigdata</a>
 	</div>
 
 
@@ -244,15 +243,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://www.yinwang.org/blog-cn/2013/04/14/markdown/" target="_blank" rel="external">from 垠神</a><br>把我之前的博文基本上转换成了 markdown 格式。我发现 markdown 虽然在编辑器里看起来比 HTML 清晰一些，但也有一些不足。</p>
-<p>这些 markup 语言的格式都有点像我本科的时候给我爸做的一种“标准化试卷标记语言”（因为他是中学英语老师）。当时我写了一个1000来行的 Perl 脚本，可以把这种简单的标记语言转换成美观的 LaTeX 格式文档，并且带有友好的 Tk 图形界面。现在回想起来，我那时候的设计就已经相当先进了。跟我的语言相比，这些 blog 用的 markup 语言真是小巫见大巫了，而且问题多多。有点跑题了，还是回头来看看 markdown 的问题吧。</p>
-<a id="more"></a>
-<h3 id="Markdown_实际上采用的是类似_Python_和_Haskell_的_layout_语法。">Markdown 实际上采用的是类似 Python 和 Haskell 的 layout 语法。</h3><p>我已经在一篇英文博文里提到了 layout 语法的多种问题。因为空格的数量决定了文档的结构，这种文档格式相当的“脆弱”。稍微少打一两个空格，就会出现不可预测的结果。这种现象在“itemize”内部的代码块最容易出现。因为每个 item 带来了缩进，所以内部的代码必须比 item 的缩进多4个空格，才能被排到正确的位置。比如我转换博文的时候多次出现以下的情况：<br><img src="http://www.yinwang.org/images/markdown-mistake.png" alt="问题"></p>
-<p>这里的问题是，代码里的第一行 helloworld z = let x = 1 因为缩进不够，被放到了代码块外面。但是为了准确的缩进所耗费的精力，其实比直接打 &lt;pre&gt;<br>这样的 tag 还要多。</p>
-<h3 id="特殊字符的选择不合理">特殊字符的选择不合理</h3><p>markdown 对特殊字符的使用不大合理。我多次发现文档段落整段的变成斜体，就是因为原来的文档里出现了 x<em>y 这样的表达式。在程序员的世界里，“乘法”显然比“强调”更加频繁。把 </em> 用于标记“强调”，实际上把一个非常有用的字符用在了很不频繁的用途。</p>
-<h3 id="表达力相当有限">表达力相当有限</h3><p>在很多细节上，markdown 并不能表达我想要的格式。比如它不能正确的插入断行 \<br>。如果你有两块紧接在一起的代码，但你不想把它们连在一起，markdown 非要给你连在一起…… 于是我就发现自己加入了越来越多的 HTML。</p>
-<p>这在图片的语法上就更加明显，markdown 引入了![alt](image url) 这样的格式，其实比起 HTML 还要难看和不一致。比如现在它仍然无法表达图片的大小，这是相当重要的信息。所以我觉得 markdown 的语法已经显示出了它的弱点，如果它要表达更复杂的信息，就会变得比 HTML 还要难记，难看。所以对于图片，我觉得还不如直接用 HTML 的 &lt;img&gt; 。</p>
-<p>所以总的感觉是 markdown 引入了太多的“语法”，以至于稍微复杂一点的信息表达起来还不如 HTML 来的直接。现在就这样先凑合着吧。也许过段时间自己设计一个格式。</p>
+        <h1 id="基本安装">基本安装</h1><h2 id="简介">简介</h2><pre><code>Apache Spark 是一个快速、通用的计算机集群系统。它提供高度优化 Java, Scala, Python and R 的高级接口来支持一般的执行流程，同时支持丰富的高层及的工具集合，包括 [<span class="link_label">Spark SQL</span>](<span class="link_url">#</span>)
+来处理关系型数据，[<span class="link_label">MLlib</span>](<span class="link_url">#</span>)来处理机器学习，[<span class="link_label">GraphX</span>](<span class="link_url">#</span>)来处理图运算，[<span class="link_label">Spark Streaming</span>](<span class="link_url">#</span>)
+</code></pre><a id="more"></a>
+<h2 id="系统要求">系统要求</h2><blockquote>
+<p>Spark runs on Java 7+, Python 2.6+ and R 3.1+. For the Scala API, Spark 1.5.2 uses Scala 2.10. You will need to use a compatible Scala version (2.10.x).</p>
+</blockquote>
+<h3 id="mac上安装">mac上安装</h3><p><strong>mac 上用brew命令行安装spark</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apache-spark</span><br></pre></td></tr></table></figure>
+<p><strong>查看spark版本</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew info apache-spark</span><br><span class="line">apache-spark: stable <span class="number">1.5</span>.<span class="number">2</span>, HEAD</span><br><span class="line">Engine <span class="keyword">for</span> large-scale data processing</span><br><span class="line">https://spark.apache.org/</span><br><span class="line">/usr/<span class="built_in">local</span>/Cellar/apache-spark/<span class="number">1.5</span>.<span class="number">2</span> (<span class="number">686</span> files, <span class="number">305</span>M) *</span><br><span class="line">  Built from <span class="built_in">source</span></span><br><span class="line">From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/apache-spark.rb</span><br></pre></td></tr></table></figure>
+<p><strong>安装java</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install java</span><br></pre></td></tr></table></figure>
+<p><strong>查看java版本</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask info java or java -version</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">java version <span class="string">"1.8.0_66"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build <span class="number">1.8</span>.<span class="number">0</span>_66-b17)</span><br><span class="line">Java HotSpot(TM) <span class="number">64</span>-Bit Server VM (build <span class="number">25.66</span>-b17, mixed mode)</span><br></pre></td></tr></table></figure>
+<p><strong>安装scala</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install scala</span><br></pre></td></tr></table></figure>
+<p><strong>查看scala版本</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew info scala</span><br></pre></td></tr></table></figure>
+<p><strong>info</strong><br>回显信息中比较重要的是用idea开发的scala的时候，scala路径设置成</p>
+<blockquote>
+<p>To use with IntelliJ, set the Scala home to:<br>/usr/local/opt/scala/idea</p>
+</blockquote>
+<p>spark 1.5.2 使用（scala2.1.x）编译的</p>
+<h2 id="Running_the_Examples_and_Shell">Running the Examples and Shell</h2><p>这样安装的spark自带一些例子， Scala, Java, Python and R 的例子在 examples/src/main目录，可以在安装的spark根目录使用命令 bin/run-example <class> [params] 跑一些例子，例如计算Pi</class></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/run-example SparkPi <span class="number">100</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -262,18 +278,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/09/06/TheBigData/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          TheBigData
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/07/07/SetupShadowSocks/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SetupShadowSocks</div>
+    <a href="/2015/09/06/TheBigData/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TheBigData</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
