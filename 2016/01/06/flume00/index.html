@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>flume00 | m2shad0w</title>
+  <title>flume聚合日志 | m2shad0w</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="0x00 起因用spark分析数据时, 希望源数据能够能够源源不断的自己写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flume00">
+<meta property="og:title" content="flume聚合日志">
 <meta property="og:url" content="http://m2shad0w.com/2016/01/06/flume00/index.html">
 <meta property="og:site_name" content="m2shad0w">
 <meta property="og:description" content="0x00 起因用spark分析数据时, 希望源数据能够能够源源不断的自己写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。">
-<meta property="og:updated_time" content="2016-01-07T04:43:05.000Z">
+<meta property="og:updated_time" content="2016-01-07T05:49:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flume00">
+<meta name="twitter:title" content="flume聚合日志">
 <meta name="twitter:description" content="0x00 起因用spark分析数据时, 希望源数据能够能够源源不断的自己写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。">
   
     <link rel="alternative" href="/atom.xml" title="m2shad0w" type="application/atom+xml">
@@ -93,9 +93,7 @@
 						
 							<li><a href="/">主页</a></li>
 				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="/tags/随笔">随笔</a></li>
+							<li><a href="/archives">文章</a></li>
 				        
 							<li><a href="/about">关于</a></li>
 				        
@@ -110,7 +108,7 @@
 					        
 								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
 					        
-								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/M2shad0w" title="zhihu">zhihu</a>
+								<a class="mail" target="_blank" href="/#" title="mail">mail</a>
 					        
 						</div>
 					</nav>
@@ -174,9 +172,7 @@
 				
 					<li><a href="/">主页</a></li>
 		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/tags/随笔">随笔</a></li>
+					<li><a href="/archives">文章</a></li>
 		        
 					<li><a href="/about">关于</a></li>
 		        
@@ -192,7 +188,7 @@
 			        
 						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
 			        
-						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/M2shad0w" title="zhihu">zhihu</a>
+						<a class="mail" target="_blank" href="/#" title="mail">mail</a>
 			        
 				</div>
 			</nav>
@@ -216,7 +212,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      flume00
+      flume聚合日志
     </h1>
   
 
@@ -245,7 +241,29 @@
 <p>Apache Flume is a distributed, reliable, and available system for efficiently collecting, aggregating and moving large amounts of log data from many different sources to a centralized data store.</p>
 </blockquote>
 <p>Apache Flume 是一种可靠的分布式可用系统，用于从许多不同源将大量日志数据收集、聚合和移动至集中的数据存储。</p>
-<h3 id="0x02_实践"><strong>0x02 实践</strong></h3>
+<h3 id="0x02_实践"><strong>0x02 实践</strong></h3><p><a href="https://flume.apache.org/FlumeUserGuide.html#http-source" target="_blank" rel="external">聚合http-source</a>, HTTP 请求通过一个 “handler” 将被转换成 flume 事件, 一个 Http 请求中的所有事件将被一次提交到 flume 的管道内. 如果 “handler” 抛出了一个异常, flume source 将会返回一个 HTTP 400 的状态码, 如果 flume source  不能添加事件到管道，将会返回一个 HTTP 503 的 状态码(暂时不可达)。</p>
+<ul>
+<li><p>在flume的安装目录的配置文件夹下</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/apache-flume/conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加配置文件</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flume-conf-http.properties</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件内容</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Define source, channel, sink&#10;agent1.sources = r1&#10;agent1.channels = ch1&#10;agent1.sinks = hdfs-sink1&#10;# Configure channel&#10;agent1.channels.ch1.type = memory&#10;agent1.channels.ch1.capacity = 1000000&#10;agent1.channels.ch1.transactionCapacity = 500000&#10;# Define and configure an Spool directory source&#10;agent1.sources.r1.channels = ch1&#10;agent1.sources.r1.type = http&#10;agent1.sources.r1.port = 5143&#10;agent1.sources.r1.handler = org.apache.flume.source.http.JSONHandler&#10;agent1.sources.r1.handler.nickname = random props&#10;agent1.sources.r1.ignorePattern = event(_\d&#123;4&#125;\-\d&#123;2&#125;\-\d&#123;2&#125;_\d&#123;2&#125;_\d&#123;2&#125;)?\.log(\.COMPLETED)?&#10;agent1.sources.r1.batchSize = 50&#10;# Define and configure a hdfs sink&#10;agent1.sinks.hdfs-sink1.channel = ch1&#10;agent1.sinks.hdfs-sink1.type = hdfs&#10;agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:9000/user/hadoop/&#9;flumetest/&#10;agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S&#10;agent1.sinks.hdfs-sink1.hdfs.fileSuffix = .log&#10;agent1.sinks.hdfs-sink1.hdfs.rollSize = 1048576&#10;agent1.sinks.hdfs-sink1.hdfs.rollCount = 0&#10;agent1.sinks.hdfs-sink1.hdfs.batchSize = 1500&#10;agent1.sinks.hdfs-sink1.hdfs.round = true&#10;agent1.sinks.hdfs-sink1.hdfs.roundUnit = minute&#10;agent1.sinks.hdfs-sink1.hdfs.threadsPoolSize = 25&#10;agent1.sinks.hdfs-sink1.hdfs.useLocalTimeStamp = true&#10;agent1.sinks.hdfs-sink1.hdfs.minBlockReplicas = 1&#10;agent1.sinks.hdfs-sink1.hdfs.fileType = DataStream&#10;agent1.sinks.hdfs-sink1.writeFormat = TEXT&#10;agent1.sinks.hdfs-sink1.rollInterval = 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动 Flume, 将数据回显在控制台</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/flume-ng agent -c ./conf/ -f conf/flume-conf-http.properties -Dflume.root.logger=INFO,console -n agent1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>python post 数据测试</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line">__author__ = <span class="string">'m2shad0w'</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">j = <span class="number">0</span></span><br><span class="line"><span class="comment"># flume  server url</span></span><br><span class="line">url = <span class="string">'http://flumeMac:5143'</span></span><br><span class="line">payload = &#123;<span class="string">"body"</span>: <span class="string">"data money"</span>&#125;</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    listdata = []</span><br><span class="line">    listdata.append(payload)</span><br><span class="line">    <span class="comment"># print listdata, i</span></span><br><span class="line">    r = requests.post(url, data=json.dumps(listdata))</span><br><span class="line">    <span class="comment"># print r.status_code</span></span><br><span class="line">    <span class="keyword">if</span> r.status_code != <span class="number">200</span>:</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">500000</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"time pasue"</span></span><br><span class="line">        time.sleep(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">100000</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"send times is "</span>, i, <span class="string">"fail times is "</span>, j</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看文件</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls -R /user/hadoop/&#9;flumetest/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="0X03_总结"><strong>0X03 总结</strong></h3><p>一开始在配置 <strong>hdfs.fileType = SequenceFile</strong> hadoop fs -cat 文件的时候, 显示乱码。应该配置成 <strong>DataStream</strong></p>
+
       
     </div>
     
