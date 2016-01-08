@@ -51,18 +51,18 @@
 
 
 
-<meta name="description" content="0x00 DataFrame
+<meta name="description" content="DataFrame
 Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提供了一个称为DataFrames的编程抽象，DataFrames可以充当分布式SQL查询引擎。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spark SQL操作之关系型数据库">
 <meta property="og:url" content="http://m2shad0w.com/2015/12/28/spark002/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="0x00 DataFrame
+<meta property="og:description" content="DataFrame
 Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提供了一个称为DataFrames的编程抽象，DataFrames可以充当分布式SQL查询引擎。">
-<meta property="og:updated_time" content="2015-12-31T07:02:42.000Z">
+<meta property="og:updated_time" content="2016-01-08T02:39:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark SQL操作之关系型数据库">
-<meta name="twitter:description" content="0x00 DataFrame
+<meta name="twitter:description" content="DataFrame
 Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提供了一个称为DataFrames的编程抽象，DataFrames可以充当分布式SQL查询引擎。">
 
 
@@ -270,10 +270,11 @@ Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提
       
 
       
-        <span itemprop="articleBody"><h3 id="0x00_DataFrame"><strong>0x00 DataFrame</strong></h3><blockquote>
-<p>Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提供了一个称为DataFrames的编程抽象，DataFrames可以充当分布式SQL查询引擎。<br><a id="more"></a></p>
+        <span itemprop="articleBody"><h3 id="DataFrame"><strong>DataFrame</strong></h3><blockquote>
+<p>Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提供了一个称为DataFrames的编程抽象，DataFrames可以充当分布式SQL查询引擎。</p>
 </blockquote>
-<h3 id="0x01_如何连mysql"><strong>0x01 如何连mysql</strong></h3><p>查看官方文档看到:   </p>
+<a id="more"></a>
+<h3 id="如何连mysql"><strong>如何连mysql</strong></h3><p>查看官方文档看到:   </p>
 <blockquote>
 <p>Spark SQL also includes a data source that can read data from other databases using JDBC.To get started you will need to include the JDBC driver for you particular database on the spark classpath. </p>
 </blockquote>
@@ -281,7 +282,7 @@ Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_CLASSPATH=postgresql-9.3-1102-jdbc41.jar bin/spark-shell</span><br></pre></td></tr></table></figure>
 <p>我们在mysql官网找到jdbc驱动<a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="external">mysql jdbc驱动快速连接</a>下载到本地, 然后在<strong>spark-env.sh</strong>中添加驱动路径，比如:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_CLASSPATH=/Users/m2shad0w/Downloads/mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar</span><br></pre></td></tr></table></figure>
-<h3 id="0x02_编程实例"><strong>0x02 编程实例</strong></h3><ul>
+<h3 id="编程实例"><strong>编程实例</strong></h3><ul>
 <li><p>代码</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkContext</span>,<span class="type">SparkConf</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.sql.&#123;<span class="type">DataFrame</span>, <span class="type">SQLContext</span>&#125;</span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Spark2mysql</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span> (</span>args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"Spark2mysql"</span>)</span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line">    <span class="keyword">val</span> url = <span class="string">"jdbc:mysql://localhost:3306/test"</span></span><br><span class="line">    <span class="keyword">val</span> prop = <span class="keyword">new</span> <span class="type">Properties</span>()</span><br><span class="line">    prop.setProperty(<span class="string">"user"</span>, <span class="string">"root"</span>)</span><br><span class="line">    prop.setProperty(<span class="string">"password"</span>, <span class="string">""</span>)</span><br><span class="line">    <span class="keyword">val</span> sqlContext: <span class="type">SQLContext</span> = <span class="keyword">new</span> <span class="type">SQLContext</span>(sc)</span><br><span class="line">    <span class="keyword">val</span> m1: <span class="type">DataFrame</span> = sqlContext.read.jdbc(url, <span class="string">"gender_count"</span>, prop)</span><br><span class="line">    <span class="keyword">val</span> m2: <span class="type">DataFrame</span> = sqlContext.read.jdbc(url, <span class="string">"person"</span>, prop)</span><br><span class="line">    m1.printSchema()</span><br><span class="line">    m2.printSchema()</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -289,10 +290,10 @@ Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root&#10; |-- gender: string (nullable = true)&#10; |-- count: long (nullable = false)&#10; |-- count_start_time: timestamp (nullable = false)&#10;root&#10; |-- person_id: integer (nullable = false)&#10; |-- first_name: string (nullable = true)&#10; |-- last_name: string (nullable = true)&#10; |-- gender: string (nullable = true)&#10; |-- age: integer (nullable = true)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="0x03_写到数据库"><strong>0x03 写到数据库</strong></h3><p>查看官方网站, DataFrame 提供了 write.jdbc和write.insertInto的接口</p>
+<h3 id="写到数据库"><strong>写到数据库</strong></h3><p>查看官方网站, DataFrame 提供了 write.jdbc和write.insertInto的接口</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>:</span> <span class="type">DataFrameWriter</span></span><br><span class="line"><span class="type">Interface</span> <span class="keyword">for</span> saving the content of the <span class="type">DataFrame</span> out into external storage.</span><br><span class="line"><span class="type">Annotations</span></span><br><span class="line"><span class="annotation">@Experimental</span>()</span><br><span class="line"><span class="type">Since</span></span><br><span class="line"><span class="number">1.4</span><span class="number">.0</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jdbc</span>(</span>url: <span class="type">String</span>, table: <span class="type">String</span>, connectionProperties: <span class="type">Properties</span>): <span class="type">Unit</span></span><br><span class="line"><span class="type">Saves</span> the content of the <span class="type">DataFrame</span> to a external database table via <span class="type">JDBC</span>. <span class="type">In</span> the <span class="keyword">case</span> the table already exists in the external database, behavior of <span class="keyword">this</span> function depends on the save mode, specified by the mode function (<span class="keyword">default</span> to throwing an exception).</span><br><span class="line"><span class="type">Don</span><span class="symbol">'t</span> create too many partitions in parallel on a large cluster; otherwise <span class="type">Spark</span> might crash your external database systems.</span><br><span class="line">url</span><br><span class="line"><span class="type">JDBC</span> database url of the form jdbc:subprotocol:subname</span><br><span class="line">table</span><br><span class="line"><span class="type">Name</span> of the table in the external database.</span><br><span class="line">connectionProperties</span><br><span class="line"><span class="type">JDBC</span> database connection arguments, a list of arbitrary string tag/value. <span class="type">Normally</span> at least a <span class="string">"user"</span> and <span class="string">"password"</span> property should be included.</span><br></pre></td></tr></table></figure>
-<h3 id="04_总结"><strong>04 总结</strong></h3><p>但是感觉接口还是古板了一点。<br>在spark issue上看到未来 spark jdbc 会支持行插入<br><a href="https://issues.apache.org/jira/browse/SPARK-12010" target="_blank" rel="external">Spark JDBC requires support for column-name-free INSERT syntax</a></p>
+<h3 id="总结"><strong>总结</strong></h3><p>但是感觉接口还是古板了一点。<br>在spark issue上看到未来 spark jdbc 会支持行插入<br><a href="https://issues.apache.org/jira/browse/SPARK-12010" target="_blank" rel="external">Spark JDBC requires support for column-name-free INSERT syntax</a></p>
 </span>
       
     </div>
@@ -457,11 +458,11 @@ Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://tang3w.com/" target="_blank">matt</a>
+                <a href="http://tang3w.com/" target="_blank">Matt</a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://onevcat.com/" target="_blank">onevcat</a>
+                <a href="http://onevcat.com/" target="_blank">Onevcat</a>
               </span>
             
               <span class="links-of-author-item">
@@ -487,7 +488,7 @@ Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00_DataFrame"><span class="nav-number">1.</span> <span class="nav-text">0x00 DataFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01_如何连mysql"><span class="nav-number">2.</span> <span class="nav-text">0x01 如何连mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02_编程实例"><span class="nav-number">3.</span> <span class="nav-text">0x02 编程实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03_写到数据库"><span class="nav-number">4.</span> <span class="nav-text">0x03 写到数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04_总结"><span class="nav-number">5.</span> <span class="nav-text">04 总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何连mysql"><span class="nav-number">2.</span> <span class="nav-text">如何连mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程实例"><span class="nav-number">3.</span> <span class="nav-text">编程实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写到数据库"><span class="nav-number">4.</span> <span class="nav-text">写到数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -751,6 +752,29 @@ Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提
 
   
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
   
