@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="network," />
+  <meta name="keywords" content="hadoop," />
 
 
 
@@ -51,17 +51,16 @@
 
 
 
-<meta name="description" content="起因某博士给我们搭建的科学上网，服务了广大码农。今天突然想到之前github推出的学生计划，在digitalocean拿到了100$的代金券，于是就琢磨着自己搭建一个ShadowSocks服务器，现将搭建过程做一下纪录。">
+<meta name="description" content="sqoop 简介sqoop 是 apache 基金会提供的用于 RDBMS 和 HDFS 互导数据的工具, 以下是我从 mysql 导数据到 hdfs 过程的一个纪录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建ShadowSocks代理">
-<meta property="og:url" content="http://m2shad0w.com/2015/07/07/SetupShadowSocks/index.html">
+<meta property="og:title" content="sqoop导数据">
+<meta property="og:url" content="http://m2shad0w.com/2016/01/09/sqoop导数据/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="起因某博士给我们搭建的科学上网，服务了广大码农。今天突然想到之前github推出的学生计划，在digitalocean拿到了100$的代金券，于是就琢磨着自己搭建一个ShadowSocks服务器，现将搭建过程做一下纪录。">
-<meta property="og:image" content="http://7xk4vd.com1.z0.glb.clouddn.com/shadowsocks1.jpg">
-<meta property="og:updated_time" content="2016-01-09T05:10:21.000Z">
+<meta property="og:description" content="sqoop 简介sqoop 是 apache 基金会提供的用于 RDBMS 和 HDFS 互导数据的工具, 以下是我从 mysql 导数据到 hdfs 过程的一个纪录。">
+<meta property="og:updated_time" content="2016-01-09T06:53:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="搭建ShadowSocks代理">
-<meta name="twitter:description" content="起因某博士给我们搭建的科学上网，服务了广大码农。今天突然想到之前github推出的学生计划，在digitalocean拿到了100$的代金券，于是就琢磨着自己搭建一个ShadowSocks服务器，现将搭建过程做一下纪录。">
+<meta name="twitter:title" content="sqoop导数据">
+<meta name="twitter:description" content="sqoop 简介sqoop 是 apache 基金会提供的用于 RDBMS 和 HDFS 互导数据的工具, 以下是我从 mysql 导数据到 hdfs 过程的一个纪录。">
 
 
 
@@ -73,7 +72,7 @@
   };
 </script>
 
-  <title> 搭建ShadowSocks代理 | m2shad0w </title>
+  <title> sqoop导数据 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -249,7 +248,7 @@
             
             
               
-                搭建ShadowSocks代理
+                sqoop导数据
               
             
           </h1>
@@ -258,8 +257,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-07-07T19:25:32+08:00" content="2015-07-07">
-              2015-07-07
+            <time itemprop="dateCreated" datetime="2016-01-09T13:57:26+08:00" content="2016-01-09">
+              2016-01-09
             </time>
           </span>
 
@@ -268,8 +267,8 @@
               &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/server/" itemprop="url" rel="index">
-                    <span itemprop="name">server</span>
+                  <a href="/categories/bigdata/" itemprop="url" rel="index">
+                    <span itemprop="name">bigdata</span>
                   </a>
                 </span>
 
@@ -284,8 +283,8 @@
             
               <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/07/07/SetupShadowSocks/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/07/SetupShadowSocks/" itemprop="commentsCount"></span>
+              <a href="/2016/01/09/sqoop导数据/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/09/sqoop导数据/" itemprop="commentsCount"></span>
               </a>
             </span>
             
@@ -304,34 +303,30 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="起因"><strong>起因</strong></h3><p>某博士给我们搭建的科学上网，服务了广大码农。今天突然想到之前github推出的<a href="https://education.github.com/pack" target="_blank" rel="external">学生计划</a>，在<a href="https://www.digitalocean.com/?refcode=73470081618f" target="_blank" rel="external">digitalocean</a>拿到了100$的代金券，于是就琢磨着自己搭建一个ShadowSocks服务器，现将搭建过程做一下纪录。</p>
+        <span itemprop="articleBody"><h3 id="sqoop_简介"><strong>sqoop 简介</strong></h3><p>sqoop 是 apache 基金会提供的用于 RDBMS 和 HDFS 互导数据的工具, 以下是我从 mysql 导数据到 hdfs 过程的一个纪录。</p>
 <a id="more"></a>
-<h3 id="搭建vps"><strong>搭建vps</strong></h3><ul>
-<li>给vps取一个名字</li>
-<li>点击Create Droplet后的配置选项，我选择的是5$/mo</li>
-<li>Select Region 选择纽约，具体根据实际使用的自己的网络环境选择）</li>
-<li>Select Image 选择centos 7X64</li>
-<li>然后点击 Create Droplet 大约等个30s就帮你建好了vps</li>
-<li>会发送root的密码到你的注册邮箱，初次登录修改掉密码<br><img src="http://7xk4vd.com1.z0.glb.clouddn.com/shadowsocks1.jpg" alt="注册界面"></li>
-</ul>
-<h3 id="安装shadowsocks环境依赖"><strong>安装shadowsocks环境依赖</strong></h3><ul>
-<li><p>安装 Python-Gevent，由于gevent依赖libevent和python-devel。</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install libevent</span><br><span class="line">yum install python-devel</span><br><span class="line">pip install gevent</span><br></pre></td></tr></table></figure>
+<h3 id="安装sqoop"><strong>安装sqoop</strong></h3><ul>
+<li><p>mac 下安装</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install sqoop</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装M2Crypto，M2Crypto是用于加密的第三库</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install openssl-devel</span><br><span class="line">yum install swig</span><br><span class="line">pip install M2Crypto</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装Shadowsocks服务端</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools &amp;&amp; easy_install pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<li><p>Linux 下安装</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar vxzf sqoop-x-y-z.tar.gz</span><br><span class="line"><span class="comment">#然后设置 SQOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> SQOOP_HOME=/opt/sqoop</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SQOOP_HOME</span>/bin</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="配置服务端"><strong>配置服务端</strong></h3><ul>
-<li><p>vi  /etc/shadowsocks.json</p>
-  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">"<span class="attribute">server</span>":<span class="value"><span class="string">"yourserver_ip_adress"</span></span>,</span><br><span class="line">"<span class="attribute">server_port</span>":<span class="value"><span class="number">8033</span></span>,</span><br><span class="line">"<span class="attribute">local_address</span>": <span class="value"><span class="string">"127.0.0.1"</span></span>,</span><br><span class="line">"<span class="attribute">local_port</span>":<span class="value"><span class="number">1080</span></span>,</span><br><span class="line">"<span class="attribute">password</span>":<span class="value"><span class="string">"password"</span></span>,</span><br><span class="line">"<span class="attribute">timeout</span>":<span class="value"><span class="number">300</span></span>,</span><br><span class="line">"<span class="attribute">method</span>":<span class="value"><span class="string">"aes-256-cfb"</span></span>,</span><br><span class="line">"<span class="attribute">fast_open</span>": <span class="value"><span class="literal">false</span></span>,</span><br><span class="line">"<span class="attribute">workers</span>": <span class="value"><span class="number">1</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用sqoop"><strong>使用sqoop</strong></h3><ul>
+<li><p>查看sqoop用法</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop <span class="built_in">help</span></span><br><span class="line"><span class="number">16</span>/<span class="number">01</span>/<span class="number">09</span> <span class="number">14</span>:<span class="number">09</span>:<span class="number">16</span> INFO sqoop.Sqoop: Running Sqoop version: <span class="number">1.4</span>.<span class="number">6</span></span><br><span class="line">usage: sqoop COMMAND [ARGS]</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">Available commands:</span><br><span class="line">  codegen            Generate code to interact with database records</span><br><span class="line">  create-hive-table  Import a table definition into Hive</span><br><span class="line">  <span class="built_in">eval</span>               Evaluate a SQL statement and display the results</span><br><span class="line">  <span class="built_in">export</span>             Export an HDFS directory to a database table</span><br><span class="line">  <span class="built_in">help</span>               List available commands</span><br><span class="line">  import             Import a table from a database to HDFS</span><br><span class="line">  import-all-tables  Import tables from a database to HDFS</span><br><span class="line">  import-mainframe   Import datasets from a mainframe server to HDFS</span><br><span class="line">  job                Work with saved <span class="built_in">jobs</span></span><br><span class="line">  list-databases     List available databases on a server</span><br><span class="line">  list-tables        List available tables <span class="keyword">in</span> a database</span><br><span class="line">  merge              Merge results of incremental imports</span><br><span class="line">  metastore          Run a standalone Sqoop metastore</span><br><span class="line">  version            Display version information</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">See <span class="string">'sqoop help COMMAND'</span> <span class="keyword">for</span> information on a specific command.</span><br></pre></td></tr></table></figure>
+<p>  通过命令 <strong>sqoop help</strong> 回显, 得知每一步的命令下可以接什么参数都可以加上 --help</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop import --help</span><br><span class="line">$ sqoop <span class="built_in">help</span> import</span><br></pre></td></tr></table></figure>
+<p>  也可以使用别名</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop-import</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启动服务</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json</span><br></pre></td></tr></table></figure></li>
+<li><p>到入数据到 hdfs</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://<span class="number">10.200</span>.<span class="number">122.47</span>/<span class="built_in">test</span> \ <span class="comment">#连接数据库</span></span><br><span class="line">--table users \ <span class="comment">#表名</span></span><br><span class="line">--username root \ <span class="comment">#表用户名</span></span><br><span class="line">-P \ <span class="comment">#控制台输入密码</span></span><br><span class="line">--fields-terminated-by <span class="string">"\01"</span> \ <span class="comment">#字段分隔符</span></span><br><span class="line">--target-dir /user/hadoop/mysql/<span class="built_in">test</span>/users <span class="comment">#指定hdfs路径</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<h3 id="总结">总结</h3><p>sqoop导数据其实是自动帮你写了java代码, 提交给hadoop做MR任务。确保集群每个节点都能连接访问数据库。</p>
+<p>参考文献：<br><a href="http://segmentfault.com/a/1190000002532293" target="_blank" rel="external">Sqoop导入关系数据库到Hive</a><br><a href="http://www.cloudera.com/content/cloudera/zh-CN/documentation/core/v5-3-x/topics/cdh_ig_sqoop_package_install.html" target="_blank" rel="external">Sqoop中文手册</a></p>
 </span>
       
     </div>
@@ -340,7 +335,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/network/" rel="tag">#network</a>
+            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
           
         </div>
       
@@ -349,17 +344,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/03/battery-discharge/" rel="next" title="电池放电曲线">
-                <i class="fa fa-chevron-left"></i> 电池放电曲线
+              <a href="/2016/01/06/flume00/" rel="next" title="flume聚合日志">
+                <i class="fa fa-chevron-left"></i> flume聚合日志
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/09/06/TheBigData/" rel="prev" title="TheBigData">
-                TheBigData <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -526,7 +517,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建vps"><span class="nav-number">2.</span> <span class="nav-text">搭建vps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装shadowsocks环境依赖"><span class="nav-number">3.</span> <span class="nav-text">安装shadowsocks环境依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置服务端"><span class="nav-number">4.</span> <span class="nav-text">配置服务端</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#sqoop_简介"><span class="nav-number">1.</span> <span class="nav-text">sqoop 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装sqoop"><span class="nav-number">2.</span> <span class="nav-text">安装sqoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用sqoop"><span class="nav-number">3.</span> <span class="nav-text">使用sqoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -586,9 +577,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2015/07/07/SetupShadowSocks/';
-      var disqus_title = '搭建ShadowSocks代理';
-      var disqus_url = 'http://m2shad0w.com/2015/07/07/SetupShadowSocks/';
+      var disqus_identifier = '2016/01/09/sqoop导数据/';
+      var disqus_title = 'sqoop导数据';
+      var disqus_url = 'http://m2shad0w.com/2016/01/09/sqoop导数据/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
