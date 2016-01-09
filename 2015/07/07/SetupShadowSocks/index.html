@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="m2shad0w">
 <meta property="og:description" content="起因某博士给我们搭建的科学上网，服务了广大码农。今天突然想到之前github推出的学生计划，在digitalocean拿到了100$的代金券，于是就琢磨着自己搭建一个ShadowSocks服务器，现将搭建过程做一下纪录。">
 <meta property="og:image" content="http://7xk4vd.com1.z0.glb.clouddn.com/shadowsocks1.jpg">
-<meta property="og:updated_time" content="2016-01-08T02:41:48.000Z">
+<meta property="og:updated_time" content="2016-01-09T05:10:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建ShadowSocks代理">
 <meta name="twitter:description" content="起因某博士给我们搭建的科学上网，服务了广大码农。今天突然想到之前github推出的学生计划，在digitalocean拿到了100$的代金券，于是就琢磨着自己搭建一个ShadowSocks服务器，现将搭建过程做一下纪录。">
@@ -316,21 +316,21 @@
 </ul>
 <h3 id="安装shadowsocks环境依赖"><strong>安装shadowsocks环境依赖</strong></h3><ul>
 <li><p>安装 Python-Gevent，由于gevent依赖libevent和python-devel。</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install libevent&#10;yum install python-devel&#10;pip install gevent</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install libevent</span><br><span class="line">yum install python-devel</span><br><span class="line">pip install gevent</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装M2Crypto，M2Crypto是用于加密的第三库</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install openssl-devel&#10;yum install swig&#10;pip install M2Crypto</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install openssl-devel</span><br><span class="line">yum install swig</span><br><span class="line">pip install M2Crypto</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装Shadowsocks服务端</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools &#38;&#38; easy_install pip&#10;pip install shadowsocks</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools &amp;&amp; easy_install pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="配置服务端"><strong>配置服务端</strong></h3><ul>
 <li><p>vi  /etc/shadowsocks.json</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;&#34;server&#34;:&#34;yourserver_ip_adress&#34;,&#10;&#34;server_port&#34;:8033,&#10;&#34;local_address&#34;: &#34;127.0.0.1&#34;,&#10;&#34;local_port&#34;:1080,&#10;&#34;password&#34;:&#34;password&#34;,&#10;&#34;timeout&#34;:300,&#10;&#34;method&#34;:&#34;aes-256-cfb&#34;,&#10;&#34;fast_open&#34;: false,&#10;&#34;workers&#34;: 1&#10;&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">"<span class="attribute">server</span>":<span class="value"><span class="string">"yourserver_ip_adress"</span></span>,</span><br><span class="line">"<span class="attribute">server_port</span>":<span class="value"><span class="number">8033</span></span>,</span><br><span class="line">"<span class="attribute">local_address</span>": <span class="value"><span class="string">"127.0.0.1"</span></span>,</span><br><span class="line">"<span class="attribute">local_port</span>":<span class="value"><span class="number">1080</span></span>,</span><br><span class="line">"<span class="attribute">password</span>":<span class="value"><span class="string">"password"</span></span>,</span><br><span class="line">"<span class="attribute">timeout</span>":<span class="value"><span class="number">300</span></span>,</span><br><span class="line">"<span class="attribute">method</span>":<span class="value"><span class="string">"aes-256-cfb"</span></span>,</span><br><span class="line">"<span class="attribute">fast_open</span>": <span class="value"><span class="literal">false</span></span>,</span><br><span class="line">"<span class="attribute">workers</span>": <span class="value"><span class="number">1</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>启动服务</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json</span><br></pre></td></tr></table></figure></li>
 </ul>
 </span>
       
