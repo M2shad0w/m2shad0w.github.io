@@ -57,7 +57,7 @@
 <meta property="og:url" content="http://m2shad0w.com/2016/01/22/ipythonWithPySpark/index.html">
 <meta property="og:site_name" content="m2shad0w">
 <meta property="og:description" content="pysparkpyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。ipython with pyspark 就能解决这个问题。">
-<meta property="og:updated_time" content="2016-01-22T06:41:58.000Z">
+<meta property="og:updated_time" content="2016-01-22T10:50:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="把ipython设置成PySpark解析器">
 <meta name="twitter:description" content="pysparkpyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。ipython with pyspark 就能解决这个问题。">
@@ -336,8 +336,17 @@
 </li>
 </ol>
 <h3 id="Starting_IPython_Notebook_with_PySpark">Starting IPython Notebook with PySpark</h3><p>保证<strong><code>$SPARK_HOME</code></strong>环境变量设置好</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipython notebook --profile=pyspark</span><br></pre></td></tr></table></figure>
-<p><a href="http://blog.cloudera.com/blog/2014/08/how-to-use-ipython-notebook-with-apache-spark/" target="_blank" rel="external">参考文章</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipython --profile=pyspark</span><br></pre></td></tr></table></figure>
+<p>如果你要使用notebook, 这里有一个方法</p>
+<ul>
+<li>Install apache-spark ($ brew install apache-spark)</li>
+<li>install findspark ( pip install -e . after cloning <a href="https://github.com/minrk/" target="_blank" rel="external">https://github.com/minrk/</a>findspark, and cd findspark)</li>
+<li>install java</li>
+<li>fire a notebook (<code>jupyter notebook</code>)</li>
+</ul>
+<script src="https://gist.github.com/M2shad0w/b844676ac996394b9bbd.js"></script>
+
+<p><a href="https://github.com/jupyter/notebook/issues/309#issuecomment-134540424" target="_blank" rel="external">pyspark on notebook</a><br><a href="http://blog.cloudera.com/blog/2014/08/how-to-use-ipython-notebook-with-apache-spark/" target="_blank" rel="external">参考文章</a></p>
 </span>
       
     </div>
