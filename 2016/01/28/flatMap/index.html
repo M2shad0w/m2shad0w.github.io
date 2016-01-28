@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="spark," />
 
 
 
@@ -51,18 +51,16 @@
 
 
 
-<meta name="description" content="OverView要求 电池曲线最后拟合函数百分比大致连续 精度2%">
+<meta name="description" content="区别flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电池放电曲线">
-<meta property="og:url" content="http://m2shad0w.com/2015/07/03/battery-discharge/index.html">
+<meta property="og:title" content="spark中flatMap&map的区别">
+<meta property="og:url" content="http://m2shad0w.com/2016/01/28/flatMap/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="OverView要求 电池曲线最后拟合函数百分比大致连续 精度2%">
-<meta property="og:image" content="http://7xk4vd.com1.z0.glb.clouddn.com/batterybl.jpg">
-<meta property="og:image" content="http://7xk4vd.com1.z0.glb.clouddn.com/battery2bl2.jpg">
-<meta property="og:updated_time" content="2016-01-27T05:42:51.000Z">
+<meta property="og:description" content="区别flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。">
+<meta property="og:updated_time" content="2016-01-28T06:12:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="电池放电曲线">
-<meta name="twitter:description" content="OverView要求 电池曲线最后拟合函数百分比大致连续 精度2%">
+<meta name="twitter:title" content="spark中flatMap&map的区别">
+<meta name="twitter:description" content="区别flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。">
 
 
 
@@ -74,7 +72,7 @@
   };
 </script>
 
-  <title> 电池放电曲线 | m2shad0w </title>
+  <title> spark中flatMap&map的区别 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -250,7 +248,7 @@
             
             
               
-                电池放电曲线
+                spark中flatMap&map的区别
               
             
           </h1>
@@ -259,8 +257,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-07-03T13:32:49+08:00" content="2015-07-03">
-              2015-07-03
+            <time itemprop="dateCreated" datetime="2016-01-28T11:43:38+08:00" content="2016-01-28">
+              2016-01-28
             </time>
           </span>
 
@@ -269,8 +267,8 @@
               &nbsp; | &nbsp; 分類於
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/dataMining/" itemprop="url" rel="index">
-                    <span itemprop="name">dataMining</span>
+                  <a href="/categories/scala/" itemprop="url" rel="index">
+                    <span itemprop="name">scala</span>
                   </a>
                 </span>
 
@@ -285,8 +283,8 @@
             
               <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/07/03/battery-discharge/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/03/battery-discharge/" itemprop="commentsCount"></span>
+              <a href="/2016/01/28/flatMap/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/28/flatMap/" itemprop="commentsCount"></span>
               </a>
             </span>
             
@@ -305,18 +303,31 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="OverView"><strong>OverView</strong></h3><p><strong>要求 电池曲线最后拟合函数百分比大致连续 精度2%</strong></p>
+        <span itemprop="articleBody"><h3 id="区别">区别</h3><p>flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。</p>
 <a id="more"></a>
-<h3 id="准备"><strong>准备</strong></h3><p>$E = U \cdot I \cdot T$ (E为能量)</p>
-<p>根据公式，测试的时候保证放电电流恒定，保证测量的时间间隔恒定，然后读取电压的 AD 采样。写好测试代码，将数据存储在mcu中。</p>
-<h3 id="读取数据">读取数据</h3><p>电池标称50mAH,测试的时候以5mAH的电流放电，每个一分钟纪录一个样本点，最后得到600个数据点。数据通过蓝牙设备倒入到电脑,利用python处理数据，绘制可视化放电曲线图。</p>
-<h3 id="图例"><strong>图例</strong></h3><p><img src="http://7xk4vd.com1.z0.glb.clouddn.com/batterybl.jpg" alt="放电曲线"><br>根据绘制的图形，可以看出电压快速下降的转折点在3.7v，能量集中在3.7v以上，我们在做实验的时候保证放电电流一定，采样时间间隔一定，所以电池的整个能量就是曲线与坐标轴所围起来的面积，每一采样点的电量百分比就是总量减去采样点到零点之间面积与总量的占比。即 percent = $\frac{total - detal}{total}$<br>简单处理之后的百分比与adc采样的关系图就是这样的。</p>
-<p><img src="http://7xk4vd.com1.z0.glb.clouddn.com/battery2bl2.jpg" alt="电压adc与电量百分对应曲线图"><br>因为mcu资源有限，拟合曲线只取了一阶拟合，根据关系图，分成十段拟合。</p>
-<h3 id="python代码">python代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">line</span><span class="params">(p, a)</span>:</span> ＃拟合函数</span><br><span class="line">    y = np.array(p)</span><br><span class="line">    x = np.array(a)</span><br><span class="line">    z = np.polyfit(x, y, <span class="number">1</span>) <span class="comment"># x,y是两个列表 1是拟合阶数</span></span><br><span class="line">    p = np.poly1d(z)</span><br><span class="line">    print(p) <span class="comment"># 拟合公式</span></span><br></pre></td></tr></table></figure>
-<p>拟合一阶函数如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4.784</span> x + <span class="number">608.8</span></span><br><span class="line"><span class="number">0.8612</span> x + <span class="number">630.3</span></span><br><span class="line"><span class="number">0.4823</span> x + <span class="number">637.9</span></span><br><span class="line"><span class="number">0.3716</span> x + <span class="number">641.3</span></span><br><span class="line"><span class="number">0.4754</span> x + <span class="number">637.1</span></span><br><span class="line"><span class="number">0.6561</span> x + <span class="number">628.1</span></span><br><span class="line"><span class="number">1.086</span> x + <span class="number">602.2</span></span><br><span class="line"><span class="number">1.077</span> x + <span class="number">603.3</span></span><br><span class="line"><span class="number">1.107</span> x + <span class="number">600.8</span></span><br><span class="line"><span class="number">1.26</span> x + <span class="number">587.2</span></span><br></pre></td></tr></table></figure>
-<p>将系数表示成两数相除，得到新公式，根据公式重新翻转去重绘百分比与电压采样值的关系，发现效果还不错，满足要求。</p>
-<p><a href="https://github.com/M2shad0w/py_tool/blob/master/battery.py" target="_blank" rel="external">python 完整代码</a></p>
+<ul>
+<li><p>相同点</p>
+<p>  应用一个函数作用在一个RDD上的每一行, 为每一条输入返回一个对象</p>
+</li>
+<li><p>不同点</p>
+<p>  flatMap是只是返回一个对象（相比map多了一个步骤, 将结果对象合并为一个对象）</p>
+</li>
+</ul>
+<h3 id="实例">实例</h3><p>实例化 sc</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> findspark</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">findspark.init()</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pyspark</span><br><span class="line">sc = pyspark.SparkContext()</span><br><span class="line"><span class="keyword">print</span> sc</span><br></pre></td></tr></table></figure>
+<p>文件路径<br><code>HDFS_PATH = &quot;hdfs://localhost:9000/user/m2shad0w/flume_data/*&quot;</code></p>
+<p>maplog</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">faltlog = sc.textFile(HDFS_PATH).map(<span class="keyword">lambda</span> line: line.split(<span class="string">"\01"</span>))</span><br></pre></td></tr></table></figure>
+<p>faltMap</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maplog = sc.textFile(HDFS_PATH).flatMap(<span class="keyword">lambda</span> line: line.split(<span class="string">"\01"</span>))</span><br></pre></td></tr></table></figure>
+<p>显示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">faltlog.first()</span><br></pre></td></tr></table></figure>
+<p><code>[u&#39;id&#39;, u&#39;2016-01-25 16:00:00&#39;, u&#39;28800&#39;, u&#39;0&#39;, u&#39;User&#39;, u&#39;1884292&#39;, u&#39;enter_background&#39;, u&#39;&#39;, u&#39;2&#39;, u&#39;1884292&#39;, u&#39;346643&#39;, u&#39;1&#39;, u&#39;0&#39;, u&#39;2016-01-25 15:43:52&#39;, u&#39;7686852&#39;, u&#39;&#39;]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maplog.first()</span><br></pre></td></tr></table></figure>
+<p><code>u&#39;id&#39;</code></p>
+<p><strong>显示第一行，所以才只显示了id</strong></p>
+<p><a href="http://blog.csdn.net/samhacker/article/details/41927567" target="_blank" rel="external">CSDN参考文章</a></p>
+<p><a href="http://www.dattamsha.com/2014/09/map-vs-flatmap-spark/" target="_blank" rel="external">英文参考文章</a></p>
 </span>
       
     </div>
@@ -325,7 +336,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag">#python</a>
+            <a href="/tags/spark/" rel="tag">#spark</a>
           
         </div>
       
@@ -334,13 +345,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/01/25/spark写数据到mysql第二弹/" rel="next" title="spark写数据到mysql第二弹">
+                <i class="fa fa-chevron-left"></i> spark写数据到mysql第二弹
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/07/07/SetupShadowSocks/" rel="prev" title="搭建ShadowSocks代理">
-                搭建ShadowSocks代理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -507,7 +518,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OverView"><span class="nav-number">1.</span> <span class="nav-text">OverView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取数据"><span class="nav-number">3.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图例"><span class="nav-number">4.</span> <span class="nav-text">图例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python代码"><span class="nav-number">5.</span> <span class="nav-text">python代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -567,9 +578,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2015/07/03/battery-discharge/';
-      var disqus_title = '电池放电曲线';
-      var disqus_url = 'http://m2shad0w.com/2015/07/03/battery-discharge/';
+      var disqus_identifier = '2016/01/28/flatMap/';
+      var disqus_title = 'spark中flatMap&map的区别';
+      var disqus_url = 'http://m2shad0w.com/2016/01/28/flatMap/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
