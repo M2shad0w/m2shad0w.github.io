@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spark," />
+  <meta name="keywords" content="hadoop," />
 
 
 
@@ -57,16 +57,17 @@
 
 
 
-<meta name="description" content="pysparkpyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。ipython with pyspark 就能解决这个问题。">
+<meta name="description" content="重启hadoop带来的问题之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="把ipython设置成PySpark解析器">
-<meta property="og:url" content="http://m2shad0w.com/2016/01/22/ipythonWithPySpark/index.html">
+<meta property="og:title" content="hdfs文件坏块">
+<meta property="og:url" content="http://m2shad0w.com/2016/02/19/hdfsBadBlock/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="pysparkpyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。ipython with pyspark 就能解决这个问题。">
-<meta property="og:updated_time" content="2016-01-22T10:50:18.000Z">
+<meta property="og:description" content="重启hadoop带来的问题之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/63fe561egw1f14hdula3mj20qk066q48.jpg">
+<meta property="og:updated_time" content="2016-02-19T03:28:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="把ipython设置成PySpark解析器">
-<meta name="twitter:description" content="pysparkpyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。ipython with pyspark 就能解决这个问题。">
+<meta name="twitter:title" content="hdfs文件坏块">
+<meta name="twitter:description" content="重启hadoop带来的问题之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。">
 
 
 
@@ -84,7 +85,7 @@
   };
 </script>
 
-  <title> 把ipython设置成PySpark解析器 | m2shad0w </title>
+  <title> hdfs文件坏块 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -271,7 +272,7 @@
             
             
               
-                把ipython设置成PySpark解析器
+                hdfs文件坏块
               
             
           </h1>
@@ -283,8 +284,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-22T14:17:00+08:00" content="2016-01-22">
-              2016-01-22
+            <time itemprop="dateCreated" datetime="2016-02-19T11:09:56+08:00" content="2016-02-19">
+              2016-02-19
             </time>
           </span>
 
@@ -304,18 +305,6 @@
 
                 
                 
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/bigdata/ipython/" itemprop="url" rel="index">
-                    <span itemprop="name">ipython</span>
-                  </a>
-                </span>
-
-                
-                
 
               
             </span>
@@ -325,8 +314,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/22/ipythonWithPySpark/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/22/ipythonWithPySpark/" itemprop="commentsCount"></span>
+                <a href="/2016/02/19/hdfsBadBlock/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/02/19/hdfsBadBlock/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -347,38 +336,17 @@
       
 
       
-        <h3 id="pyspark"><strong>pyspark</strong></h3><p>pyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。<br>ipython with pyspark 就能解决这个问题。</p>
+        <h3 id="重启hadoop带来的问题">重启hadoop带来的问题</h3><p>之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。</p>
 <a id="more"></a>
-<h3 id="软件依赖">软件依赖</h3><ul>
-<li><p>IPython <code>pip show ipython</code></p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">Metadata-Version: <span class="number">2.0</span></span><br><span class="line">Name: ipython</span><br><span class="line">Version: <span class="number">4.0</span>.<span class="number">1</span></span><br><span class="line">Summary: IPython: Productive Interactive Computing</span><br><span class="line">Home-page: http://ipython.org</span><br><span class="line">Author: The IPython Development Team</span><br><span class="line">Author-email: ipython-dev@scipy.org</span><br><span class="line">License: BSD</span><br><span class="line">Location: /Library/Python/<span class="number">2.7</span>/site-packages</span><br><span class="line">Requires: traitlets, pickleshare, simplegeneric, decorator, gnureadline, appnope, pexpect</span><br><span class="line">Entry-points:</span><br><span class="line">  [console_scripts]</span><br><span class="line">  iptest = IPython.testing.iptestcontroller:main</span><br><span class="line">  iptest2 = IPython.testing.iptestcontroller:main</span><br><span class="line">  ipython = IPython:start_ipython</span><br><span class="line">  ipython2 = IPython:start_ipython</span><br><span class="line">  [pygments.lexers]</span><br><span class="line">  ipython = IPython.lib.lexers:IPythonLexer</span><br><span class="line">  ipython3 = IPython.lib.lexers:IPython3Lexer</span><br><span class="line">  ipythonconsole = IPython.lib.lexers:IPythonConsoleLexer</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>pyspark</p>
-</li>
-</ul>
-<h3 id="配置ipython">配置ipython</h3><ol>
-<li><p>First create an IPython profile for use with PySpark</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipython profile create pyspark</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>This should have created the profile directory <code>~/.ipython/profile_pyspark/.</code> Edit the file <code>~/.ipython/profile_pyspark/ipython_notebook_config.py</code> to have:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c = get_config()</span><br><span class="line"> </span><br><span class="line">c.NotebookApp.ip = <span class="string">'*'</span></span><br><span class="line">c.NotebookApp.open_browser = False</span><br><span class="line">c.NotebookApp.port = <span class="number">8880</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Finally, create the file <code>~/.ipython/profile_pyspark/startup/00-pyspark-setup.py</code> with the following contents:</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line">spark_home = os.environ.get(<span class="string">'SPARK_HOME'</span>, <span class="keyword">None</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> spark_home:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">'SPARK_HOME environment variable is not set'</span>)</span><br><span class="line">sys.path.insert(<span class="number">0</span>, os.path.join(spark_home, <span class="string">'python'</span>))</span><br><span class="line">sys.path.insert(<span class="number">0</span>, os.path.join(spark_home, <span class="string">'python/lib/py4j-0.9-src.zip'</span>))</span><br><span class="line">execfile(os.path.join(spark_home, <span class="string">'python/pyspark/shell.py'</span>))</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="Starting_IPython_Notebook_with_PySpark">Starting IPython Notebook with PySpark</h3><p>保证<strong><code>$SPARK_HOME</code></strong>环境变量设置好</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipython --profile=pyspark</span><br></pre></td></tr></table></figure>
-<p>如果你要使用notebook, 这里有一个方法</p>
-<ul>
-<li>Install apache-spark ($ brew install apache-spark)</li>
-<li>install findspark ( pip install -e . after cloning <a href="https://github.com/minrk/" target="_blank" rel="external">https://github.com/minrk/</a>findspark, and cd findspark)</li>
-<li>install java</li>
-<li>fire a notebook (<code>jupyter notebook</code>)</li>
-</ul>
-<script src="https://gist.github.com/M2shad0w/b844676ac996394b9bbd.js"></script>
-
-<p><a href="https://github.com/jupyter/notebook/issues/309#issuecomment-134540424" target="_blank" rel="external">pyspark on notebook</a><br><a href="http://blog.cloudera.com/blog/2014/08/how-to-use-ipython-notebook-with-apache-spark/" target="_blank" rel="external">参考文章</a></p>
+<h3 id="错误">错误</h3><p>spark 从hdfs上 load数据的时候出现错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cause:java.io.IOException: Cannot obtain block length <span class="keyword">for</span> LocatedBlock</span><br></pre></td></tr></table></figure>
+<p>用 <code>hdfs fsck /</code> 查看显示 <code>hadoop显示现在没有任何丢失的块</code></p>
+<p>找出文件<br><code>hadoop fsck / -openforwrite |egrep -v &#39;^\.+$&#39; |egrep &quot;MISSING|OPENFORWRITE&quot; |grep -o &quot;/[^ ]*&quot; |sed -e &quot;s/:$//|sort |uniq&quot;</code></p>
+<p><img src="http://ww4.sinaimg.cn/mw690/63fe561egw1f14hdula3mj20qk066q48.jpg" alt=""></p>
+<p>删除文件</p>
+<p><code>hadoop fs -rm -skipTrash $file</code></p>
+<h3 id="参考文章">参考文章</h3><p><a href="http://ju.outofmemory.cn/entry/204699" target="_blank" rel="external">http://ju.outofmemory.cn/entry/204699</a></p>
+<p><a href="http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037" target="_blank" rel="external">http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037</a></p>
 
       
     </div>
@@ -387,7 +355,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
+            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
           
         </div>
       
@@ -396,17 +364,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/15/sbt仓库设置/" rel="next" title="sbt仓库设置">
-                <i class="fa fa-chevron-left"></i> sbt仓库设置
+              <a href="/2016/02/18/DeepInflume2/" rel="next" title="DeepInConfigflume">
+                <i class="fa fa-chevron-left"></i> DeepInConfigflume
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/25/spark写数据到mysql第二弹/" rel="prev" title="spark写数据到mysql第二弹">
-                spark写数据到mysql第二弹 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -584,7 +548,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pyspark"><span class="nav-number">1.</span> <span class="nav-text">pyspark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件依赖"><span class="nav-number">2.</span> <span class="nav-text">软件依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ipython"><span class="nav-number">3.</span> <span class="nav-text">配置ipython</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Starting_IPython_Notebook_with_PySpark"><span class="nav-number">4.</span> <span class="nav-text">Starting IPython Notebook with PySpark</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#重启hadoop带来的问题"><span class="nav-number">1.</span> <span class="nav-text">重启hadoop带来的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误"><span class="nav-number">2.</span> <span class="nav-text">错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">3.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -849,9 +813,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2016/01/22/ipythonWithPySpark/';
-      var disqus_title = '把ipython设置成PySpark解析器';
-      var disqus_url = 'http://m2shad0w.com/2016/01/22/ipythonWithPySpark/';
+      var disqus_identifier = '2016/02/19/hdfsBadBlock/';
+      var disqus_title = 'hdfs文件坏块';
+      var disqus_url = 'http://m2shad0w.com/2016/02/19/hdfsBadBlock/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
