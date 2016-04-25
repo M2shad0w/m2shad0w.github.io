@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hadoop," />
+  <meta name="keywords" content="go," />
 
 
 
@@ -57,16 +57,17 @@
 
 
 
-<meta name="description" content="起因用spark分析数据时, 希望源数据能够写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。">
+<meta name="description" content="go操作mongo的好驱动画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动mgo。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flume聚合日志">
-<meta property="og:url" content="http://m2shad0w.com/2016/01/06/flume00/index.html">
+<meta property="og:title" content="go2mongo">
+<meta property="og:url" content="http://m2shad0w.com/2016/04/25/go2mongo/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="起因用spark分析数据时, 希望源数据能够写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。">
-<meta property="og:updated_time" content="2016-03-16T10:24:47.000Z">
+<meta property="og:description" content="go操作mongo的好驱动画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动mgo。">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/63fe561egw1f38rh2u41zj20ea05074u.jpg">
+<meta property="og:updated_time" content="2016-04-25T02:57:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flume聚合日志">
-<meta name="twitter:description" content="起因用spark分析数据时, 希望源数据能够写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。">
+<meta name="twitter:title" content="go2mongo">
+<meta name="twitter:description" content="go操作mongo的好驱动画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动mgo。">
 
 
 
@@ -84,7 +85,7 @@
   };
 </script>
 
-  <title> flume聚合日志 | m2shad0w </title>
+  <title> go2mongo | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -271,7 +272,7 @@
             
             
               
-                flume聚合日志
+                go2mongo
               
             
           </h1>
@@ -283,8 +284,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-06T21:10:24+08:00" content="2016-01-06">
-              2016-01-06
+            <time itemprop="dateCreated" datetime="2016-04-25T10:43:34+08:00" content="2016-04-25">
+              2016-04-25
             </time>
           </span>
 
@@ -297,8 +298,20 @@
               <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/bigdata/" itemprop="url" rel="index">
-                    <span itemprop="name">bigdata</span>
+                  <a href="/categories/mongo/" itemprop="url" rel="index">
+                    <span itemprop="name">mongo</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mongo/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -313,8 +326,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/06/flume00/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/06/flume00/" itemprop="commentsCount"></span>
+                <a href="/2016/04/25/go2mongo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/25/go2mongo/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,34 +348,15 @@
       
 
       
-        <h3 id="起因"><strong>起因</strong></h3><p>用spark分析数据时, 希望源数据能够写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。</p>
+        <h3 id="go操作mongo的好驱动">go操作mongo的好驱动</h3><p>画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动<strong>mgo</strong>。</p>
 <a id="more"></a>
-<h3 id="Flume_简介"><strong>Flume 简介</strong></h3><blockquote>
-<p>Apache Flume is a distributed, reliable, and available system for efficiently collecting, aggregating and moving large amounts of log data from many different sources to a centralized data store.</p>
-</blockquote>
-<p>Apache Flume 是一种可靠的分布式可用系统，用于从许多不同源将大量日志数据收集、聚合和移动至集中的数据存储。</p>
-<h3 id="实践"><strong>实践</strong></h3><p><a href="https://flume.apache.org/FlumeUserGuide.html#http-source" target="_blank" rel="external">聚合http-source</a>, HTTP 请求通过一个 “handler” 将被转换成 flume 事件, 一个 Http 请求中的所有事件将被一次提交到 flume 的管道内. 如果 “handler” 抛出了一个异常, flume source 将会返回一个 HTTP 400 的状态码, 如果 flume source  不能添加事件到管道，将会返回一个 HTTP 503 的 状态码(暂时不可达)。</p>
-<ul>
-<li><p>在flume的安装目录的配置文件夹下</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/apache-flume/conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加配置文件</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flume-conf-http.properties</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置文件内容</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define source, channel, sink</span></span><br><span class="line">agent1.sources = r1</span><br><span class="line">agent1.channels = ch1</span><br><span class="line">agent1.sinks = hdfs-sink1</span><br><span class="line"><span class="comment"># Configure channel</span></span><br><span class="line">agent1.channels.ch1.type = memory</span><br><span class="line">agent1.channels.ch1.capacity = <span class="number">1000000</span></span><br><span class="line">agent1.channels.ch1.transactionCapacity = <span class="number">500000</span></span><br><span class="line"><span class="comment"># Define and configure an Spool directory source</span></span><br><span class="line">agent1.sources.r1.channels = ch1</span><br><span class="line">agent1.sources.r1.type = http</span><br><span class="line">agent1.sources.r1.port = <span class="number">5143</span></span><br><span class="line">agent1.sources.r1.handler = org.apache.flume.source.http.JSONHandler</span><br><span class="line">agent1.sources.r1.handler.nickname = random props</span><br><span class="line">agent1.sources.r1.ignorePattern = event(_\d&#123;<span class="number">4</span>&#125;\-\d&#123;<span class="number">2</span>&#125;\-\d&#123;<span class="number">2</span>&#125;_\d&#123;<span class="number">2</span>&#125;_\d&#123;<span class="number">2</span>&#125;)?\.log(\.COMPLETED)?</span><br><span class="line">agent1.sources.r1.batchSize = <span class="number">50</span></span><br><span class="line"><span class="comment"># Define and configure a hdfs sink</span></span><br><span class="line">agent1.sinks.hdfs-sink1.channel = ch1</span><br><span class="line">agent1.sinks.hdfs-sink1.type = hdfs</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:<span class="number">9000</span>/user/hadoop/	flumetest/</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.fileSuffix = .log</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.rollSize = <span class="number">1048576</span></span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.rollCount = <span class="number">0</span></span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.batchSize = <span class="number">1500</span></span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.round = <span class="literal">true</span></span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.roundUnit = minute</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.threadsPoolSize = <span class="number">25</span></span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.useLocalTimeStamp = <span class="literal">true</span></span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.minBlockReplicas = <span class="number">1</span></span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.fileType = DataStream</span><br><span class="line">agent1.sinks.hdfs-sink1.writeFormat = TEXT</span><br><span class="line">agent1.sinks.hdfs-sink1.rollInterval = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动 Flume, 将数据回显在控制台</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/flume-ng agent -c ./conf/ -f conf/flume-conf-http.properties -Dflume.root.logger=INFO,console -n agent1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>python post 数据测试</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line">__author__ = <span class="string">'m2shad0w'</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">j = <span class="number">0</span></span><br><span class="line"><span class="comment"># flume  server url</span></span><br><span class="line">url = <span class="string">'http://flumeMac:5143'</span></span><br><span class="line">payload = &#123;<span class="string">"body"</span>: <span class="string">"data money"</span>&#125;</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    listdata = []</span><br><span class="line">    listdata.append(payload)</span><br><span class="line">    <span class="comment"># print listdata, i</span></span><br><span class="line">    r = requests.post(url, data=json.dumps(listdata))</span><br><span class="line">    <span class="comment"># print r.status_code</span></span><br><span class="line">    <span class="keyword">if</span> r.status_code != <span class="number">200</span>:</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">500000</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"time pasue"</span></span><br><span class="line">        time.sleep(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">100000</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"send times is "</span>, i, <span class="string">"fail times is "</span>, j</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看文件</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls -R /user/hadoop/&#9;flumetest/</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="总结"><strong>总结</strong></h3><p>一开始在配置 <strong>hdfs.fileType = SequenceFile</strong> hadoop fs -cat 文件的时候, 显示乱码。应该配置成 <strong>DataStream</strong></p>
+<p>在github 的 <code>go awesome</code> 项目下，搜索<code>mongo</code>，看到如下说明</p>
+<p><code>MongoDB driver for the Go language that implements a rich and well tested selection of features under a very simple API following standard Go idioms</code></p>
+<h3 id="安装mgo驱动">安装mgo驱动</h3><p>按照mgo的介绍页<a href="http://labix.org/mgo" target="_blank" rel="external">http://labix.org/mgo</a></p>
+<p><code>go get gopkg.in/mgo.v2</code></p>
+<h3 id="快速实现例子">快速实现例子</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">        <span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">        <span class="string">"gopkg.in/mgo.v2"</span></span><br><span class="line">        <span class="string">"gopkg.in/mgo.v2/bson"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">        Name <span class="typename">string</span></span><br><span class="line">        Phone <span class="typename">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">        session, err := mgo.Dial(<span class="string">"server1.example.com,server2.example.com"</span>)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">                <span class="built_in">panic</span>(err)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">defer</span> session.Close()</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Optional. Switch the session to a monotonic behavior.</span></span><br><span class="line">        session.SetMode(mgo.Monotonic, <span class="constant">true</span>)</span><br><span class="line"></span><br><span class="line">        c := session.DB(<span class="string">"test"</span>).C(<span class="string">"people"</span>)</span><br><span class="line">        err = c.Insert(&amp;Person&#123;<span class="string">"Ale"</span>, <span class="string">"+55 53 8116 9639"</span>&#125;,</span><br><span class="line">	               &amp;Person&#123;<span class="string">"Cla"</span>, <span class="string">"+55 53 8402 8510"</span>&#125;)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">                log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        result := Person&#123;&#125;</span><br><span class="line">        err = c.Find(bson.M&#123;<span class="string">"name"</span>: <span class="string">"Ale"</span>&#125;).One(&amp;result)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">                log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fmt.Println(<span class="string">"Phone:"</span>, result.Phone)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="效果">效果</h3><p><img src="http://ww3.sinaimg.cn/large/63fe561egw1f38rh2u41zj20ea05074u.jpg" alt=""></p>
+<p>好了，去写接口了…</p>
 
       
     </div>
@@ -371,7 +365,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+            <a href="/tags/go/" rel="tag">#go</a>
           
         </div>
       
@@ -380,17 +374,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/28/spark002/" rel="next" title="spark SQL操作之关系型数据库">
-                <i class="fa fa-chevron-left"></i> spark SQL操作之关系型数据库
+              <a href="/2016/04/24/openwrt-mount-usb/" rel="next" title="openwrt_mount_usb">
+                <i class="fa fa-chevron-left"></i> openwrt_mount_usb
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/09/sqoop导数据/" rel="prev" title="sqoop导数据">
-                sqoop导数据 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -568,7 +558,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flume_简介"><span class="nav-number">2.</span> <span class="nav-text">Flume 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践"><span class="nav-number">3.</span> <span class="nav-text">实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#go操作mongo的好驱动"><span class="nav-number">1.</span> <span class="nav-text">go操作mongo的好驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装mgo驱动"><span class="nav-number">2.</span> <span class="nav-text">安装mgo驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速实现例子"><span class="nav-number">3.</span> <span class="nav-text">快速实现例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果"><span class="nav-number">4.</span> <span class="nav-text">效果</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -833,9 +823,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2016/01/06/flume00/';
-      var disqus_title = 'flume聚合日志';
-      var disqus_url = 'http://m2shad0w.com/2016/01/06/flume00/';
+      var disqus_identifier = '2016/04/25/go2mongo/';
+      var disqus_title = 'go2mongo';
+      var disqus_url = 'http://m2shad0w.com/2016/04/25/go2mongo/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
