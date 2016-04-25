@@ -63,7 +63,7 @@
 <meta property="og:url" content="http://m2shad0w.com/2016/04/24/openwrt-mount-usb/index.html">
 <meta property="og:site_name" content="m2shad0w">
 <meta property="og:description" content="老路由刷上openwrt周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。">
-<meta property="og:updated_time" content="2016-04-25T01:47:24.000Z">
+<meta property="og:updated_time" content="2016-04-25T02:27:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openwrt_mount_usb">
 <meta name="twitter:description" content="老路由刷上openwrt周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。">
@@ -341,6 +341,10 @@
 <p>在openwrt官网上找到db120芯片的固件（cpu是博通的brcm63xx），刷上<a href="https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/" target="_blank" rel="external">snapshots</a>的<strong>openwrt-brcm63xx-generic-RG100A-squashfs-cfe.bin</strong></p>
 <p>sysupdate   *bin</p>
 <p>等待片刻，升级成功</p>
+<h3 id="修改opkg源为ustc源">修改opkg源为ustc源</h3><blockquote>
+<p>vi /etc/opkg.conf # 添加如下路径</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">src/gz barrier_breaker_base https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/base</span><br><span class="line">src/gz barrier_breaker_luci https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/luci</span><br><span class="line">src/gz barrier_breaker_management https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/management</span><br><span class="line">src/gz barrier_breaker_packages https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/packages</span><br><span class="line">src/gz barrier_breaker_routing https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/routing</span><br><span class="line">src/gz barrier_breaker_telephony https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/telephony</span><br><span class="line">src/gz barrier_breaker_kernel https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/kernel</span><br><span class="line">src/gz barrier_breaker_targets https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/targets</span><br></pre></td></tr></table></figure>
 <h3 id="挂载u盘做外部存储">挂载u盘做外部存储</h3><p>手头有16GB的金士顿优盘，挂载上去做外部存储，将opkg install 的软件包都安装在u盘中。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">安装usb支持：</span><br><span class="line">&gt;opkg install kmod-fs-ext4</span><br><span class="line">&gt;opkg install kmod-usb-storage</span><br><span class="line">&gt;opkg install block-mount</span><br></pre></td></tr></table></figure>
 
@@ -544,7 +548,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#老路由刷上openwrt"><span class="nav-number">1.</span> <span class="nav-text">老路由刷上openwrt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载u盘做外部存储"><span class="nav-number">2.</span> <span class="nav-text">挂载u盘做外部存储</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#老路由刷上openwrt"><span class="nav-number">1.</span> <span class="nav-text">老路由刷上openwrt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改opkg源为ustc源"><span class="nav-number">2.</span> <span class="nav-text">修改opkg源为ustc源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载u盘做外部存储"><span class="nav-number">3.</span> <span class="nav-text">挂载u盘做外部存储</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
