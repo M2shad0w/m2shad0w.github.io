@@ -57,18 +57,16 @@
 
 
 
-<meta name="description" content="OverView要求 电池曲线最后拟合函数百分比大致连续 精度2%">
+<meta name="description" content="pandas处理数据一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电池放电曲线">
-<meta property="og:url" content="http://m2shad0w.com/2015/07/03/battery-discharge/index.html">
+<meta property="og:title" content="pandas2data">
+<meta property="og:url" content="http://m2shad0w.com/2016/04/28/pandas2data/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="OverView要求 电池曲线最后拟合函数百分比大致连续 精度2%">
-<meta property="og:image" content="http://7xk4vd.com1.z0.glb.clouddn.com/batterybl.jpg">
-<meta property="og:image" content="http://7xk4vd.com1.z0.glb.clouddn.com/battery2bl2.jpg">
-<meta property="og:updated_time" content="2016-04-25T11:45:21.000Z">
+<meta property="og:description" content="pandas处理数据一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…">
+<meta property="og:updated_time" content="2016-04-28T06:32:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="电池放电曲线">
-<meta name="twitter:description" content="OverView要求 电池曲线最后拟合函数百分比大致连续 精度2%">
+<meta name="twitter:title" content="pandas2data">
+<meta name="twitter:description" content="pandas处理数据一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…">
 
 
 
@@ -86,7 +84,7 @@
   };
 </script>
 
-  <title> 电池放电曲线 | m2shad0w </title>
+  <title> pandas2data | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -273,7 +271,7 @@
             
             
               
-                电池放电曲线
+                pandas2data
               
             
           </h1>
@@ -285,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-07-03T13:32:49+08:00" content="2015-07-03">
-              2015-07-03
+            <time itemprop="dateCreated" datetime="2016-04-28T11:46:39+08:00" content="2016-04-28">
+              2016-04-28
             </time>
           </span>
 
@@ -299,7 +297,19 @@
               <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/dataMining/" itemprop="url" rel="index">
+                  <a href="/categories/pandas/" itemprop="url" rel="index">
+                    <span itemprop="name">pandas</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/pandas/dataMining/" itemprop="url" rel="index">
                     <span itemprop="name">dataMining</span>
                   </a>
                 </span>
@@ -315,8 +325,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/07/03/battery-discharge/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/03/battery-discharge/" itemprop="commentsCount"></span>
+                <a href="/2016/04/28/pandas2data/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/28/pandas2data/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -337,19 +347,16 @@
       
 
       
-        <h3 id="OverView"><strong>OverView</strong></h3><p><strong>要求 电池曲线最后拟合函数百分比大致连续 精度2%</strong></p>
-<a id="more"></a>
-<h3 id="准备"><strong>准备</strong></h3><p>$E = U \cdot I \cdot T$ (E为能量)</p>
-<p>根据公式，测试的时候保证放电电流恒定，保证测量的时间间隔恒定，然后读取电压的 AD 采样。写好测试代码，将数据存储在mcu中。</p>
-<h3 id="读取数据">读取数据</h3><p>电池标称50mAH,测试的时候以5mAH的电流放电，每个一分钟纪录一个样本点，最后得到600个数据点。数据通过蓝牙设备倒入到电脑,利用python处理数据，绘制可视化放电曲线图。</p>
-<h3 id="图例"><strong>图例</strong></h3><p><img src="http://7xk4vd.com1.z0.glb.clouddn.com/batterybl.jpg" alt="放电曲线"><br>根据绘制的图形，可以看出电压快速下降的转折点在3.7v，能量集中在3.7v以上，我们在做实验的时候保证放电电流一定，采样时间间隔一定，所以电池的整个能量就是曲线与坐标轴所围起来的面积，每一采样点的电量百分比就是总量减去采样点到零点之间面积与总量的占比。即 percent = $\frac{total - detal}{total}$<br>简单处理之后的百分比与adc采样的关系图就是这样的。</p>
-<p><img src="http://7xk4vd.com1.z0.glb.clouddn.com/battery2bl2.jpg" alt="电压adc与电量百分对应曲线图"><br>因为mcu资源有限，拟合曲线只取了一阶拟合，根据关系图，分成十段拟合。</p>
-<h3 id="python代码">python代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">line</span><span class="params">(p, a)</span>:</span> ＃拟合函数</span><br><span class="line">    y = np.array(p)</span><br><span class="line">    x = np.array(a)</span><br><span class="line">    z = np.polyfit(x, y, <span class="number">1</span>) <span class="comment"># x,y是两个列表 1是拟合阶数</span></span><br><span class="line">    p = np.poly1d(z)</span><br><span class="line">    print(p) <span class="comment"># 拟合公式</span></span><br></pre></td></tr></table></figure>
-<p>拟合一阶函数如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4.784</span> x + <span class="number">608.8</span></span><br><span class="line"><span class="number">0.8612</span> x + <span class="number">630.3</span></span><br><span class="line"><span class="number">0.4823</span> x + <span class="number">637.9</span></span><br><span class="line"><span class="number">0.3716</span> x + <span class="number">641.3</span></span><br><span class="line"><span class="number">0.4754</span> x + <span class="number">637.1</span></span><br><span class="line"><span class="number">0.6561</span> x + <span class="number">628.1</span></span><br><span class="line"><span class="number">1.086</span> x + <span class="number">602.2</span></span><br><span class="line"><span class="number">1.077</span> x + <span class="number">603.3</span></span><br><span class="line"><span class="number">1.107</span> x + <span class="number">600.8</span></span><br><span class="line"><span class="number">1.26</span> x + <span class="number">587.2</span></span><br></pre></td></tr></table></figure>
-<p>将系数表示成两数相除，得到新公式，根据公式重新翻转去重绘百分比与电压采样值的关系，发现效果还不错，满足要求。</p>
-<p><a href="https://github.com/M2shad0w/py_tool/blob/master/battery.py" target="_blank" rel="external">python 完整代码</a></p>
-
+        <h3 id="pandas处理数据">pandas处理数据</h3><p>一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…<br><a id="more"></a></p>
+<p>需求中有将几张表中的数据聚合</p>
+<p>这几张表都有一个公共的key，但是没法通过一个简单的sql语句完成（跨裤，不在一个地方）<br>这时候就可以通过pandas的DataFrame 的聚合输出</p>
+<p><code>from pandas import DataFrame</code></p>
+<h3 id="pandas操作文档">pandas操作文档</h3><p><a href="http://pandas.pydata.org/pandas-docs/stable/merging.html#brief-primer-on-merge-methods-relational-algebra" target="_blank" rel="external">官方文档</a></p>
+<p>将前面获得的从pymysql中list对象传入DataFrame</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df = DataFrame(result1)</span><br><span class="line">df2 = DataFrame(result2)</span><br><span class="line">df3 = DataFrame(result3)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dff = pd.merge(df, df2, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</span><br><span class="line">dff1 = pd.merge(dff, df3, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</span><br></pre></td></tr></table></figure>
+<p>聚合之后导出到xlsx</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dff1.to_excel(<span class="string">'foo.xlsx'</span>, sheet_name=<span class="string">'sheet1'</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -366,13 +373,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/04/25/go2mongo/" rel="next" title="go2mongo">
+                <i class="fa fa-chevron-left"></i> go2mongo
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/07/07/SetupShadowSocks/" rel="prev" title="搭建ShadowSocks代理">
-                搭建ShadowSocks代理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -550,7 +557,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OverView"><span class="nav-number">1.</span> <span class="nav-text">OverView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取数据"><span class="nav-number">3.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图例"><span class="nav-number">4.</span> <span class="nav-text">图例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python代码"><span class="nav-number">5.</span> <span class="nav-text">python代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas处理数据"><span class="nav-number">1.</span> <span class="nav-text">pandas处理数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas操作文档"><span class="nav-number">2.</span> <span class="nav-text">pandas操作文档</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -815,9 +822,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2015/07/03/battery-discharge/';
-      var disqus_title = '电池放电曲线';
-      var disqus_url = 'http://m2shad0w.com/2015/07/03/battery-discharge/';
+      var disqus_identifier = '2016/04/28/pandas2data/';
+      var disqus_title = 'pandas2data';
+      var disqus_url = 'http://m2shad0w.com/2016/04/28/pandas2data/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
