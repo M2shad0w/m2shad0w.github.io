@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="data," />
+  <meta name="keywords" content="mongodb," />
 
 
 
@@ -57,17 +57,16 @@
 
 
 
-<meta name="description" content="用户数据大数据好处多，对于一个公司来说，数据是支撑商业的最有力说服工具。">
+<meta name="description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TheBigData">
-<meta property="og:url" content="http://m2shad0w.com/2015/09/06/TheBigData/index.html">
+<meta property="og:title" content="mongodb基础">
+<meta property="og:url" content="http://m2shad0w.com/2016/05/09/mongodb基础/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="用户数据大数据好处多，对于一个公司来说，数据是支撑商业的最有力说服工具。">
-<meta property="og:image" content="http://7xk4vd.com1.z0.glb.clouddn.com/dataIG20150625173841967.jpg">
-<meta property="og:updated_time" content="2016-04-25T11:45:21.000Z">
+<meta property="og:description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
+<meta property="og:updated_time" content="2016-05-09T01:39:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TheBigData">
-<meta name="twitter:description" content="用户数据大数据好处多，对于一个公司来说，数据是支撑商业的最有力说服工具。">
+<meta name="twitter:title" content="mongodb基础">
+<meta name="twitter:description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
 
 
 
@@ -85,7 +84,7 @@
   };
 </script>
 
-  <title> TheBigData | m2shad0w </title>
+  <title> mongodb基础 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -272,7 +271,7 @@
             
             
               
-                TheBigData
+                mongodb基础
               
             
           </h1>
@@ -284,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-09-06T13:46:34+08:00" content="2015-09-06">
-              2015-09-06
+            <time itemprop="dateCreated" datetime="2016-05-09T09:34:40+08:00" content="2016-05-09">
+              2016-05-09
             </time>
           </span>
 
@@ -298,8 +297,8 @@
               <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/bigdata/" itemprop="url" rel="index">
-                    <span itemprop="name">bigdata</span>
+                  <a href="/categories/mongodb/" itemprop="url" rel="index">
+                    <span itemprop="name">mongodb</span>
                   </a>
                 </span>
 
@@ -314,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/06/TheBigData/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/06/TheBigData/" itemprop="commentsCount"></span>
+                <a href="/2016/05/09/mongodb基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/09/mongodb基础/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -336,13 +335,8 @@
       
 
       
-        <h3 id="用户数据">用户数据</h3><p>大数据好处多，对于一个公司来说，数据是支撑商业的最有力说服工具。</p>
-<a id="more"></a>
-<p>在现在鼓吹大众创业、万众创新的背景下，很多团队如雨后春笋一般冒了出来。创始人往往有一个好的idea，找几个技术人员干起来，就是一个很好的创业项目。做的好的话，在中国，你的用户数量很可能井喷，曾几何趋势增长，公司价值自然飙升，如杭州的in团队，时常对比国外的Instagram，更容易获得资本的青睐，获得很高的估值。下面就是第三方统计友盟的数据。<br><img src="http://7xk4vd.com1.z0.glb.clouddn.com/dataIG20150625173841967.jpg" alt=""><br>在互联网，用户就是一笔巨大的财富！</p>
-<h3 id="数据挖掘">数据挖掘</h3><p>数据多了自然就是大数据了，尤其是现在的信息化社会，一个普通的人，每天接触的信息量都是一千年前的人一生的信息了。纷繁的数据，需要挖掘分析，提炼出适合企业的关键点，以此来指导企业的各种商业决策。<br>有同事上周末去了七牛的BigData的大会，回来跟我们说，一个facebook的数据团队给的一个案例就是 “他们改版了一下facebook首页的布局，虽然很好看，仅仅一个很小的内部测试，发现这给他们减少了20%的广告营收，然后他们马上就将改版撤下了，然后国内的人人却是直接抄去，结果导致现在……”,当然这个有点段子了，但是确实也是不无道理的。</p>
-<h3 id="分享一个TED视频">分享一个TED视频</h3><!-- <link href="css/user.css" rel="stylesheet"> -->
-<p><style type="text/css"><br>    .video-container {<br>    position: relative;<br>    padding-bottom: 56.25%;<br>    padding-top: 30px;<br>    height: 0;<br>    overflow: hidden;<br>    }<br>    .video-container iframe {<br>    position: absolute;<br>    top:0;<br>    left: 0;<br>    width: 100%;<br>    height: 100%;<br>    }<br></style></p>
-<div class="video-container"><br>    <iframe height="315" width="560" src="http://player.youku.com/embed/XODI5NTQxNDQw" frameborder="0" allowfullscreen></iframe><br></div>
+        <h3 id="nosql之mongodb">nosql之mongodb</h3><p>mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。<br>在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。<br><a id="more"></a></p>
+<h3 id="mongo_ppt">mongo ppt</h3><p><iframe src="//www.slideshare.net/slideshow/embed_code/key/bCfioac6WeYuvY" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/JiahuaZhu3/mongo-61799349" title="Mongo基础" target="_blank">Mongo基础</a> </strong> from <strong><a href="//www.slideshare.net/JiahuaZhu3" target="_blank">Jiahua Zhu</a></strong> </div></p>
 
       
     </div>
@@ -351,7 +345,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/data/" rel="tag">#data</a>
+            <a href="/tags/mongodb/" rel="tag">#mongodb</a>
           
         </div>
       
@@ -360,17 +354,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/07/SetupShadowSocks/" rel="next" title="搭建ShadowSocks代理">
-                <i class="fa fa-chevron-left"></i> 搭建ShadowSocks代理
+              <a href="/2016/04/28/pandas2data/" rel="next" title="pandas2data">
+                <i class="fa fa-chevron-left"></i> pandas2data
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/21/how_to_use_spark_00/" rel="prev" title="数据平台spark">
-                数据平台spark <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,7 +538,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户数据"><span class="nav-number">1.</span> <span class="nav-text">用户数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据挖掘"><span class="nav-number">2.</span> <span class="nav-text">数据挖掘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享一个TED视频"><span class="nav-number">3.</span> <span class="nav-text">分享一个TED视频</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nosql之mongodb"><span class="nav-number">1.</span> <span class="nav-text">nosql之mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongo_ppt"><span class="nav-number">2.</span> <span class="nav-text">mongo ppt</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -813,9 +803,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2015/09/06/TheBigData/';
-      var disqus_title = 'TheBigData';
-      var disqus_url = 'http://m2shad0w.com/2015/09/06/TheBigData/';
+      var disqus_identifier = '2016/05/09/mongodb基础/';
+      var disqus_title = 'mongodb基础';
+      var disqus_url = 'http://m2shad0w.com/2016/05/09/mongodb基础/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
