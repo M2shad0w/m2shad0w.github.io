@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="flume," />
+  <meta name="keywords" content="ambari," />
 
 
 
@@ -57,18 +57,16 @@
 
 
 
-<meta name="description" content="flume深入配置想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。">
+<meta name="description" content="ambariambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DeepInConfigflume">
-<meta property="og:url" content="http://m2shad0w.com/2016/02/18/DeepInflume2/index.html">
+<meta property="og:title" content="ambari-agent注册失败">
+<meta property="og:url" content="http://m2shad0w.com/2016/06/02/ambari-agent注册失败/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="flume深入配置想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。">
-<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/63fe561egw1f13kkyzbd3j20yq02s75h.jpg">
-<meta property="og:updated_time" content="2016-04-25T11:45:21.000Z">
+<meta property="og:description" content="ambariambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录">
+<meta property="og:updated_time" content="2016-06-02T07:58:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DeepInConfigflume">
-<meta name="twitter:description" content="flume深入配置想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。">
+<meta name="twitter:title" content="ambari-agent注册失败">
+<meta name="twitter:description" content="ambariambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录">
 
 
 
@@ -86,7 +84,7 @@
   };
 </script>
 
-  <title> DeepInConfigflume | m2shad0w </title>
+  <title> ambari-agent注册失败 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -273,7 +271,7 @@
             
             
               
-                DeepInConfigflume
+                ambari-agent注册失败
               
             
           </h1>
@@ -285,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-02-18T16:04:28+08:00" content="2016-02-18">
-              2016-02-18
+            <time itemprop="dateCreated" datetime="2016-06-02T14:44:16+08:00" content="2016-06-02">
+              2016-06-02
             </time>
           </span>
 
@@ -315,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/18/DeepInflume2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/02/18/DeepInflume2/" itemprop="commentsCount"></span>
+                <a href="/2016/06/02/ambari-agent注册失败/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/02/ambari-agent注册失败/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -337,20 +335,23 @@
       
 
       
-        <h3 id="flume深入配置">flume深入配置</h3><p>想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。</p>
+        <h3 id="ambari">ambari</h3><p>ambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录</p>
 <a id="more"></a>
-<h3 id="读flume文档">读flume文档</h3><blockquote>
-<p>Alias    Description<br>%{host}    Substitute value of event header named “host”. Arbitrary header names are supported.</p>
-</blockquote>
-<p><img src="http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg" alt=""></p>
-<p>因此，需要在post数据headers 中加上 <code>host</code> 字段.</p>
-<p>快速修改一下flume的配置文件，测试一下</p>
-<p>配置文件对应修改字段：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:<span class="number">9000</span>/user/hadoop/%&#123;host&#125;/%y-%m-%d/</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S</span><br></pre></td></tr></table></figure>
-<p>测试:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST <span class="operator">-d</span> <span class="string">'[&#123;"headers":&#123;"host" : "chat"&#125;,"body" : "hello random flume "&#125;]'</span> http://&#123;your ip&#125;:&#123;your port&#125;</span><br></pre></td></tr></table></figure>
-<p>成功:</p>
-<p><img src="http://ww4.sinaimg.cn/mw690/63fe561egw1f13kkyzbd3j20yq02s75h.jpg" alt=""></p>
+<h3 id="过程">过程</h3><p>搭建的过程首先参考<a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_start_the_ambari_server.html" target="_blank" rel="external">hortonworks.com的文章</a>的文章.<br>包括</p>
+<ol>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_set_up_password-less_ssh.html" target="_blank" rel="external">无密码登陆</a></li>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_enable_ntp_on_the_cluster_and_on_the_browser_host.html" target="_blank" rel="external">安装ntp服务，同步时间</a></li>
+<li>[安装wget等基本软件]</li>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html" target="_blank" rel="external">设置FQDN, DNS</a></li>
+<li>[关闭防火墙, selinux]</li>
+</ol>
+<h3 id="坑">坑</h3><ul>
+<li>在<code>ambari-server setup</code> 选择数据库时候没有选择默认的<code>postgres</code>, 而选择了<code>mysql</code>，后面<code>ambar-server reset</code> 想重新设置为<code>postgres</code>时候不起作用</li>
+<li>centos 的系统语言设置成中文，导致 <code>Registration with the server failed</code>, 将系统语言改成英文就好了</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Connection <span class="built_in">to</span> laboratorio.cetax.com closed.</span><br><span class="line">SSH <span class="command"><span class="keyword">command</span> <span class="title">execution</span> <span class="title">finished</span></span></span><br><span class="line">host=laboratorio.cetax.com, exitcode=<span class="number">0</span></span><br><span class="line">Command <span class="function"><span class="keyword">end</span> <span class="title">time</span> <span class="title">2016-04-29</span> <span class="title">11</span>:<span class="title">27</span>:<span class="title">04</span></span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">Registering <span class="operator">with</span> <span class="operator">the</span> server...</span><br><span class="line">Registration <span class="operator">with</span> <span class="operator">the</span> server failed.</span><br></pre></td></tr></table></figure>
+<h3 id="参考文章">参考文章</h3><p><a href="http://www.oschina.net/question/2684511_2159089" target="_blank" rel="external">http://www.oschina.net/question/2684511_2159089</a></p>
+<p><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html" target="_blank" rel="external">http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html</a></p>
 
       
     </div>
@@ -359,7 +360,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/flume/" rel="tag">#flume</a>
+            <a href="/tags/ambari/" rel="tag">#ambari</a>
           
         </div>
       
@@ -368,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/15/crackWifiPasswd/" rel="next" title="crackWifiPasswd">
-                <i class="fa fa-chevron-left"></i> crackWifiPasswd
+              <a href="/2016/06/02/python-pkg-resources/" rel="next" title="python_pkg_resources">
+                <i class="fa fa-chevron-left"></i> python_pkg_resources
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/19/hdfsBadBlock/" rel="prev" title="hdfs文件坏块">
-                hdfs文件坏块 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -556,7 +553,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#flume深入配置"><span class="nav-number">1.</span> <span class="nav-text">flume深入配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读flume文档"><span class="nav-number">2.</span> <span class="nav-text">读flume文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ambari"><span class="nav-number">1.</span> <span class="nav-text">ambari</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">2.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">3.</span> <span class="nav-text">坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -821,9 +818,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2016/02/18/DeepInflume2/';
-      var disqus_title = 'DeepInConfigflume';
-      var disqus_url = 'http://m2shad0w.com/2016/02/18/DeepInflume2/';
+      var disqus_identifier = '2016/06/02/ambari-agent注册失败/';
+      var disqus_title = 'ambari-agent注册失败';
+      var disqus_url = 'http://m2shad0w.com/2016/06/02/ambari-agent注册失败/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
