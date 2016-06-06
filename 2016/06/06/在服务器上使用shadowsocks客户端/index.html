@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="openwrt," />
+  <meta name="keywords" content="shadowsocks," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="老路由刷上openwrt周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。">
+<meta name="description" content="ss客户端在centos上因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="openwrt_mount_usb">
-<meta property="og:url" content="http://m2shad0w.com/2016/04/24/openwrt-mount-usb/index.html">
+<meta property="og:title" content="在服务器上使用shadowsocks客户端">
+<meta property="og:url" content="http://m2shad0w.com/2016/06/06/在服务器上使用shadowsocks客户端/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="老路由刷上openwrt周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。">
-<meta property="og:updated_time" content="2016-04-25T11:45:21.000Z">
+<meta property="og:description" content="ss客户端在centos上因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。">
+<meta property="og:updated_time" content="2016-06-06T02:29:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="openwrt_mount_usb">
-<meta name="twitter:description" content="老路由刷上openwrt周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。">
+<meta name="twitter:title" content="在服务器上使用shadowsocks客户端">
+<meta name="twitter:description" content="ss客户端在centos上因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> openwrt_mount_usb | m2shad0w </title>
+  <title> 在服务器上使用shadowsocks客户端 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -271,7 +271,7 @@
             
             
               
-                openwrt_mount_usb
+                在服务器上使用shadowsocks客户端
               
             
           </h1>
@@ -283,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T22:16:53+08:00" content="2016-04-24">
-              2016-04-24
+            <time itemprop="dateCreated" datetime="2016-06-06T10:14:53+08:00" content="2016-06-06">
+              2016-06-06
             </time>
           </span>
 
@@ -297,8 +297,8 @@
               <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hardware/" itemprop="url" rel="index">
-                    <span itemprop="name">hardware</span>
+                  <a href="/categories/hue/" itemprop="url" rel="index">
+                    <span itemprop="name">hue</span>
                   </a>
                 </span>
 
@@ -313,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/24/openwrt-mount-usb/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/24/openwrt-mount-usb/" itemprop="commentsCount"></span>
+                <a href="/2016/06/06/在服务器上使用shadowsocks客户端/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/06/在服务器上使用shadowsocks客户端/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,18 +335,14 @@
       
 
       
-        <h3 id="老路由刷上openwrt">老路由刷上openwrt</h3><p>周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。</p>
+        <h3 id="ss客户端在centos上">ss客户端在centos上</h3><p>因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。</p>
 <a id="more"></a>
-<p>这是一台老路由器，大亚db120，之前刷过dreambox的op，但是想要装一些新的ipk的时候不能装上，想想还是刷到最新的固件好了。</p>
-<p>在openwrt官网上找到db120芯片的固件（cpu是博通的brcm63xx），刷上<a href="https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/" target="_blank" rel="external">snapshots</a>的<strong>openwrt-brcm63xx-generic-RG100A-squashfs-cfe.bin</strong></p>
-<p>sysupdate   *bin</p>
-<p>等待片刻，升级成功</p>
-<h3 id="修改opkg源为ustc源">修改opkg源为ustc源</h3><blockquote>
-<p>vi /etc/opkg.conf # 添加如下路径</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">src/gz barrier_breaker_base https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/base</span><br><span class="line">src/gz barrier_breaker_luci https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/luci</span><br><span class="line">src/gz barrier_breaker_management https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/management</span><br><span class="line">src/gz barrier_breaker_packages https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/packages</span><br><span class="line">src/gz barrier_breaker_routing https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/routing</span><br><span class="line">src/gz barrier_breaker_telephony https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/telephony</span><br><span class="line">src/gz barrier_breaker_kernel https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/kernel</span><br><span class="line">src/gz barrier_breaker_targets https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/targets</span><br></pre></td></tr></table></figure>
-<h3 id="挂载u盘做外部存储">挂载u盘做外部存储</h3><p>手头有16GB的金士顿优盘，挂载上去做外部存储，将opkg install 的软件包都安装在u盘中。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">安装usb支持：</span><br><span class="line">&gt;opkg install kmod-fs-ext4</span><br><span class="line">&gt;opkg install kmod-usb-storage</span><br><span class="line">&gt;opkg install block-mount</span><br></pre></td></tr></table></figure>
+<h3 id="安装">安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yum install python-pip    </span><br><span class="line">$ pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<h3 id="配置">配置</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "server":"x.x.x.x",             #ss服务器IP</span><br><span class="line">    "server_port":xxx,             #ss服务器端口</span><br><span class="line">    "local_address": "127.0.0.1",   #本地ip</span><br><span class="line">    "local_port":1080,              #本地端口</span><br><span class="line">    "password":"password",          #连接ss密码</span><br><span class="line">    "timeout":300,                  #等待超时</span><br><span class="line">    "method":"aes-256-cfb",             #加密方式(与服务器一致)</span><br><span class="line">    "fast_open": false,             # true 或 false。如果你的服务器 Linux 内核在3.7+，可以开启 fast_open 以降低延迟。开启方法： echo 3 &gt; /proc/sys/net/ipv4/tcp_fastopen 开启之后，将 fast_open 的配置设置为 true 即可</span><br><span class="line">    "workers": 1                    # 工作线程数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="启动&amp;测试">启动&amp;测试</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nohup sslocal -c <span class="regexp">/etc/</span>shadowsocks.json <span class="regexp">/dev/</span><span class="keyword">null</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br><span class="line"><span class="comment">// 然后加入开机自启动</span></span><br><span class="line">$ echo <span class="string">" nohup sslocal -c /etc/shadowsocks.json /dev/null 2&gt;&amp;1 &amp;"</span> <span class="regexp">/etc/</span>rc.local</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux |grep sslocal |grep -v <span class="string">"grep"</span></span><br><span class="line">root     <span class="number">12936</span>  <span class="number">0.0</span>  <span class="number">0.0</span> <span class="number">201376</span>  <span class="number">7764</span> pts/<span class="number">1</span>    S    <span class="number">6</span>月<span class="number">04</span>   <span class="number">0</span>:<span class="number">01</span> /usr/bin/python /usr/bin/sslocal -c /etc/shadowsocks.json /dev/null</span><br></pre></td></tr></table></figure>
+<p>测试<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl --socks5 <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">1080</span> http:<span class="comment">//httpbin.org/ip</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="参考">参考</h3><p><a href="http://www.jianshu.com/p/f688cdfa6947" target="_blank" rel="external">linux全局代理</a><br><a href="http://overtrue.me/articles/2016/03/shadowsocks-on-server.html" target="_blank" rel="external">http://overtrue.me/articles/2016/03/shadowsocks-on-server.html</a><br><a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">https://github.com/shadowsocks/shadowsocks/tree/master</a></p>
 
       
     </div>
@@ -355,7 +351,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/openwrt/" rel="tag">#openwrt</a>
+            <a href="/tags/shadowsocks/" rel="tag">#shadowsocks</a>
           
         </div>
       
@@ -364,17 +360,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/16/utf8mbOnRds/" rel="next" title="utf8mb4OnRds">
-                <i class="fa fa-chevron-left"></i> utf8mb4OnRds
+              <a href="/2016/06/03/hue编译安装/" rel="next" title="hue编译安装">
+                <i class="fa fa-chevron-left"></i> hue编译安装
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/25/go2mongo/" rel="prev" title="go2mongo">
-                go2mongo <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +544,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#老路由刷上openwrt"><span class="nav-number">1.</span> <span class="nav-text">老路由刷上openwrt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改opkg源为ustc源"><span class="nav-number">2.</span> <span class="nav-text">修改opkg源为ustc源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载u盘做外部存储"><span class="nav-number">3.</span> <span class="nav-text">挂载u盘做外部存储</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ss客户端在centos上"><span class="nav-number">1.</span> <span class="nav-text">ss客户端在centos上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动&测试"><span class="nav-number">4.</span> <span class="nav-text">启动&测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -817,9 +809,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2016/04/24/openwrt-mount-usb/';
-      var disqus_title = 'openwrt_mount_usb';
-      var disqus_url = 'http://m2shad0w.com/2016/04/24/openwrt-mount-usb/';
+      var disqus_identifier = '2016/06/06/在服务器上使用shadowsocks客户端/';
+      var disqus_title = '在服务器上使用shadowsocks客户端';
+      var disqus_url = 'http://m2shad0w.com/2016/06/06/在服务器上使用shadowsocks客户端/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
