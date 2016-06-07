@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>m2shad0w</title>
+  <subtitle>follow the wind</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://m2shad0w.com/"/>
+  <updated>2016-06-06T02:30:14.000Z</updated>
+  <id>http://m2shad0w.com/</id>
+  
+  <author>
+    <name>Apollo Zhu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在服务器上使用shadowsocks客户端</title>
+    <link href="http://m2shad0w.com/2016/06/06/%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BD%BF%E7%94%A8shadowsocks%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
+    <id>http://m2shad0w.com/2016/06/06/在服务器上使用shadowsocks客户端/</id>
+    <published>2016-06-06T02:14:53.000Z</published>
+    <updated>2016-06-06T02:30:14.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;ss客户端在centos上&quot;&gt;ss客户端在centos上&lt;/h3&gt;&lt;p&gt;因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;安装&quot;&gt;安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ yum install python-pip    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ pip install shadowsocks&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;配置&quot;&gt;配置&lt;/h3&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;server&quot;:&quot;x.x.x.x&quot;,             #ss服务器IP&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;server_port&quot;:xxx,             #ss服务器端口&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;local_address&quot;: &quot;127.0.0.1&quot;,   #本地ip&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;local_port&quot;:1080,              #本地端口&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;password&quot;:&quot;password&quot;,          #连接ss密码&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;timeout&quot;:300,                  #等待超时&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;method&quot;:&quot;aes-256-cfb&quot;,             #加密方式(与服务器一致)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;fast_open&quot;: false,             # true 或 false。如果你的服务器 Linux 内核在3.7+，可以开启 fast_open 以降低延迟。开启方法： echo 3 &amp;gt; /proc/sys/net/ipv4/tcp_fastopen 开启之后，将 fast_open 的配置设置为 true 即可&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;workers&quot;: 1                    # 工作线程数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;启动&amp;amp;测试&quot;&gt;启动&amp;amp;测试&lt;/h3&gt;&lt;figure class=&quot;highlight gradle&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ nohup sslocal -c &lt;span class=&quot;regexp&quot;&gt;/etc/&lt;/span&gt;shadowsocks.json &lt;span class=&quot;regexp&quot;&gt;/dev/&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&amp;gt;&amp;amp;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 然后加入开机自启动&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ echo &lt;span class=&quot;string&quot;&gt;&quot; nohup sslocal -c /etc/shadowsocks.json /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&quot;&lt;/span&gt; &lt;span class=&quot;regexp&quot;&gt;/etc/&lt;/span&gt;rc.local&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ ps aux |grep sslocal |grep -v &lt;span class=&quot;string&quot;&gt;&quot;grep&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;root     &lt;span class=&quot;number&quot;&gt;12936&lt;/span&gt;  &lt;span class=&quot;number&quot;&gt;0.0&lt;/span&gt;  &lt;span class=&quot;number&quot;&gt;0.0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;201376&lt;/span&gt;  &lt;span class=&quot;number&quot;&gt;7764&lt;/span&gt; pts/&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;    S    &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;月&lt;span class=&quot;number&quot;&gt;04&lt;/span&gt;   &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;01&lt;/span&gt; /usr/bin/python /usr/bin/sslocal -c /etc/shadowsocks.json /dev/null&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;测试&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ curl --socks5 &lt;span class=&quot;number&quot;&gt;127.0&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;.0&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;.1&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;1080&lt;/span&gt; http:&lt;span class=&quot;comment&quot;&gt;//httpbin.org/ip&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/f688cdfa6947&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;linux全局代理&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://overtrue.me/articles/2016/03/shadowsocks-on-server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://overtrue.me/articles/2016/03/shadowsocks-on-server.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/shadowsocks/shadowsocks/tree/master&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/shadowsocks/shadowsocks/tree/master&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;ss客户端在centos上&quot;&gt;ss客户端在centos上&lt;/h3&gt;&lt;p&gt;因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hue" scheme="http://m2shad0w.com/categories/hue/"/>
+    
+    
+      <category term="shadowsocks" scheme="http://m2shad0w.com/tags/shadowsocks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hue编译安装</title>
+    <link href="http://m2shad0w.com/2016/06/03/hue%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
+    <id>http://m2shad0w.com/2016/06/03/hue编译安装/</id>
+    <published>2016-06-03T10:02:46.000Z</published>
+    <updated>2016-06-04T09:07:50.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;安装依赖&quot;&gt;安装依赖&lt;/h3&gt;&lt;p&gt;yum 安装依赖&lt;/p&gt;
+&lt;figure class=&quot;highlight cmake&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; gmp-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; libffi-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; krb5-devel cyrus-sasl-gssapi cyrus-sasl-deve libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel python-simplejson sqlite-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;built_in&quot;&gt;list&lt;/span&gt; &amp;lt;xxx&amp;gt; &lt;span class=&quot;preprocessor&quot;&gt;# yum list gmp-devel 查看具体包名&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://my.oschina.net/wangjiankui/blog/465827&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://my.oschina.net/wangjiankui/blog/465827&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://cloudera.github.io/hue/docs-3.8.0/manual.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://cloudera.github.io/hue/docs-3.8.0/manual.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;安装依赖&quot;&gt;安装依赖&lt;/h3&gt;&lt;p&gt;yum 安装依赖&lt;/p&gt;
+&lt;figure class=&quot;highlight cmake&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; gmp-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; libffi-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; krb5-devel cyrus-sasl-gssapi cyrus-sasl-deve libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel python-simplejson sqlite-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+      <category term="tools" scheme="http://m2shad0w.com/categories/bigdata/tools/"/>
+    
+    
+      <category term="hue" scheme="http://m2shad0w.com/tags/hue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ambari-agent注册失败</title>
+    <link href="http://m2shad0w.com/2016/06/02/ambari-agent%E6%B3%A8%E5%86%8C%E5%A4%B1%E8%B4%A5/"/>
+    <id>http://m2shad0w.com/2016/06/02/ambari-agent注册失败/</id>
+    <published>2016-06-02T06:44:16.000Z</published>
+    <updated>2016-06-02T07:58:30.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;ambari&quot;&gt;ambari&lt;/h3&gt;&lt;p&gt;ambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;过程&quot;&gt;过程&lt;/h3&gt;&lt;p&gt;搭建的过程首先参考&lt;a href=&quot;http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_start_the_ambari_server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hortonworks.com的文章&lt;/a&gt;的文章.&lt;br&gt;包括&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_set_up_password-less_ssh.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;无密码登陆&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_enable_ntp_on_the_cluster_and_on_the_browser_host.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;安装ntp服务，同步时间&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[安装wget等基本软件]&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;设置FQDN, DNS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[关闭防火墙, selinux]&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;坑&quot;&gt;坑&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;ambari-server setup&lt;/code&gt; 选择数据库时候没有选择默认的&lt;code&gt;postgres&lt;/code&gt;, 而选择了&lt;code&gt;mysql&lt;/code&gt;，后面&lt;code&gt;ambar-server reset&lt;/code&gt; 想重新设置为&lt;code&gt;postgres&lt;/code&gt;时候不起作用&lt;/li&gt;
+&lt;li&gt;centos 的系统语言设置成中文，导致 &lt;code&gt;Registration with the server failed&lt;/code&gt;, 将系统语言改成英文就好了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight livecodeserver&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Connection &lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt; laboratorio.cetax.com closed.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SSH &lt;span class=&quot;command&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;execution&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;finished&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;host=laboratorio.cetax.com, exitcode=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Command &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;2016-04-29&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;11&lt;/span&gt;:&lt;span class=&quot;title&quot;&gt;27&lt;/span&gt;:&lt;span class=&quot;title&quot;&gt;04&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Registering &lt;span class=&quot;operator&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;operator&quot;&gt;the&lt;/span&gt; server...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Registration &lt;span class=&quot;operator&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;operator&quot;&gt;the&lt;/span&gt; server failed.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;参考文章&quot;&gt;参考文章&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://www.oschina.net/question/2684511_2159089&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.oschina.net/question/2684511_2159089&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;ambari&quot;&gt;ambari&lt;/h3&gt;&lt;p&gt;ambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="ambari" scheme="http://m2shad0w.com/tags/ambari/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python_pkg_resources</title>
+    <link href="http://m2shad0w.com/2016/06/02/python-pkg-resources/"/>
+    <id>http://m2shad0w.com/2016/06/02/python-pkg-resources/</id>
+    <published>2016-06-02T06:10:32.000Z</published>
+    <updated>2016-06-02T06:10:32.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>centos网络配置</title>
+    <link href="http://m2shad0w.com/2016/05/31/centos%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    <id>http://m2shad0w.com/2016/05/31/centos网络配置/</id>
+    <published>2016-05-31T07:45:23.000Z</published>
+    <updated>2016-05-31T08:00:58.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;centos-dvd-iso&quot;&gt;centos-dvd-iso&lt;/h3&gt;&lt;p&gt;安装了centos－dvd－iso镜像版本，默认boot up的时候竟然网卡没有驱动起来。配置的过程做一下纪录。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;配置sysconfig&quot;&gt;配置sysconfig&lt;/h3&gt;&lt;p&gt;在&lt;code&gt;/etc/sysconfig/network-scripts&lt;/code&gt; 修改 &lt;code&gt;ifcfg-enp3s0&lt;/code&gt;文件&lt;/p&gt;
+&lt;p&gt;ifcfg后缀名就是网卡的名&lt;br&gt;可以通过&lt;code&gt;ip add&lt;/code&gt;获取&lt;/p&gt;
+&lt;h3 id=&quot;图形化配置&quot;&gt;图形化配置&lt;/h3&gt;&lt;p&gt;&lt;code&gt;nmtui edit 网卡名&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;依次填写好&lt;/p&gt;
+&lt;p&gt;ip、网关、dns 等&lt;/p&gt;
+&lt;p&gt;如图&lt;br&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/63fe561egw1f4emdhg7r4j20s80pyade.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;重启网络服务生效&quot;&gt;重启网络服务生效&lt;/h3&gt;&lt;p&gt;&lt;code&gt;service network restart&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;或者&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;systemctl restart network.service&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装一些网络工具&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yum update &amp;amp;&amp;amp; yum install net-tools&lt;/code&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;centos-dvd-iso&quot;&gt;centos-dvd-iso&lt;/h3&gt;&lt;p&gt;安装了centos－dvd－iso镜像版本，默认boot up的时候竟然网卡没有驱动起来。配置的过程做一下纪录。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="network" scheme="http://m2shad0w.com/categories/network/"/>
+    
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/tags/bigdata/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zeppelin_data_visualization</title>
+    <link href="http://m2shad0w.com/2016/05/26/zeppelin-data-visualization/"/>
+    <id>http://m2shad0w.com/2016/05/26/zeppelin-data-visualization/</id>
+    <published>2016-05-26T11:41:24.000Z</published>
+    <updated>2016-05-28T09:35:05.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;Multi-purpose_Notebook&quot;&gt;Multi-purpose Notebook&lt;/h3&gt;&lt;p&gt;正如zeppelin主页所说， zeppelin 是一个多目的的文本笔记。你的所有的数据需求都可以在这个笔记中完成。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据喂入&lt;/li&gt;
+&lt;li&gt;数据发现&lt;/li&gt;
+&lt;li&gt;数据分析&lt;/li&gt;
+&lt;li&gt;数据可视化&amp;amp;合作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;多语言支持&quot;&gt;多语言支持&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Multi-purpose_Notebook&quot;&gt;Multi-purpose Notebook&lt;/h3&gt;&lt;p&gt;正如zeppelin主页所说， zeppelin 是一个多目的的文本笔记。你的所有的数据需求都可以在这个笔记中完成。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据喂入&lt;/li&gt;
+&lt;li&gt;数据发现&lt;/li&gt;
+&lt;li&gt;数据分析&lt;/li&gt;
+&lt;li&gt;数据可视化&amp;amp;合作&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="data" scheme="http://m2shad0w.com/tags/data/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dato_Machine_Learning</title>
+    <link href="http://m2shad0w.com/2016/05/25/Dato-Machine-Learning/"/>
+    <id>http://m2shad0w.com/2016/05/25/Dato-Machine-Learning/</id>
+    <published>2016-05-25T07:01:23.000Z</published>
+    <updated>2016-05-25T07:05:56.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;dato&quot;&gt;dato&lt;/h3&gt;&lt;p&gt;Dato_Machine_Learning, 使用GraphLab来做一些机器学习。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;user_guide&quot;&gt;user guide&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://dato.com/learn/userguide/install.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://dato.com/learn/userguide/install.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;dato&quot;&gt;dato&lt;/h3&gt;&lt;p&gt;Dato_Machine_Learning, 使用GraphLab来做一些机器学习。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="machine_learning" scheme="http://m2shad0w.com/tags/machine-learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mongodb基础</title>
+    <link href="http://m2shad0w.com/2016/05/09/mongodb%E5%9F%BA%E7%A1%80/"/>
+    <id>http://m2shad0w.com/2016/05/09/mongodb基础/</id>
+    <published>2016-05-09T01:34:40.000Z</published>
+    <updated>2016-05-09T01:39:38.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;nosql之mongodb&quot;&gt;nosql之mongodb&lt;/h3&gt;&lt;p&gt;mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。&lt;br&gt;在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;mongo_ppt&quot;&gt;mongo ppt&lt;/h3&gt;&lt;p&gt;&lt;iframe src=&quot;//www.slideshare.net/slideshow/embed_code/key/bCfioac6WeYuvY&quot; width=&quot;595&quot; height=&quot;485&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;//www.slideshare.net/JiahuaZhu3/mongo-61799349&quot; title=&quot;Mongo基础&quot; target=&quot;_blank&quot;&gt;Mongo基础&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&quot;//www.slideshare.net/JiahuaZhu3&quot; target=&quot;_blank&quot;&gt;Jiahua Zhu&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;nosql之mongodb&quot;&gt;nosql之mongodb&lt;/h3&gt;&lt;p&gt;mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。&lt;br&gt;在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="mongodb" scheme="http://m2shad0w.com/categories/mongodb/"/>
+    
+    
+      <category term="mongodb" scheme="http://m2shad0w.com/tags/mongodb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pandas2data</title>
+    <link href="http://m2shad0w.com/2016/04/28/pandas2data/"/>
+    <id>http://m2shad0w.com/2016/04/28/pandas2data/</id>
+    <published>2016-04-28T03:46:39.000Z</published>
+    <updated>2016-04-28T06:32:46.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;pandas处理数据&quot;&gt;pandas处理数据&lt;/h3&gt;&lt;p&gt;一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;需求中有将几张表中的数据聚合&lt;/p&gt;
+&lt;p&gt;这几张表都有一个公共的key，但是没法通过一个简单的sql语句完成（跨裤，不在一个地方）&lt;br&gt;这时候就可以通过pandas的DataFrame 的聚合输出&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;from pandas import DataFrame&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;pandas操作文档&quot;&gt;pandas操作文档&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://pandas.pydata.org/pandas-docs/stable/merging.html#brief-primer-on-merge-methods-relational-algebra&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将前面获得的从pymysql中list对象传入DataFrame&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df = DataFrame(result1)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df2 = DataFrame(result2)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df3 = DataFrame(result3)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dff = pd.merge(df, df2, how=&lt;span class=&quot;string&quot;&gt;&#39;left&#39;&lt;/span&gt;, on=&lt;span class=&quot;string&quot;&gt;&quot;id&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dff1 = pd.merge(dff, df3, how=&lt;span class=&quot;string&quot;&gt;&#39;left&#39;&lt;/span&gt;, on=&lt;span class=&quot;string&quot;&gt;&quot;id&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;聚合之后导出到xlsx&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dff1.to_excel(&lt;span class=&quot;string&quot;&gt;&#39;foo.xlsx&#39;&lt;/span&gt;, sheet_name=&lt;span class=&quot;string&quot;&gt;&#39;sheet1&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;pandas处理数据&quot;&gt;pandas处理数据&lt;/h3&gt;&lt;p&gt;一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…&lt;br&gt;
+    
+    </summary>
+    
+      <category term="pandas" scheme="http://m2shad0w.com/categories/pandas/"/>
+    
+      <category term="dataMining" scheme="http://m2shad0w.com/categories/pandas/dataMining/"/>
+    
+    
+      <category term="python" scheme="http://m2shad0w.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go2mongo</title>
+    <link href="http://m2shad0w.com/2016/04/25/go2mongo/"/>
+    <id>http://m2shad0w.com/2016/04/25/go2mongo/</id>
+    <published>2016-04-25T02:43:34.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;go操作mongo的好驱动&quot;&gt;go操作mongo的好驱动&lt;/h3&gt;&lt;p&gt;画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动&lt;strong&gt;mgo&lt;/strong&gt;。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;在github 的 &lt;code&gt;go awesome&lt;/code&gt; 项目下，搜索&lt;code&gt;mongo&lt;/code&gt;，看到如下说明&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MongoDB driver for the Go language that implements a rich and well tested selection of features under a very simple API following standard Go idioms&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;安装mgo驱动&quot;&gt;安装mgo驱动&lt;/h3&gt;&lt;p&gt;按照mgo的介绍页&lt;a href=&quot;http://labix.org/mgo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://labix.org/mgo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;go get gopkg.in/mgo.v2&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;快速实现例子&quot;&gt;快速实现例子&lt;/h3&gt;&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;package&lt;/span&gt; main&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; (&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;string&quot;&gt;&quot;log&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;string&quot;&gt;&quot;gopkg.in/mgo.v2&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;string&quot;&gt;&quot;gopkg.in/mgo.v2/bson&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;type&lt;/span&gt; Person &lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Name &lt;span class=&quot;typename&quot;&gt;string&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Phone &lt;span class=&quot;typename&quot;&gt;string&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; main() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        session, err := mgo.Dial(&lt;span class=&quot;string&quot;&gt;&quot;server1.example.com,server2.example.com&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; err != &lt;span class=&quot;constant&quot;&gt;nil&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;built_in&quot;&gt;panic&lt;/span&gt;(err)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;defer&lt;/span&gt; session.Close()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// Optional. Switch the session to a monotonic behavior.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        session.SetMode(mgo.Monotonic, &lt;span class=&quot;constant&quot;&gt;true&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        c := session.DB(&lt;span class=&quot;string&quot;&gt;&quot;test&quot;&lt;/span&gt;).C(&lt;span class=&quot;string&quot;&gt;&quot;people&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        err = c.Insert(&amp;amp;Person&amp;#123;&lt;span class=&quot;string&quot;&gt;&quot;Ale&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;+55 53 8116 9639&quot;&lt;/span&gt;&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	               &amp;amp;Person&amp;#123;&lt;span class=&quot;string&quot;&gt;&quot;Cla&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;+55 53 8402 8510&quot;&lt;/span&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; err != &lt;span class=&quot;constant&quot;&gt;nil&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                log.Fatal(err)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        result := Person&amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        err = c.Find(bson.M&amp;#123;&lt;span class=&quot;string&quot;&gt;&quot;name&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;Ale&quot;&lt;/span&gt;&amp;#125;).One(&amp;amp;result)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; err != &lt;span class=&quot;constant&quot;&gt;nil&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                log.Fatal(err)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        fmt.Println(&lt;span class=&quot;string&quot;&gt;&quot;Phone:&quot;&lt;/span&gt;, result.Phone)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;效果&quot;&gt;效果&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/63fe561egw1f38rh2u41zj20ea05074u.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;好了，去写接口了…&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;go操作mongo的好驱动&quot;&gt;go操作mongo的好驱动&lt;/h3&gt;&lt;p&gt;画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动&lt;strong&gt;mgo&lt;/strong&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mongo" scheme="http://m2shad0w.com/categories/mongo/"/>
+    
+      <category term="go" scheme="http://m2shad0w.com/categories/mongo/go/"/>
+    
+    
+      <category term="go" scheme="http://m2shad0w.com/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openwrt_mount_usb</title>
+    <link href="http://m2shad0w.com/2016/04/24/openwrt-mount-usb/"/>
+    <id>http://m2shad0w.com/2016/04/24/openwrt-mount-usb/</id>
+    <published>2016-04-24T14:16:53.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;老路由刷上openwrt&quot;&gt;老路由刷上openwrt&lt;/h3&gt;&lt;p&gt;周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;这是一台老路由器，大亚db120，之前刷过dreambox的op，但是想要装一些新的ipk的时候不能装上，想想还是刷到最新的固件好了。&lt;/p&gt;
+&lt;p&gt;在openwrt官网上找到db120芯片的固件（cpu是博通的brcm63xx），刷上&lt;a href=&quot;https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;snapshots&lt;/a&gt;的&lt;strong&gt;openwrt-brcm63xx-generic-RG100A-squashfs-cfe.bin&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;sysupdate   *bin&lt;/p&gt;
+&lt;p&gt;等待片刻，升级成功&lt;/p&gt;
+&lt;h3 id=&quot;修改opkg源为ustc源&quot;&gt;修改opkg源为ustc源&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;vi /etc/opkg.conf # 添加如下路径&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_base https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/base&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_luci https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/luci&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_management https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/management&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_packages https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/packages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_routing https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/routing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_telephony https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/telephony&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_kernel https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/kernel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;src/gz barrier_breaker_targets https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/targets&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;挂载u盘做外部存储&quot;&gt;挂载u盘做外部存储&lt;/h3&gt;&lt;p&gt;手头有16GB的金士顿优盘，挂载上去做外部存储，将opkg install 的软件包都安装在u盘中。&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;安装usb支持：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;opkg install kmod-fs-ext4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;opkg install kmod-usb-storage&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;opkg install block-mount&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;老路由刷上openwrt&quot;&gt;老路由刷上openwrt&lt;/h3&gt;&lt;p&gt;周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hardware" scheme="http://m2shad0w.com/categories/hardware/"/>
+    
+    
+      <category term="openwrt" scheme="http://m2shad0w.com/tags/openwrt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>utf8mb4OnRds</title>
+    <link href="http://m2shad0w.com/2016/03/16/utf8mbOnRds/"/>
+    <id>http://m2shad0w.com/2016/03/16/utf8mbOnRds/</id>
+    <published>2016-03-16T10:23:09.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;数据存入rds&quot;&gt;数据存入rds&lt;/h3&gt;&lt;p&gt;记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;err&quot;&gt;err&lt;/h3&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;java.sql.SQLException: Incorrect string value: &amp;#39;\xF0\x9F\x8E\x89\xF0\x9F...&amp;#39; for column&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;设置字符集为_utf8mb4&quot;&gt;设置字符集为 utf8mb4&lt;/h3&gt;&lt;p&gt;&lt;code&gt;mysql&amp;gt; show variables like &amp;#39;%char%&amp;#39;;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/mw690/63fe561egw1f23k82w2tbj20k40f641x.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/mw690/63fe561egw1f23k8k1m52j213002at97.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 客户端上设置字符集为utf8mb4 重连不生效 需要在rds 控制台设置 &lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://help.aliyun.com/knowledge_detail/5990076.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://help.aliyun.com/knowledge_detail/5990076.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;数据存入rds&quot;&gt;数据存入rds&lt;/h3&gt;&lt;p&gt;记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="mysql" scheme="http://m2shad0w.com/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hdfs文件坏块</title>
+    <link href="http://m2shad0w.com/2016/02/19/hdfsBadBlock/"/>
+    <id>http://m2shad0w.com/2016/02/19/hdfsBadBlock/</id>
+    <published>2016-02-19T03:09:56.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;重启hadoop带来的问题&quot;&gt;重启hadoop带来的问题&lt;/h3&gt;&lt;p&gt;之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;错误&quot;&gt;错误&lt;/h3&gt;&lt;p&gt;spark 从hdfs上 load数据的时候出现错误&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cause:java.io.IOException: Cannot obtain block length &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; LocatedBlock&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;用 &lt;code&gt;hdfs fsck /&lt;/code&gt; 查看显示 &lt;code&gt;hadoop显示现在没有任何丢失的块&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;找出文件&lt;br&gt;&lt;code&gt;hadoop fsck / -openforwrite |egrep -v &amp;#39;^\.+$&amp;#39; |egrep &amp;quot;MISSING|OPENFORWRITE&amp;quot; |grep -o &amp;quot;/[^ ]*&amp;quot; |sed -e &amp;quot;s/:$//|sort |uniq&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/mw690/63fe561egw1f14hdula3mj20qk066q48.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;删除文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hadoop fs -rm -skipTrash $file&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;参考文章&quot;&gt;参考文章&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://ju.outofmemory.cn/entry/204699&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ju.outofmemory.cn/entry/204699&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;重启hadoop带来的问题&quot;&gt;重启hadoop带来的问题&lt;/h3&gt;&lt;p&gt;之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="hadoop" scheme="http://m2shad0w.com/tags/hadoop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DeepInConfigflume</title>
+    <link href="http://m2shad0w.com/2016/02/18/DeepInflume2/"/>
+    <id>http://m2shad0w.com/2016/02/18/DeepInflume2/</id>
+    <published>2016-02-18T08:04:28.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;flume深入配置&quot;&gt;flume深入配置&lt;/h3&gt;&lt;p&gt;想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;读flume文档&quot;&gt;读flume文档&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Alias    Description&lt;br&gt;%{host}    Substitute value of event header named “host”. Arbitrary header names are supported.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;因此，需要在post数据headers 中加上 &lt;code&gt;host&lt;/code&gt; 字段.&lt;/p&gt;
+&lt;p&gt;快速修改一下flume的配置文件，测试一下&lt;/p&gt;
+&lt;p&gt;配置文件对应修改字段：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:&lt;span class=&quot;number&quot;&gt;9000&lt;/span&gt;/user/hadoop/%&amp;#123;host&amp;#125;/%y-%m-%d/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;测试:&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;curl -X POST &lt;span class=&quot;operator&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;[&amp;#123;&quot;headers&quot;:&amp;#123;&quot;host&quot; : &quot;chat&quot;&amp;#125;,&quot;body&quot; : &quot;hello random flume &quot;&amp;#125;]&#39;&lt;/span&gt; http://&amp;#123;your ip&amp;#125;:&amp;#123;your port&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;成功:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/mw690/63fe561egw1f13kkyzbd3j20yq02s75h.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;flume深入配置&quot;&gt;flume深入配置&lt;/h3&gt;&lt;p&gt;想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="flume" scheme="http://m2shad0w.com/tags/flume/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>crackWifiPasswd</title>
+    <link href="http://m2shad0w.com/2016/02/15/crackWifiPasswd/"/>
+    <id>http://m2shad0w.com/2016/02/15/crackWifiPasswd/</id>
+    <published>2016-02-15T09:30:25.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;无线破解&quot;&gt;无线破解&lt;/h3&gt;&lt;p&gt;声明: 仅作研究的一个笔记。 在小区内有很多的wifi热点, 正好手头有一个无线网卡, 尝试破解wifi密码。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;背景知识&quot;&gt;背景知识&lt;/h3&gt;&lt;p&gt;常用的wifi加密web、wpa、wpa2, wifi破解屌爆了的工具aircrack-ng, 密码字典。&lt;/p&gt;
+&lt;h3 id=&quot;破解实战&quot;&gt;破解实战&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;将无线网卡处于混杂模式（能够监听周围通过网卡的数据）&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;是指一台机器的网卡能够接收所有经过它的数据流，而不论其目的地址是否是它&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airmon-ng&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/mw690/63fe561egw1f1159fnr4lj214c0c8q60.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airmon-ng start wlan0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/mw690/63fe561egw1f115chobo8j214w0matgn.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;回显的时候 提示有些存在的进程可能会影响airodump正常工作，确保正常工作，需要执行一下命令&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airmon-ng check &lt;span class=&quot;built_in&quot;&gt;kill&lt;/span&gt; all&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;iwconfig wlan0mon &lt;span class=&quot;comment&quot;&gt;# 查看网卡是否处于混杂模式&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airodump-ng waln0mon &lt;span class=&quot;comment&quot;&gt;# 查看周围的无线网络&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/63fe561egw1f115lckxtdj21e80nkam7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;语法:airodump-ng –channel [x] –bssid [bssid] –write [filename] [interface?mon0]&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airodump-ng  -w qiu --bssid FC:D7:&lt;span class=&quot;number&quot;&gt;33&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;82&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;B:&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; wlan0mon&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;再开一个终端, 模拟客户端mac, 进行网络洪水攻击, 直到抓到重连握手包&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;aireplay-ng -&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; --ignore-negative-one  &lt;span class=&quot;operator&quot;&gt;-a&lt;/span&gt;  FC:D7:&lt;span class=&quot;number&quot;&gt;33&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;82&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;B:&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;  -c &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;C:BE:&lt;span class=&quot;number&quot;&gt;08&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;B:&lt;span class=&quot;number&quot;&gt;81&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;48&lt;/span&gt;  wlan0mon&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;aircrack-ng -w WPA字典.txt qiu-*.cap&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/mw690/63fe561egw1f13jd6q1o7j217o0wgwpo.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;!hack the passwd&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;后记&quot;&gt;后记&lt;/h3&gt;&lt;p&gt;抓到wifi的握手包之后，就是跑密码字典了，精心设计密码字典，就会事半功倍！破解wifi之后，还有更多好玩的东西！&lt;/p&gt;
+&lt;h3 id=&quot;参考文献&quot;&gt;参考文献&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://www.freebuf.com/articles/wireless/59809.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.freebuf.com/articles/wireless/59809.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://aircrack-ng.org/documentation.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://aircrack-ng.org/documentation.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.aircrack-ng.org/doku.php?id=cracking_wpa&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.aircrack-ng.org/doku.php?id=cracking_wpa&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://sweetll.me/2014/11/ubuntu-14-10-%E5%AF%B9%E4%BA%8Ewifi%E5%AF%86%E7%A0%81%E7%9A%84%E7%A0%B4%E8%A7%A3%E7%A0%94%E7%A9%B6-%E4%BB%A5%E5%8F%8A%E7%A0%B4%E8%A7%A3wifi%E5%90%8E%E8%83%BD%E5%B9%B2%E4%BB%80%E4%B9%88/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://sweetll.me&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;无线破解&quot;&gt;无线破解&lt;/h3&gt;&lt;p&gt;声明: 仅作研究的一个笔记。 在小区内有很多的wifi热点, 正好手头有一个无线网卡, 尝试破解wifi密码。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="crack" scheme="http://m2shad0w.com/categories/crack/"/>
+    
+    
+      <category term="aircrack" scheme="http://m2shad0w.com/tags/aircrack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scala_MeetUp_InHangZhou</title>
+    <link href="http://m2shad0w.com/2016/02/02/scala-MeetUp-InHangZhou/"/>
+    <id>http://m2shad0w.com/2016/02/02/scala-MeetUp-InHangZhou/</id>
+    <published>2016-02-02T06:02:02.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;&lt;p&gt;去年12月的时候, 在杭州in总部举办了一场杭州scala的线下交流会, 在现场大家分享了很多在实际业务应用中的心得, 我受益匪浅。在此分享给大家。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;ppt分享&quot;&gt;ppt分享&lt;/h3&gt;&lt;p&gt;以下ppt内容是来自阿里的玄畅, 可以说是scala的技术栈&lt;/p&gt;
+&lt;p&gt;&lt;iframe src=&quot;//www.slideshare.net/slideshow/embed_code/key/b489pZGPiqqooT&quot; width=&quot;595&quot; height=&quot;485&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;//www.slideshare.net/JiahuaZhu3/scala-201512&quot; title=&quot;Scala使用体验 玄畅 201512&quot; target=&quot;_blank&quot;&gt;Scala使用体验 玄畅 201512&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&quot;//www.slideshare.net/JiahuaZhu3&quot; target=&quot;_blank&quot;&gt;Jiahua Zhu&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&quot;git分享&quot;&gt;git分享&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/CSUG/csug/tree/master/hangzhou-2015-12-26&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;scala meet-up hangzhou-2015-12-26&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;&lt;p&gt;去年12月的时候, 在杭州in总部举办了一场杭州scala的线下交流会, 在现场大家分享了很多在实际业务应用中的心得, 我受益匪浅。在此分享给大家。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="scala" scheme="http://m2shad0w.com/categories/scala/"/>
+    
+    
+      <category term="scala" scheme="http://m2shad0w.com/tags/scala/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spark中flatMap&amp;map的区别</title>
+    <link href="http://m2shad0w.com/2016/01/28/flatMap/"/>
+    <id>http://m2shad0w.com/2016/01/28/flatMap/</id>
+    <published>2016-01-28T03:43:38.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;区别&quot;&gt;区别&lt;/h3&gt;&lt;p&gt;flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;相同点&lt;/p&gt;
+&lt;p&gt;  应用一个函数作用在一个RDD上的每一行, 为每一条输入返回一个对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不同点&lt;/p&gt;
+&lt;p&gt;  flatMap是只是返回一个对象（相比map多了一个步骤, 将结果对象合并为一个对象）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;实例&quot;&gt;实例&lt;/h3&gt;&lt;p&gt;实例化 sc&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; findspark&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; os&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;findspark.init()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pyspark&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sc = pyspark.SparkContext()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; sc&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;文件路径&lt;br&gt;&lt;code&gt;HDFS_PATH = &amp;quot;hdfs://localhost:9000/user/m2shad0w/flume_data/*&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;maplog&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;faltlog = sc.textFile(HDFS_PATH).map(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; line: line.split(&lt;span class=&quot;string&quot;&gt;&quot;\01&quot;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;faltMap&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;maplog = sc.textFile(HDFS_PATH).flatMap(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; line: line.split(&lt;span class=&quot;string&quot;&gt;&quot;\01&quot;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;显示&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;faltlog.first()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;[u&amp;#39;id&amp;#39;, u&amp;#39;2016-01-25 16:00:00&amp;#39;, u&amp;#39;28800&amp;#39;, u&amp;#39;0&amp;#39;, u&amp;#39;User&amp;#39;, u&amp;#39;1884292&amp;#39;, u&amp;#39;enter_background&amp;#39;, u&amp;#39;&amp;#39;, u&amp;#39;2&amp;#39;, u&amp;#39;1884292&amp;#39;, u&amp;#39;346643&amp;#39;, u&amp;#39;1&amp;#39;, u&amp;#39;0&amp;#39;, u&amp;#39;2016-01-25 15:43:52&amp;#39;, u&amp;#39;7686852&amp;#39;, u&amp;#39;&amp;#39;]&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;maplog.first()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;u&amp;#39;id&amp;#39;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;显示第一行，所以才只显示了id&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/samhacker/article/details/41927567&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSDN参考文章&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.dattamsha.com/2014/09/map-vs-flatmap-spark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;英文参考文章&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;区别&quot;&gt;区别&lt;/h3&gt;&lt;p&gt;flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="scala" scheme="http://m2shad0w.com/categories/scala/"/>
+    
+    
+      <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spark写数据到mysql第二弹</title>
+    <link href="http://m2shad0w.com/2016/01/25/spark%E5%86%99%E6%95%B0%E6%8D%AE%E5%88%B0mysql%E7%AC%AC%E4%BA%8C%E5%BC%B9/"/>
+    <id>http://m2shad0w.com/2016/01/25/spark写数据到mysql第二弹/</id>
+    <published>2016-01-25T02:08:23.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;&lt;p&gt;分析的中间数据, 很多需要持久化到关系型数据库, 以便后续的二次分析, 在官方给出insert指定字段的接口之前我先实现自己的方法吧。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;之前有一篇文章&lt;a href=&quot;http://m2shad0w.com/2015/12/28/spark002/&quot;&gt;spark SQL操作之关系型数据库&lt;/a&gt;简单讲解了spark 写mysql的接口。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;逐行指定字段写入数据库, 我们必须能拿到每一行数据。在spark SQL 操作完的对象是一个 RDD, &lt;a href=&quot;http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.RDD&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;spark SQL scala api说明&lt;/a&gt; 上有一个api:&lt;/p&gt;
+  &lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;foreachPartition&lt;/span&gt;(&lt;/span&gt;f: (&lt;span class=&quot;type&quot;&gt;Iterator&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;T&lt;/span&gt;]) ⇒ &lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt;):&lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Applies a function f to each partition of this RDD.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因此我们只需要实现一个参数是&lt;code&gt;Iterator&lt;/code&gt;类型的函数, 就能取出每一行的数据。&lt;/p&gt;
+&lt;h3 id=&quot;代码实现实例&quot;&gt;代码实现实例&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;闭包&lt;/p&gt;
+ &lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; keyWords = sqlContext.sql(&lt;span class=&quot;string&quot;&gt;&quot;your sql &quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// scala 闭包, 传参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;keyWordsr2mysql&lt;/span&gt;(&lt;/span&gt;iter: &lt;span class=&quot;type&quot;&gt;Iterator&lt;/span&gt;[org.apache.spark.sql.&lt;span class=&quot;type&quot;&gt;Row&lt;/span&gt;]): &lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt; = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; keyTags = &lt;span class=&quot;type&quot;&gt;Array&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;count_start_time&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;kind&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; tags = &lt;span class=&quot;type&quot;&gt;Array&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;word&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;count&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      write2mysql(iter, &lt;span class=&quot;string&quot;&gt;&quot;keyWordCount&quot;&lt;/span&gt;, keyTags, tags, sStartTime, kind)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;抽象写数据库&lt;/p&gt;
+&lt;p&gt; 将数据库表名, 指定字段等以参数形式传入, 接口更抽象通用&lt;/p&gt;
+ &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;write2mysql&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(iter :Iterator[org.apache.spark.sql.Row], sTable: String, keytags :Array[String], tags :Array[String], args:Any*)&lt;/span&gt;:&lt;/span&gt; Unit = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// your code&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;&lt;p&gt;分析的中间数据, 很多需要持久化到关系型数据库, 以便后续的二次分析, 在官方给出insert指定字段的接口之前我先实现自己的方法吧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://m2shad0w.com/categories/mysql/"/>
+    
+    
+      <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>把ipython设置成PySpark解析器</title>
+    <link href="http://m2shad0w.com/2016/01/22/ipythonWithPySpark/"/>
+    <id>http://m2shad0w.com/2016/01/22/ipythonWithPySpark/</id>
+    <published>2016-01-22T06:17:00.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;pyspark&quot;&gt;&lt;strong&gt;pyspark&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;pyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。&lt;br&gt;ipython with pyspark 就能解决这个问题。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;软件依赖&quot;&gt;软件依赖&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;IPython &lt;code&gt;pip show ipython&lt;/code&gt;&lt;/p&gt;
+  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;---&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Metadata-Version: &lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Name: ipython&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Version: &lt;span class=&quot;number&quot;&gt;4.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Summary: IPython: Productive Interactive Computing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Home-page: http://ipython.org&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author: The IPython Development Team&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author-email: ipython-dev@scipy.org&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;License: BSD&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Location: /Library/Python/&lt;span class=&quot;number&quot;&gt;2.7&lt;/span&gt;/site-packages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Requires: traitlets, pickleshare, simplegeneric, decorator, gnureadline, appnope, pexpect&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Entry-points:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [console_scripts]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  iptest = IPython.testing.iptestcontroller:main&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  iptest2 = IPython.testing.iptestcontroller:main&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython = IPython:start_ipython&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython2 = IPython:start_ipython&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [pygments.lexers]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython = IPython.lib.lexers:IPythonLexer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython3 = IPython.lib.lexers:IPython3Lexer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipythonconsole = IPython.lib.lexers:IPythonConsoleLexer&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;pyspark&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;配置ipython&quot;&gt;配置ipython&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;First create an IPython profile for use with PySpark&lt;/p&gt;
+ &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ipython profile create pyspark&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This should have created the profile directory &lt;code&gt;~/.ipython/profile_pyspark/.&lt;/code&gt; Edit the file &lt;code&gt;~/.ipython/profile_pyspark/ipython_notebook_config.py&lt;/code&gt; to have:&lt;/p&gt;
+ &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;c = get_config()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;c.NotebookApp.ip = &lt;span class=&quot;string&quot;&gt;&#39;*&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;c.NotebookApp.open_browser = False&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;c.NotebookApp.port = &lt;span class=&quot;number&quot;&gt;8880&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Finally, create the file &lt;code&gt;~/.ipython/profile_pyspark/startup/00-pyspark-setup.py&lt;/code&gt; with the following contents:&lt;/p&gt;
+ &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; os&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; sys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;spark_home = os.environ.get(&lt;span class=&quot;string&quot;&gt;&#39;SPARK_HOME&#39;&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; spark_home:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;raise&lt;/span&gt; ValueError(&lt;span class=&quot;string&quot;&gt;&#39;SPARK_HOME environment variable is not set&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sys.path.insert(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, os.path.join(spark_home, &lt;span class=&quot;string&quot;&gt;&#39;python&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sys.path.insert(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, os.path.join(spark_home, &lt;span class=&quot;string&quot;&gt;&#39;python/lib/py4j-0.9-src.zip&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;execfile(os.path.join(spark_home, &lt;span class=&quot;string&quot;&gt;&#39;python/pyspark/shell.py&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;Starting_IPython_Notebook_with_PySpark&quot;&gt;Starting IPython Notebook with PySpark&lt;/h3&gt;&lt;p&gt;保证&lt;strong&gt;&lt;code&gt;$SPARK_HOME&lt;/code&gt;&lt;/strong&gt;环境变量设置好&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ipython --profile=pyspark&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果你要使用notebook, 这里有一个方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install apache-spark ($ brew install apache-spark)&lt;/li&gt;
+&lt;li&gt;install findspark ( pip install -e . after cloning &lt;a href=&quot;https://github.com/minrk/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/minrk/&lt;/a&gt;findspark, and cd findspark)&lt;/li&gt;
+&lt;li&gt;install java&lt;/li&gt;
+&lt;li&gt;fire a notebook (&lt;code&gt;jupyter notebook&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script src=&quot;https://gist.github.com/M2shad0w/b844676ac996394b9bbd.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jupyter/notebook/issues/309#issuecomment-134540424&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pyspark on notebook&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.cloudera.com/blog/2014/08/how-to-use-ipython-notebook-with-apache-spark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;pyspark&quot;&gt;&lt;strong&gt;pyspark&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;pyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。&lt;br&gt;ipython with pyspark 就能解决这个问题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+      <category term="ipython" scheme="http://m2shad0w.com/categories/bigdata/ipython/"/>
+    
+    
+      <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sbt仓库设置</title>
+    <link href="http://m2shad0w.com/2016/01/15/sbt%E4%BB%93%E5%BA%93%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://m2shad0w.com/2016/01/15/sbt仓库设置/</id>
+    <published>2016-01-15T09:56:24.000Z</published>
+    <updated>2016-04-25T11:45:21.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;sbt_构建_scala_应用&quot;&gt;sbt 构建 scala 应用&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;正如官网所说, sbt是一个为 scala、java 而生的构建工具，在mac上安装十分的方便。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew install sbt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;只要你构建的目录有如下的层级&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;src/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  main/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resources/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;files to include &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; main jar here&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    scala/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;main Scala sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    java/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;main Java sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resources&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;files to include &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; jar here&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    scala/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; Scala sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    java/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; Java sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在根目录 &lt;code&gt;touch build.sbt&lt;/code&gt;, 设置 build.sbt 配置应用依赖的库。&lt;/p&gt;
+&lt;p&gt;在 console 中键入 &lt;code&gt;sbt run&lt;/code&gt;, 代码就被编译运行起来了&lt;/p&gt;
+&lt;h3 id=&quot;默认仓库下载依赖慢&quot;&gt;默认仓库下载依赖慢&lt;/h3&gt;&lt;p&gt;sbt 默认下载库文件很慢, 还时不时被打断&lt;/p&gt;
+&lt;p&gt;我们可以在用户目录下创建  &lt;code&gt;touch ~/.sbt/repositories&lt;/code&gt;, 填上开源中国的镜像&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[repositories]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;osc: http://maven.oschina.net/content/groups/public/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;]s/[artifact](-[classifier]).[ext], bootOnly&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sonatype-oss-releases&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;maven-centra&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.scala-sbt.org/0.13.2/docs/Detailed-Topics/Library-Management.html#override-all-resolvers-for-all-builds&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考官网说明&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;遇到的问题&quot;&gt;遇到的问题&lt;/h3&gt;&lt;p&gt;一定要严格按格式来, local &lt;code&gt; &lt;/code&gt; 后面不要有空格。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;sbt_构建_scala_应用&quot;&gt;sbt 构建 scala 应用&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;正如官网所说, sbt是一个为 scala、java 而生的构建工具，在mac上安装十分的方便。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="scala" scheme="http://m2shad0w.com/tags/scala/"/>
+    
+  </entry>
+  
+</feed>
