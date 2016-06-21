@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-06-06T02:30:14.000Z</updated>
+  <updated>2016-06-21T12:20:39.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql导入之行sql语句</title>
+    <link href="http://m2shad0w.com/2016/06/21/mysql%E5%AF%BC%E5%85%A5%E4%B9%8B%E8%A1%8Csql%E8%AF%AD%E5%8F%A5/"/>
+    <id>http://m2shad0w.com/2016/06/21/mysql导入之行sql语句/</id>
+    <published>2016-06-21T12:14:57.000Z</published>
+    <updated>2016-06-21T12:20:39.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;mysql导入之行sql&quot;&gt;mysql导入之行sql&lt;/h3&gt;&lt;p&gt;一些常用的sql，写成文件形式，在mysql中导入，可以批量生成表&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;在迁移Azkaban的时候，就有这个过程。 做一下简单的记录。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Mysql&amp;gt;source 【sql脚本文件的路径全名】&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Mysql&amp;gt;\. 【sql脚本文件的路径全名】&lt;/code&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;mysql导入之行sql&quot;&gt;mysql导入之行sql&lt;/h3&gt;&lt;p&gt;一些常用的sql，写成文件形式，在mysql中导入，可以批量生成表&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://m2shad0w.com/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="http://m2shad0w.com/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>flume多channel、slink配置</title>
+    <link href="http://m2shad0w.com/2016/06/08/flume%E5%A4%9Achannel%E3%80%81slink%E9%85%8D%E7%BD%AE/"/>
+    <id>http://m2shad0w.com/2016/06/08/flume多channel、slink配置/</id>
+    <published>2016-06-08T05:36:56.000Z</published>
+    <updated>2016-06-08T05:54:39.000Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;参考文章&quot;&gt;参考文章&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#configuration&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://flume.apache.org/FlumeUserGuide.html#configuration&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;参考文章&quot;&gt;参考文章&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#configuration&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://flume.
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>在服务器上使用shadowsocks客户端</title>
@@ -610,102 +656,6 @@
     
     
       <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>把ipython设置成PySpark解析器</title>
-    <link href="http://m2shad0w.com/2016/01/22/ipythonWithPySpark/"/>
-    <id>http://m2shad0w.com/2016/01/22/ipythonWithPySpark/</id>
-    <published>2016-01-22T06:17:00.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;pyspark&quot;&gt;&lt;strong&gt;pyspark&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;pyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。&lt;br&gt;ipython with pyspark 就能解决这个问题。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;软件依赖&quot;&gt;软件依赖&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;IPython &lt;code&gt;pip show ipython&lt;/code&gt;&lt;/p&gt;
-  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;---&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Metadata-Version: &lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Name: ipython&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Version: &lt;span class=&quot;number&quot;&gt;4.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Summary: IPython: Productive Interactive Computing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Home-page: http://ipython.org&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author: The IPython Development Team&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Author-email: ipython-dev@scipy.org&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;License: BSD&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Location: /Library/Python/&lt;span class=&quot;number&quot;&gt;2.7&lt;/span&gt;/site-packages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Requires: traitlets, pickleshare, simplegeneric, decorator, gnureadline, appnope, pexpect&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Entry-points:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [console_scripts]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  iptest = IPython.testing.iptestcontroller:main&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  iptest2 = IPython.testing.iptestcontroller:main&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython = IPython:start_ipython&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython2 = IPython:start_ipython&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [pygments.lexers]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython = IPython.lib.lexers:IPythonLexer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipython3 = IPython.lib.lexers:IPython3Lexer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ipythonconsole = IPython.lib.lexers:IPythonConsoleLexer&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;pyspark&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;配置ipython&quot;&gt;配置ipython&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;First create an IPython profile for use with PySpark&lt;/p&gt;
- &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ipython profile create pyspark&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;This should have created the profile directory &lt;code&gt;~/.ipython/profile_pyspark/.&lt;/code&gt; Edit the file &lt;code&gt;~/.ipython/profile_pyspark/ipython_notebook_config.py&lt;/code&gt; to have:&lt;/p&gt;
- &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;c = get_config()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;c.NotebookApp.ip = &lt;span class=&quot;string&quot;&gt;&#39;*&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;c.NotebookApp.open_browser = False&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;c.NotebookApp.port = &lt;span class=&quot;number&quot;&gt;8880&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Finally, create the file &lt;code&gt;~/.ipython/profile_pyspark/startup/00-pyspark-setup.py&lt;/code&gt; with the following contents:&lt;/p&gt;
- &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; os&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; sys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;spark_home = os.environ.get(&lt;span class=&quot;string&quot;&gt;&#39;SPARK_HOME&#39;&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; spark_home:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;raise&lt;/span&gt; ValueError(&lt;span class=&quot;string&quot;&gt;&#39;SPARK_HOME environment variable is not set&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sys.path.insert(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, os.path.join(spark_home, &lt;span class=&quot;string&quot;&gt;&#39;python&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sys.path.insert(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, os.path.join(spark_home, &lt;span class=&quot;string&quot;&gt;&#39;python/lib/py4j-0.9-src.zip&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;execfile(os.path.join(spark_home, &lt;span class=&quot;string&quot;&gt;&#39;python/pyspark/shell.py&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;Starting_IPython_Notebook_with_PySpark&quot;&gt;Starting IPython Notebook with PySpark&lt;/h3&gt;&lt;p&gt;保证&lt;strong&gt;&lt;code&gt;$SPARK_HOME&lt;/code&gt;&lt;/strong&gt;环境变量设置好&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ipython --profile=pyspark&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果你要使用notebook, 这里有一个方法&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Install apache-spark ($ brew install apache-spark)&lt;/li&gt;
-&lt;li&gt;install findspark ( pip install -e . after cloning &lt;a href=&quot;https://github.com/minrk/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/minrk/&lt;/a&gt;findspark, and cd findspark)&lt;/li&gt;
-&lt;li&gt;install java&lt;/li&gt;
-&lt;li&gt;fire a notebook (&lt;code&gt;jupyter notebook&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;script src=&quot;https://gist.github.com/M2shad0w/b844676ac996394b9bbd.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/jupyter/notebook/issues/309#issuecomment-134540424&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pyspark on notebook&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.cloudera.com/blog/2014/08/how-to-use-ipython-notebook-with-apache-spark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;pyspark&quot;&gt;&lt;strong&gt;pyspark&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;pyspark 是spark的 python接口实现的入口, 但是pyspark默认调用的是python的解析器, 在shell中调试时, 连基本的代码提示都没有, 很影响效率。&lt;br&gt;ipython with pyspark 就能解决这个问题。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
-    
-      <category term="ipython" scheme="http://m2shad0w.com/categories/bigdata/ipython/"/>
-    
-    
-      <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>sbt仓库设置</title>
-    <link href="http://m2shad0w.com/2016/01/15/sbt%E4%BB%93%E5%BA%93%E8%AE%BE%E7%BD%AE/"/>
-    <id>http://m2shad0w.com/2016/01/15/sbt仓库设置/</id>
-    <published>2016-01-15T09:56:24.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;sbt_构建_scala_应用&quot;&gt;sbt 构建 scala 应用&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;正如官网所说, sbt是一个为 scala、java 而生的构建工具，在mac上安装十分的方便。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;brew install sbt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;只要你构建的目录有如下的层级&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;src/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  main/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resources/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;files to include &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; main jar here&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    scala/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;main Scala sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    java/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;main Java sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    resources&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;files to include &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; jar here&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    scala/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; Scala sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    java/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;lt;&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; Java sources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;在根目录 &lt;code&gt;touch build.sbt&lt;/code&gt;, 设置 build.sbt 配置应用依赖的库。&lt;/p&gt;
-&lt;p&gt;在 console 中键入 &lt;code&gt;sbt run&lt;/code&gt;, 代码就被编译运行起来了&lt;/p&gt;
-&lt;h3 id=&quot;默认仓库下载依赖慢&quot;&gt;默认仓库下载依赖慢&lt;/h3&gt;&lt;p&gt;sbt 默认下载库文件很慢, 还时不时被打断&lt;/p&gt;
-&lt;p&gt;我们可以在用户目录下创建  &lt;code&gt;touch ~/.sbt/repositories&lt;/code&gt;, 填上开源中国的镜像&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[repositories]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;osc: http://maven.oschina.net/content/groups/public/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;]s/[artifact](-[classifier]).[ext], bootOnly&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sonatype-oss-releases&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;maven-centra&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.scala-sbt.org/0.13.2/docs/Detailed-Topics/Library-Management.html#override-all-resolvers-for-all-builds&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考官网说明&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;遇到的问题&quot;&gt;遇到的问题&lt;/h3&gt;&lt;p&gt;一定要严格按格式来, local &lt;code&gt; &lt;/code&gt; 后面不要有空格。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;sbt_构建_scala_应用&quot;&gt;sbt 构建 scala 应用&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;正如官网所说, sbt是一个为 scala、java 而生的构建工具，在mac上安装十分的方便。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
-    
-    
-      <category term="scala" scheme="http://m2shad0w.com/tags/scala/"/>
     
   </entry>
   
