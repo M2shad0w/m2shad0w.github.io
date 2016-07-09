@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-06-21T12:20:39.000Z</updated>
+  <updated>2016-07-09T06:40:14.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>修改yarn-web-ui时区</title>
+    <link href="http://m2shad0w.com/2016/07/09/%E4%BF%AE%E6%94%B9yarn-web-ui%E6%97%B6%E5%8C%BA/"/>
+    <id>http://m2shad0w.com/2016/07/09/修改yarn-web-ui时区/</id>
+    <published>2016-07-09T06:05:20.000Z</published>
+    <updated>2016-07-09T06:40:14.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;yarn-web-ui时区显示不对&quot;&gt;yarn-web-ui时区显示不对&lt;/h3&gt;&lt;p&gt;在运行spark on yarn 程序中，job偶尔会失败，加上job量又比较多，web－ui的时区不矫正，简直对给定位问题带来了困难。&lt;/p&gt;
+&lt;p&gt;下面就是我实践校正时区的一个过程。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;查看一下hadoop的版本&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hadoop version&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Hadoop &lt;span class=&quot;number&quot;&gt;2.6&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Subversion https://git-wip-us.apache.org/repos/asf/hadoop.git -r cc865b490b9a6260e9611a5b8633cab885b3d247&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Compiled by jenkins on &lt;span class=&quot;number&quot;&gt;2015&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;12&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;18&lt;/span&gt;T01:&lt;span class=&quot;number&quot;&gt;19&lt;/span&gt;Z&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Compiled with protoc &lt;span class=&quot;number&quot;&gt;2.5&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;From &lt;span class=&quot;built_in&quot;&gt;source&lt;/span&gt; with checksum &lt;span class=&quot;number&quot;&gt;722&lt;/span&gt;f77f825e326e13a86ff62b34ada&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;This &lt;span class=&quot;built_in&quot;&gt;command&lt;/span&gt; was run using /opt/hadoop/share/hadoop/common/hadoop-common-&lt;span class=&quot;number&quot;&gt;2.6&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;.jar&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;得知安装的版本是2.6.3, 编译的用的是protoc 2.5.0&lt;/p&gt;
+&lt;p&gt;从&lt;a href=&quot;https://issues.apache.org/jira/browse/YARN-1998&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://issues.apache.org/jira/browse/YARN-1998&lt;/a&gt;得知这是一个bug(14年已经修复了，但是2.6.3版本还是出现了)。&lt;/p&gt;
+&lt;h3 id=&quot;解决方案&quot;&gt;解决方案&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://issues.apache.org/jira/secure/attachment/12642581/YARN-1998.patch&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://issues.apache.org/jira/secure/attachment/12642581/YARN-1998.patch&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Index: hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/src/main/resources/webapps/static/yarn.dt.plugins.js&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;===================================================================&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;--- hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/src/main/resources/webapps/static/yarn.dt.plugins.js	(revision &lt;span class=&quot;number&quot;&gt;1591171&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+++ hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/src/main/resources/webapps/static/yarn.dt.plugins.js	(working copy)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@@ -&lt;span class=&quot;number&quot;&gt;78&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt; +&lt;span class=&quot;number&quot;&gt;78&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt; @@&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(data === &lt;span class=&quot;string&quot;&gt;&#39;0&#39;&lt;/span&gt;|| data === &lt;span class=&quot;string&quot;&gt;&#39;-1&#39;&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;N/A&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Date&lt;/span&gt;(&lt;span class=&quot;built_in&quot;&gt;parseInt&lt;/span&gt;(data)).toUTCString();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Date&lt;/span&gt;(&lt;span class=&quot;built_in&quot;&gt;parseInt&lt;/span&gt;(data)).toLocaleString();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;comment&quot;&gt;// &#39;sort&#39;, &#39;type&#39; and undefined all just use the number&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;comment&quot;&gt;// If date is 0, then for purposes of sorting it should be consider max_int&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;找hadoop2-6-3分支，修改yarn-dt-plugins-js&quot;&gt;找hadoop2.6.3分支，修改yarn.dt.plugins.js&lt;/h3&gt;&lt;p&gt;首先需要安装对应的protobuf，&lt;a href=&quot;https://github.com/google/protobuf/releases?after=v3.0.0-alpha-4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;protobuf-2.5.0.tar.gz&lt;/a&gt;, 下载地址&lt;a href=&quot;https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;click&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;tar -xzvf ./protobuf-2.5.0.tar.gz&lt;/code&gt;&lt;br&gt;&lt;code&gt;cd protobuf-2.5.0&lt;/code&gt;&lt;br&gt;&lt;code&gt;make&lt;/code&gt;&lt;br&gt;&lt;code&gt;make check&lt;/code&gt;&lt;br&gt;&lt;code&gt;make install&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;一气呵成安装好，并确认版本&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;protoc --version&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;从hadoop github仓库下载最新源码， 切换到2.6.3分支，进入&lt;code&gt;hadoop-yarn-common&lt;/code&gt;目录，&lt;br&gt;找到&lt;code&gt;yarn.dt.plugins.js&lt;/code&gt;中的&lt;code&gt;renderHadoopDate&lt;/code&gt;函数，返回值修改成&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;return new Date(parseInt(data)).toLocaleString()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;mvn编译打包&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mvn clean package -DskipTests&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;参考文章&quot;&gt;参考文章&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://my.oschina.net/allman90/blog/486768&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://my.oschina.net/allman90/blog/486768&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;yarn-web-ui时区显示不对&quot;&gt;yarn-web-ui时区显示不对&lt;/h3&gt;&lt;p&gt;在运行spark on yarn 程序中，job偶尔会失败，加上job量又比较多，web－ui的时区不矫正，简直对给定位问题带来了困难。&lt;/p&gt;
+&lt;p&gt;下面就是我实践校正时区的一个过程。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="yarn" scheme="http://m2shad0w.com/categories/yarn/"/>
+    
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/tags/bigdata/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql导入之行sql语句</title>
@@ -612,47 +653,6 @@
     </summary>
     
       <category term="scala" scheme="http://m2shad0w.com/categories/scala/"/>
-    
-    
-      <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spark写数据到mysql第二弹</title>
-    <link href="http://m2shad0w.com/2016/01/25/spark%E5%86%99%E6%95%B0%E6%8D%AE%E5%88%B0mysql%E7%AC%AC%E4%BA%8C%E5%BC%B9/"/>
-    <id>http://m2shad0w.com/2016/01/25/spark写数据到mysql第二弹/</id>
-    <published>2016-01-25T02:08:23.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;&lt;p&gt;分析的中间数据, 很多需要持久化到关系型数据库, 以便后续的二次分析, 在官方给出insert指定字段的接口之前我先实现自己的方法吧。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;之前有一篇文章&lt;a href=&quot;http://m2shad0w.com/2015/12/28/spark002/&quot;&gt;spark SQL操作之关系型数据库&lt;/a&gt;简单讲解了spark 写mysql的接口。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;逐行指定字段写入数据库, 我们必须能拿到每一行数据。在spark SQL 操作完的对象是一个 RDD, &lt;a href=&quot;http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.RDD&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;spark SQL scala api说明&lt;/a&gt; 上有一个api:&lt;/p&gt;
-  &lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;foreachPartition&lt;/span&gt;(&lt;/span&gt;f: (&lt;span class=&quot;type&quot;&gt;Iterator&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;T&lt;/span&gt;]) ⇒ &lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt;):&lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Applies a function f to each partition of this RDD.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;因此我们只需要实现一个参数是&lt;code&gt;Iterator&lt;/code&gt;类型的函数, 就能取出每一行的数据。&lt;/p&gt;
-&lt;h3 id=&quot;代码实现实例&quot;&gt;代码实现实例&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;闭包&lt;/p&gt;
- &lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; keyWords = sqlContext.sql(&lt;span class=&quot;string&quot;&gt;&quot;your sql &quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// scala 闭包, 传参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;keyWordsr2mysql&lt;/span&gt;(&lt;/span&gt;iter: &lt;span class=&quot;type&quot;&gt;Iterator&lt;/span&gt;[org.apache.spark.sql.&lt;span class=&quot;type&quot;&gt;Row&lt;/span&gt;]): &lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt; = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; keyTags = &lt;span class=&quot;type&quot;&gt;Array&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;count_start_time&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;kind&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; tags = &lt;span class=&quot;type&quot;&gt;Array&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;word&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;count&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      write2mysql(iter, &lt;span class=&quot;string&quot;&gt;&quot;keyWordCount&quot;&lt;/span&gt;, keyTags, tags, sStartTime, kind)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;抽象写数据库&lt;/p&gt;
-&lt;p&gt; 将数据库表名, 指定字段等以参数形式传入, 接口更抽象通用&lt;/p&gt;
- &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;write2mysql&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(iter :Iterator[org.apache.spark.sql.Row], sTable: String, keytags :Array[String], tags :Array[String], args:Any*)&lt;/span&gt;:&lt;/span&gt; Unit = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// your code&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;需求&quot;&gt;需求&lt;/h3&gt;&lt;p&gt;分析的中间数据, 很多需要持久化到关系型数据库, 以便后续的二次分析, 在官方给出insert指定字段的接口之前我先实现自己的方法吧。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="mysql" scheme="http://m2shad0w.com/categories/mysql/"/>
     
     
       <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
