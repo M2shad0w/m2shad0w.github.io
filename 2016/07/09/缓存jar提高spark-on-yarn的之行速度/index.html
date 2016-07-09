@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="flume," />
+  <meta name="keywords" content="bigdata," />
 
 
 
@@ -59,18 +59,23 @@
 
 
 
-<meta name="description" content="flume深入配置想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。">
+<meta name="description" content="spark-on-yarn将job提交到 yarn 上，整个job的执行时间明显多了很多，想着优化一下。
+从下面这张图可以看到，有一个上传spark jar的过程，这个包很大170多M，必然会浪费时间。
+所以通过缓存jar来提高spark on yarn的执行速度。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DeepInConfigflume">
-<meta property="og:url" content="http://m2shad0w.com/2016/02/18/DeepInflume2/index.html">
+<meta property="og:title" content="缓存jar提高spark-on-yarn的之行速度">
+<meta property="og:url" content="http://m2shad0w.com/2016/07/09/缓存jar提高spark-on-yarn的之行速度/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="flume深入配置想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。">
-<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/63fe561egw1f13kkyzbd3j20yq02s75h.jpg">
-<meta property="og:updated_time" content="2016-04-25T11:45:21.000Z">
+<meta property="og:description" content="spark-on-yarn将job提交到 yarn 上，整个job的执行时间明显多了很多，想着优化一下。
+从下面这张图可以看到，有一个上传spark jar的过程，这个包很大170多M，必然会浪费时间。
+所以通过缓存jar来提高spark on yarn的执行速度。">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/63fe561egw1f5nptf0dsbj21kw037419.jpg">
+<meta property="og:updated_time" content="2016-07-09T08:22:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DeepInConfigflume">
-<meta name="twitter:description" content="flume深入配置想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。">
+<meta name="twitter:title" content="缓存jar提高spark-on-yarn的之行速度">
+<meta name="twitter:description" content="spark-on-yarn将job提交到 yarn 上，整个job的执行时间明显多了很多，想着优化一下。
+从下面这张图可以看到，有一个上传spark jar的过程，这个包很大170多M，必然会浪费时间。
+所以通过缓存jar来提高spark on yarn的执行速度。">
 
 
 
@@ -88,7 +93,7 @@
   };
 </script>
 
-  <title> DeepInConfigflume | m2shad0w </title>
+  <title> 缓存jar提高spark-on-yarn的之行速度 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -275,7 +280,7 @@
             
             
               
-                DeepInConfigflume
+                缓存jar提高spark-on-yarn的之行速度
               
             
           </h1>
@@ -287,8 +292,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-02-18T16:04:28+08:00" content="2016-02-18">
-              2016-02-18
+            <time itemprop="dateCreated" datetime="2016-07-09T15:44:23+08:00" content="2016-07-09">
+              2016-07-09
             </time>
           </span>
 
@@ -301,8 +306,8 @@
               <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/bigdata/" itemprop="url" rel="index">
-                    <span itemprop="name">bigdata</span>
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
                   </a>
                 </span>
 
@@ -317,8 +322,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/18/DeepInflume2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/02/18/DeepInflume2/" itemprop="commentsCount"></span>
+                <a href="/2016/07/09/缓存jar提高spark-on-yarn的之行速度/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/09/缓存jar提高spark-on-yarn的之行速度/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -339,20 +344,23 @@
       
 
       
-        <h3 id="flume深入配置">flume深入配置</h3><p>想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。</p>
+        <h3 id="spark-on-yarn">spark-on-yarn</h3><p>将job提交到 <code>yarn</code> 上，整个job的执行时间明显多了很多，想着优化一下。</p>
+<p>从下面这张图可以看到，有一个上传<code>spark jar</code>的过程，这个包很大170多M，必然会浪费时间。</p>
+<p>所以通过缓存jar来提高<code>spark on yarn</code>的执行速度。</p>
 <a id="more"></a>
-<h3 id="读flume文档">读flume文档</h3><blockquote>
-<p>Alias    Description<br>%{host}    Substitute value of event header named “host”. Arbitrary header names are supported.</p>
-</blockquote>
-<p><img src="http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg" alt=""></p>
-<p>因此，需要在post数据headers 中加上 <code>host</code> 字段.</p>
-<p>快速修改一下flume的配置文件，测试一下</p>
-<p>配置文件对应修改字段：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:<span class="number">9000</span>/user/hadoop/%&#123;host&#125;/%y-%m-%d/</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S</span><br></pre></td></tr></table></figure>
-<p>测试:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST <span class="operator">-d</span> <span class="string">'[&#123;"headers":&#123;"host" : "chat"&#125;,"body" : "hello random flume "&#125;]'</span> http://&#123;your ip&#125;:&#123;your port&#125;</span><br></pre></td></tr></table></figure>
-<p>成功:</p>
-<p><img src="http://ww4.sinaimg.cn/mw690/63fe561egw1f13kkyzbd3j20yq02s75h.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/63fe561egw1f5nptf0dsbj21kw037419.jpg" alt="上传jar记录"></p>
+<h3 id="缓存过程">缓存过程</h3><ul>
+<li><p>在hdfs上创建公共jar包的一个路径</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir /spark-lib</span><br><span class="line">hadoop fs -chmod <span class="number">755</span> /spark-lib <span class="comment"># 修改目录权限</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将jar包put到新建的路径中去</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -put <span class="variable">$yourpath</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在spark-default.conf中设置spark.yarn.jar指定到 hdfs中spark-assembly包的绝对路径</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spark.yarn.jar <span class="variable">$yourpath</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考文章">参考文章</h3><p><a href="http://blog.csdn.net/xueba207/article/details/50440625" target="_blank" rel="external">http://blog.csdn.net/xueba207/article/details/50440625</a></p>
 
       
     </div>
@@ -361,7 +369,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/flume/" rel="tag">#flume</a>
+            <a href="/tags/bigdata/" rel="tag">#bigdata</a>
           
         </div>
       
@@ -370,17 +378,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/15/crackWifiPasswd/" rel="next" title="crackWifiPasswd">
-                <i class="fa fa-chevron-left"></i> crackWifiPasswd
+              <a href="/2016/07/09/修改yarn-web-ui时区/" rel="next" title="修改yarn-web-ui时区">
+                <i class="fa fa-chevron-left"></i> 修改yarn-web-ui时区
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/19/hdfsBadBlock/" rel="prev" title="hdfs文件坏块">
-                hdfs文件坏块 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +569,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#flume深入配置"><span class="nav-number">1.</span> <span class="nav-text">flume深入配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读flume文档"><span class="nav-number">2.</span> <span class="nav-text">读flume文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#spark-on-yarn"><span class="nav-number">1.</span> <span class="nav-text">spark-on-yarn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存过程"><span class="nav-number">2.</span> <span class="nav-text">缓存过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">3.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -830,9 +834,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2016/02/18/DeepInflume2/';
-      var disqus_title = 'DeepInConfigflume';
-      var disqus_url = 'http://m2shad0w.com/2016/02/18/DeepInflume2/';
+      var disqus_identifier = '2016/07/09/缓存jar提高spark-on-yarn的之行速度/';
+      var disqus_title = '缓存jar提高spark-on-yarn的之行速度';
+      var disqus_url = 'http://m2shad0w.com/2016/07/09/缓存jar提高spark-on-yarn的之行速度/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

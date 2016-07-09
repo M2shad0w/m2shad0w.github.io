@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-07-09T06:40:14.000Z</updated>
+  <updated>2016-07-09T08:22:44.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>缓存jar提高spark-on-yarn的之行速度</title>
+    <link href="http://m2shad0w.com/2016/07/09/%E7%BC%93%E5%AD%98jar%E6%8F%90%E9%AB%98spark-on-yarn%E7%9A%84%E4%B9%8B%E8%A1%8C%E9%80%9F%E5%BA%A6/"/>
+    <id>http://m2shad0w.com/2016/07/09/缓存jar提高spark-on-yarn的之行速度/</id>
+    <published>2016-07-09T07:44:23.000Z</published>
+    <updated>2016-07-09T08:22:44.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;spark-on-yarn&quot;&gt;spark-on-yarn&lt;/h3&gt;&lt;p&gt;将job提交到 &lt;code&gt;yarn&lt;/code&gt; 上，整个job的执行时间明显多了很多，想着优化一下。&lt;/p&gt;
+&lt;p&gt;从下面这张图可以看到，有一个上传&lt;code&gt;spark jar&lt;/code&gt;的过程，这个包很大170多M，必然会浪费时间。&lt;/p&gt;
+&lt;p&gt;所以通过缓存jar来提高&lt;code&gt;spark on yarn&lt;/code&gt;的执行速度。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/63fe561egw1f5nptf0dsbj21kw037419.jpg&quot; alt=&quot;上传jar记录&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;缓存过程&quot;&gt;缓存过程&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在hdfs上创建公共jar包的一个路径&lt;/p&gt;
+  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hadoop fs -mkdir /spark-lib&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;hadoop fs -chmod &lt;span class=&quot;number&quot;&gt;755&lt;/span&gt; /spark-lib &lt;span class=&quot;comment&quot;&gt;# 修改目录权限&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将jar包put到新建的路径中去&lt;/p&gt;
+  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hadoop fs -put &lt;span class=&quot;variable&quot;&gt;$yourpath&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在spark-default.conf中设置spark.yarn.jar指定到 hdfs中spark-assembly包的绝对路径&lt;/p&gt;
+  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;spark.yarn.jar &lt;span class=&quot;variable&quot;&gt;$yourpath&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;参考文章&quot;&gt;参考文章&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/xueba207/article/details/50440625&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/xueba207/article/details/50440625&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;spark-on-yarn&quot;&gt;spark-on-yarn&lt;/h3&gt;&lt;p&gt;将job提交到 &lt;code&gt;yarn&lt;/code&gt; 上，整个job的执行时间明显多了很多，想着优化一下。&lt;/p&gt;
+&lt;p&gt;从下面这张图可以看到，有一个上传&lt;code&gt;spark jar&lt;/code&gt;的过程，这个包很大170多M，必然会浪费时间。&lt;/p&gt;
+&lt;p&gt;所以通过缓存jar来提高&lt;code&gt;spark on yarn&lt;/code&gt;的执行速度。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="spark" scheme="http://m2shad0w.com/categories/spark/"/>
+    
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/tags/bigdata/"/>
+    
+  </entry>
   
   <entry>
     <title>修改yarn-web-ui时区</title>
@@ -609,53 +650,6 @@
     
     
       <category term="scala" scheme="http://m2shad0w.com/tags/scala/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spark中flatMap&amp;map的区别</title>
-    <link href="http://m2shad0w.com/2016/01/28/flatMap/"/>
-    <id>http://m2shad0w.com/2016/01/28/flatMap/</id>
-    <published>2016-01-28T03:43:38.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;区别&quot;&gt;区别&lt;/h3&gt;&lt;p&gt;flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;相同点&lt;/p&gt;
-&lt;p&gt;  应用一个函数作用在一个RDD上的每一行, 为每一条输入返回一个对象&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;不同点&lt;/p&gt;
-&lt;p&gt;  flatMap是只是返回一个对象（相比map多了一个步骤, 将结果对象合并为一个对象）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;实例&quot;&gt;实例&lt;/h3&gt;&lt;p&gt;实例化 sc&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; findspark&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; os&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;findspark.init()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pyspark&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sc = pyspark.SparkContext()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; sc&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;文件路径&lt;br&gt;&lt;code&gt;HDFS_PATH = &amp;quot;hdfs://localhost:9000/user/m2shad0w/flume_data/*&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;maplog&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;faltlog = sc.textFile(HDFS_PATH).map(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; line: line.split(&lt;span class=&quot;string&quot;&gt;&quot;\01&quot;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;faltMap&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;maplog = sc.textFile(HDFS_PATH).flatMap(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; line: line.split(&lt;span class=&quot;string&quot;&gt;&quot;\01&quot;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;显示&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;faltlog.first()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;[u&amp;#39;id&amp;#39;, u&amp;#39;2016-01-25 16:00:00&amp;#39;, u&amp;#39;28800&amp;#39;, u&amp;#39;0&amp;#39;, u&amp;#39;User&amp;#39;, u&amp;#39;1884292&amp;#39;, u&amp;#39;enter_background&amp;#39;, u&amp;#39;&amp;#39;, u&amp;#39;2&amp;#39;, u&amp;#39;1884292&amp;#39;, u&amp;#39;346643&amp;#39;, u&amp;#39;1&amp;#39;, u&amp;#39;0&amp;#39;, u&amp;#39;2016-01-25 15:43:52&amp;#39;, u&amp;#39;7686852&amp;#39;, u&amp;#39;&amp;#39;]&lt;/code&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;maplog.first()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;u&amp;#39;id&amp;#39;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;显示第一行，所以才只显示了id&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/samhacker/article/details/41927567&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSDN参考文章&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.dattamsha.com/2014/09/map-vs-flatmap-spark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;英文参考文章&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;区别&quot;&gt;区别&lt;/h3&gt;&lt;p&gt;flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="scala" scheme="http://m2shad0w.com/categories/scala/"/>
-    
-    
-      <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
     
   </entry>
   
