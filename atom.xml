@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-07-09T08:22:44.000Z</updated>
+  <updated>2016-07-11T07:27:43.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>centos7安装nginx</title>
+    <link href="http://m2shad0w.com/2016/07/11/centos7%E5%AE%89%E8%A3%85nginx/"/>
+    <id>http://m2shad0w.com/2016/07/11/centos7安装nginx/</id>
+    <published>2016-07-11T07:21:19.000Z</published>
+    <updated>2016-07-11T07:27:43.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;centos7安装nginx&quot;&gt;centos7安装nginx&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在yum的仓库中添加nginx的源&lt;/p&gt;
+&lt;p&gt;  &lt;code&gt;cd /etc/yum.repos.d/&lt;/code&gt;&lt;br&gt;  &lt;code&gt;vi nginx.repo&lt;/code&gt;&lt;/p&gt;
+  &lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;[nginx]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;name=&lt;span class=&quot;value&quot;&gt;nginx repo&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;baseurl=&lt;span class=&quot;value&quot;&gt;http://nginx.org/packages/centos/&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/&lt;span class=&quot;variable&quot;&gt;$basearch&lt;/span&gt;/&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;gpgcheck=&lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;enabled=&lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;添加签名&lt;/p&gt;
+  &lt;figure class=&quot;highlight avrasm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;label&quot;&gt;http:&lt;/span&gt;//nginx&lt;span class=&quot;preprocessor&quot;&gt;.org&lt;/span&gt;/keys/nginx_signing.key&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装&lt;/p&gt;
+  &lt;figure class=&quot;highlight cmake&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; nginx -y&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动&lt;/p&gt;
+  &lt;figure class=&quot;highlight crmsh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;systemctl &lt;span class=&quot;literal&quot;&gt;start&lt;/span&gt; nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使能开机启动&lt;/p&gt;
+  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;systemctl &lt;span class=&quot;built_in&quot;&gt;enable&lt;/span&gt; nginx.service&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;参考文章&quot;&gt;参考文章&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://mos.meituan.com/library/18/how-to-install-lnmp-on-centos7/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;美团－在CentOS 7上搭建LNMP环境&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;centos7安装nginx&quot;&gt;centos7安装nginx&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在yum的仓库中添加nginx的源&lt;/p&gt;
+&lt;p&gt;  &lt;code&gt;cd /etc/yum.repos.d/&lt;/code&gt;&lt;br&gt;  &lt;code&gt;vi nginx.repo&lt;/code&gt;&lt;/p&gt;
+  &lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;[nginx]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;name=&lt;span class=&quot;value&quot;&gt;nginx repo&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;baseurl=&lt;span class=&quot;value&quot;&gt;http://nginx.org/packages/centos/&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;/&lt;span class=&quot;variable&quot;&gt;$basearch&lt;/span&gt;/&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;gpgcheck=&lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;enabled=&lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="nginx" scheme="http://m2shad0w.com/categories/nginx/"/>
+    
+    
+      <category term="centos" scheme="http://m2shad0w.com/tags/centos/"/>
+    
+  </entry>
   
   <entry>
     <title>缓存jar提高spark-on-yarn的之行速度</title>
@@ -623,33 +672,6 @@
     
     
       <category term="aircrack" scheme="http://m2shad0w.com/tags/aircrack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scala_MeetUp_InHangZhou</title>
-    <link href="http://m2shad0w.com/2016/02/02/scala-MeetUp-InHangZhou/"/>
-    <id>http://m2shad0w.com/2016/02/02/scala-MeetUp-InHangZhou/</id>
-    <published>2016-02-02T06:02:02.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;&lt;p&gt;去年12月的时候, 在杭州in总部举办了一场杭州scala的线下交流会, 在现场大家分享了很多在实际业务应用中的心得, 我受益匪浅。在此分享给大家。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;ppt分享&quot;&gt;ppt分享&lt;/h3&gt;&lt;p&gt;以下ppt内容是来自阿里的玄畅, 可以说是scala的技术栈&lt;/p&gt;
-&lt;p&gt;&lt;iframe src=&quot;//www.slideshare.net/slideshow/embed_code/key/b489pZGPiqqooT&quot; width=&quot;595&quot; height=&quot;485&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;//www.slideshare.net/JiahuaZhu3/scala-201512&quot; title=&quot;Scala使用体验 玄畅 201512&quot; target=&quot;_blank&quot;&gt;Scala使用体验 玄畅 201512&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&quot;//www.slideshare.net/JiahuaZhu3&quot; target=&quot;_blank&quot;&gt;Jiahua Zhu&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
-&lt;h3 id=&quot;git分享&quot;&gt;git分享&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/CSUG/csug/tree/master/hangzhou-2015-12-26&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;scala meet-up hangzhou-2015-12-26&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;&lt;p&gt;去年12月的时候, 在杭州in总部举办了一场杭州scala的线下交流会, 在现场大家分享了很多在实际业务应用中的心得, 我受益匪浅。在此分享给大家。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="scala" scheme="http://m2shad0w.com/categories/scala/"/>
-    
-    
-      <category term="scala" scheme="http://m2shad0w.com/tags/scala/"/>
     
   </entry>
   
