@@ -71,7 +71,7 @@ sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.
 sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.
 
 正如官网所说, sbt是一个为 scala、java 而生的构建工具，在mac上安装十分的方便。">
-<meta property="og:updated_time" content="2016-04-25T11:45:21.000Z">
+<meta property="og:updated_time" content="2016-07-18T05:02:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sbt仓库设置">
 <meta name="twitter:description" content="sbt 构建 scala 应用
@@ -358,7 +358,7 @@ sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.
 <p>在 console 中键入 <code>sbt run</code>, 代码就被编译运行起来了</p>
 <h3 id="默认仓库下载依赖慢">默认仓库下载依赖慢</h3><p>sbt 默认下载库文件很慢, 还时不时被打断</p>
 <p>我们可以在用户目录下创建  <code>touch ~/.sbt/repositories</code>, 填上开源中国的镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[repositories]</span><br><span class="line"><span class="built_in">local</span></span><br><span class="line">osc: http://maven.oschina.net/content/groups/public/</span><br><span class="line">typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[<span class="built_in">type</span>]s/[artifact](-[classifier]).[ext], bootOnly</span><br><span class="line">sonatype-oss-releases</span><br><span class="line">maven-centra</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[repositories]</span><br><span class="line"><span class="built_in">local</span></span><br><span class="line">osc: http://maven.oschina.net/content/groups/public/</span><br><span class="line">typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[<span class="built_in">type</span>]s/[artifact](-[classifier]).[ext], bootOnly</span><br><span class="line">sonatype-oss-releases</span><br><span class="line">maven-central</span><br></pre></td></tr></table></figure>
 <p><a href="http://www.scala-sbt.org/0.13.2/docs/Detailed-Topics/Library-Management.html#override-all-resolvers-for-all-builds" target="_blank" rel="external">参考官网说明</a></p>
 <h3 id="遇到的问题">遇到的问题</h3><p>一定要严格按格式来, local <code> </code> 后面不要有空格。</p>
 
