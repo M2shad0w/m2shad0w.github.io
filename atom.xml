@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-07-15T07:02:01.000Z</updated>
+  <updated>2016-07-20T12:06:35.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sparkStream持久化设计</title>
+    <link href="http://m2shad0w.com/2016/07/20/sparkStream%E6%8C%81%E4%B9%85%E5%8C%96%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://m2shad0w.com/2016/07/20/sparkStream持久化设计/</id>
+    <published>2016-07-20T11:27:21.000Z</published>
+    <updated>2016-07-20T12:06:35.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;数据批处理&quot;&gt;数据批处理&lt;/h3&gt;&lt;p&gt;现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;数据流基本按照官网给的图走的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/63fe561egw1f60lw5yta2j20wk0c6q50.jpg&quot; alt=&quot;spark stream 数据流图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;从&lt;code&gt;flume&lt;/code&gt;收集日志，&lt;code&gt;sink&lt;/code&gt;到&lt;code&gt;kafka&lt;/code&gt;, &lt;code&gt;kafka&lt;/code&gt;的消息被 &lt;code&gt;spark stream&lt;/code&gt; 批处理消费掉。&lt;/p&gt;
+&lt;h3 id=&quot;批处理的数据被存到外部系统&quot;&gt;批处理的数据被存到外部系统&lt;/h3&gt;&lt;p&gt;在业务中， 外部系统是mysql， 怎么高效的存储呢？&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在spark的官网中提供了思路&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用 &lt;code&gt;dstream.foreachRDD&lt;/code&gt; 的算子， 你有可能这样写&lt;/p&gt;
+&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dstream.foreachRDD(rdd =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; connection = createNewConnection()  &lt;span class=&quot;comment&quot;&gt;// executed at the driver&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  rdd.foreach(record =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      connection.send(record) &lt;span class=&quot;comment&quot;&gt;// executed at the worker&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;但是这样写会报序列化的错误，提高系统的吞吐量，更好的办法是利用 &lt;code&gt;rdd.foreachPartition&lt;/code&gt; 的方法。&lt;br&gt;为RDD的每个partition创建一个连接对象&lt;/p&gt;
+&lt;p&gt;类似如下这种方法&lt;/p&gt;
+&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dstream.foreachRDD(rdd =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      rdd.foreachPartition(partitionOfRecords =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; connection = createNewConnection()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          partitionOfRecords.foreach(record =&amp;gt; connection.send(record))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          connection.close()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;还有更好的方案是创建一个静态的，懒加载的连接对象，节省进一步的开销&lt;/p&gt;
+&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dstream.foreachRDD(rdd =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      rdd.foreachPartition(partitionOfRecords =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;comment&quot;&gt;// ConnectionPool is a static, lazily initialized pool of connections&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          val connection = ConnectionPool.getConnection()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          partitionOfRecords.&lt;span class=&quot;keyword&quot;&gt;foreach&lt;/span&gt;(record =&amp;gt; connection.send(record))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          ConnectionPool.returnConnection(connection)  &lt;span class=&quot;comment&quot;&gt;// return to the pool for future reuse&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;附送python实例&quot;&gt;附送python实例&lt;/h3&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; MySQLdb&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; DBUtils.PooledDB &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; PooledDB&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ConnectionPool&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(object)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        TRACK_HOST = $TRACK_HOST&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        TRACK_USER = $TRACK_USER&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        TRACK_PASSWD = $TRACK_PASSWD&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        TRACK_DB = $TRACK_DB&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.pool = PooledDB(MySQLdb, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, host=TRACK_HOST, user=TRACK_USER, passwd=TRACK_PASSWD, db=TRACK_DB, port=&lt;span class=&quot;number&quot;&gt;3306&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getConnection&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; self.pool.connection()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;returnConnection&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, connection)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; connection.close()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	balabala&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	counts.foreachRDD(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; rdd: rdd.foreachPartition(send_partition))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;send_partition&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(data)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   	&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    c = ConnectionPool()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    conn = c.getConnection()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    cur = conn.cursor()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; record &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; data:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    	balabala&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    	...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	    c.returnConnection(conn)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;except&lt;/span&gt; Exception, e:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; (e)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; __name__ == &lt;span class=&quot;string&quot;&gt;&quot;__main__&quot;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    main()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;[&lt;span class=&quot;link_label&quot;&gt;https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/spark-streaming/basic-concepts/output-operations-on-DStreams.html&lt;/span&gt;](&lt;span class=&quot;link_url&quot;&gt;https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/spark-streaming/basic-concepts/output-operations-on-DStreams.html&lt;/span&gt;)
+[&lt;span class=&quot;link_label&quot;&gt;https://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd&lt;/span&gt;](&lt;span class=&quot;link_url&quot;&gt;https://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;数据批处理&quot;&gt;数据批处理&lt;/h3&gt;&lt;p&gt;现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="spark" scheme="http://m2shad0w.com/tags/spark/"/>
+    
+  </entry>
   
   <entry>
     <title>rinetd端口转发工具</title>
@@ -623,42 +662,6 @@
     
     
       <category term="hadoop" scheme="http://m2shad0w.com/tags/hadoop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DeepInConfigflume</title>
-    <link href="http://m2shad0w.com/2016/02/18/DeepInflume2/"/>
-    <id>http://m2shad0w.com/2016/02/18/DeepInflume2/</id>
-    <published>2016-02-18T08:04:28.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;flume深入配置&quot;&gt;flume深入配置&lt;/h3&gt;&lt;p&gt;想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;读flume文档&quot;&gt;读flume文档&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;Alias    Description&lt;br&gt;%{host}    Substitute value of event header named “host”. Arbitrary header names are supported.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;因此，需要在post数据headers 中加上 &lt;code&gt;host&lt;/code&gt; 字段.&lt;/p&gt;
-&lt;p&gt;快速修改一下flume的配置文件，测试一下&lt;/p&gt;
-&lt;p&gt;配置文件对应修改字段：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:&lt;span class=&quot;number&quot;&gt;9000&lt;/span&gt;/user/hadoop/%&amp;#123;host&amp;#125;/%y-%m-%d/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;测试:&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;curl -X POST &lt;span class=&quot;operator&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;[&amp;#123;&quot;headers&quot;:&amp;#123;&quot;host&quot; : &quot;chat&quot;&amp;#125;,&quot;body&quot; : &quot;hello random flume &quot;&amp;#125;]&#39;&lt;/span&gt; http://&amp;#123;your ip&amp;#125;:&amp;#123;your port&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;成功:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/mw690/63fe561egw1f13kkyzbd3j20yq02s75h.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;flume深入配置&quot;&gt;flume深入配置&lt;/h3&gt;&lt;p&gt;想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
-    
-    
-      <category term="flume" scheme="http://m2shad0w.com/tags/flume/"/>
     
   </entry>
   

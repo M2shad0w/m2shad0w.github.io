@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mongodb," />
+  <meta name="keywords" content="spark," />
 
 
 
@@ -59,16 +59,17 @@
 
 
 
-<meta name="description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
+<meta name="description" content="数据批处理现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mongodb基础">
-<meta property="og:url" content="http://m2shad0w.com/2016/05/09/mongodb基础/index.html">
+<meta property="og:title" content="sparkStream持久化设计">
+<meta property="og:url" content="http://m2shad0w.com/2016/07/20/sparkStream持久化设计/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
-<meta property="og:updated_time" content="2016-05-09T01:39:38.000Z">
+<meta property="og:description" content="数据批处理现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/63fe561egw1f60lw5yta2j20wk0c6q50.jpg">
+<meta property="og:updated_time" content="2016-07-20T12:06:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mongodb基础">
-<meta name="twitter:description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
+<meta name="twitter:title" content="sparkStream持久化设计">
+<meta name="twitter:description" content="数据批处理现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。">
 
 
 
@@ -86,7 +87,7 @@
   };
 </script>
 
-  <title> mongodb基础 | m2shad0w </title>
+  <title> sparkStream持久化设计 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -273,7 +274,7 @@
             
             
               
-                mongodb基础
+                sparkStream持久化设计
               
             
           </h1>
@@ -285,8 +286,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-05-09T09:34:40+08:00" content="2016-05-09">
-              2016-05-09
+            <time itemprop="dateCreated" datetime="2016-07-20T19:27:21+08:00" content="2016-07-20">
+              2016-07-20
             </time>
           </span>
 
@@ -299,8 +300,8 @@
               <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">mongodb</span>
+                  <a href="/categories/bigdata/" itemprop="url" rel="index">
+                    <span itemprop="name">bigdata</span>
                   </a>
                 </span>
 
@@ -315,8 +316,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/09/mongodb基础/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/09/mongodb基础/" itemprop="commentsCount"></span>
+                <a href="/2016/07/20/sparkStream持久化设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/20/sparkStream持久化设计/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -337,9 +338,24 @@
       
 
       
-        <h3 id="nosql之mongodb">nosql之mongodb</h3><p>mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。<br>在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。<br><a id="more"></a></p>
-<h3 id="mongo_ppt">mongo ppt</h3><p><iframe src="//www.slideshare.net/slideshow/embed_code/key/bCfioac6WeYuvY" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/JiahuaZhu3/mongo-61799349" title="Mongo基础" target="_blank">Mongo基础</a> </strong> from <strong><a href="//www.slideshare.net/JiahuaZhu3" target="_blank">Jiahua Zhu</a></strong> </div></p>
-
+        <h3 id="数据批处理">数据批处理</h3><p>现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。</p>
+<a id="more"></a>
+<p>数据流基本按照官网给的图走的。</p>
+<p><img src="http://ww2.sinaimg.cn/large/63fe561egw1f60lw5yta2j20wk0c6q50.jpg" alt="spark stream 数据流图"></p>
+<p>从<code>flume</code>收集日志，<code>sink</code>到<code>kafka</code>, <code>kafka</code>的消息被 <code>spark stream</code> 批处理消费掉。</p>
+<h3 id="批处理的数据被存到外部系统">批处理的数据被存到外部系统</h3><p>在业务中， 外部系统是mysql， 怎么高效的存储呢？</p>
+<p><a href="https://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd" target="_blank" rel="external">在spark的官网中提供了思路</a></p>
+<p>用 <code>dstream.foreachRDD</code> 的算子， 你有可能这样写</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dstream.foreachRDD(rdd =&gt; &#123;</span><br><span class="line">  <span class="keyword">val</span> connection = createNewConnection()  <span class="comment">// executed at the driver</span></span><br><span class="line">  rdd.foreach(record =&gt; &#123;</span><br><span class="line">      connection.send(record) <span class="comment">// executed at the worker</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>但是这样写会报序列化的错误，提高系统的吞吐量，更好的办法是利用 <code>rdd.foreachPartition</code> 的方法。<br>为RDD的每个partition创建一个连接对象</p>
+<p>类似如下这种方法</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dstream.foreachRDD(rdd =&gt; &#123;</span><br><span class="line">      rdd.foreachPartition(partitionOfRecords =&gt; &#123;</span><br><span class="line">          <span class="keyword">val</span> connection = createNewConnection()</span><br><span class="line">          partitionOfRecords.foreach(record =&gt; connection.send(record))</span><br><span class="line">          connection.close()</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>还有更好的方案是创建一个静态的，懒加载的连接对象，节省进一步的开销</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dstream.foreachRDD(rdd =&gt; &#123;</span><br><span class="line">      rdd.foreachPartition(partitionOfRecords =&gt; &#123;</span><br><span class="line">          <span class="comment">// ConnectionPool is a static, lazily initialized pool of connections</span></span><br><span class="line">          val connection = ConnectionPool.getConnection()</span><br><span class="line">          partitionOfRecords.<span class="keyword">foreach</span>(record =&gt; connection.send(record))</span><br><span class="line">          ConnectionPool.returnConnection(connection)  <span class="comment">// return to the pool for future reuse</span></span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="附送python实例">附送python实例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"><span class="keyword">from</span> DBUtils.PooledDB <span class="keyword">import</span> PooledDB</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConnectionPool</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        TRACK_HOST = $TRACK_HOST</span><br><span class="line">        TRACK_USER = $TRACK_USER</span><br><span class="line">        TRACK_PASSWD = $TRACK_PASSWD</span><br><span class="line">        TRACK_DB = $TRACK_DB</span><br><span class="line">        self.pool = PooledDB(MySQLdb, <span class="number">2</span>, host=TRACK_HOST, user=TRACK_USER, passwd=TRACK_PASSWD, db=TRACK_DB, port=<span class="number">3306</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getConnection</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.pool.connection()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">returnConnection</span><span class="params">(self, connection)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> connection.close()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	balabala</span><br><span class="line">	...</span><br><span class="line">	counts.foreachRDD(<span class="keyword">lambda</span> rdd: rdd.foreachPartition(send_partition))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_partition</span><span class="params">(data)</span>:</span></span><br><span class="line">   	<span class="keyword">try</span>:</span><br><span class="line">	    c = ConnectionPool()</span><br><span class="line">	    conn = c.getConnection()</span><br><span class="line">	    cur = conn.cursor()</span><br><span class="line">	    <span class="keyword">for</span> record <span class="keyword">in</span> data:</span><br><span class="line">	    	balabala</span><br><span class="line">	    	...</span><br><span class="line">	    c.returnConnection(conn)</span><br><span class="line">	<span class="keyword">except</span> Exception, e:</span><br><span class="line">        <span class="keyword">print</span> (e)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h3 id="参考">参考</h3><pre><code>[<span class="link_label">https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/spark-streaming/basic-concepts/output-operations-on-DStreams.html</span>](<span class="link_url">https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/spark-streaming/basic-concepts/output-operations-on-DStreams.html</span>)
+[<span class="link_label">https://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd</span>](<span class="link_url">https://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd</span>)
+</code></pre>
       
     </div>
 
@@ -347,7 +363,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mongodb/" rel="tag">#mongodb</a>
+            <a href="/tags/spark/" rel="tag">#spark</a>
           
         </div>
       
@@ -356,17 +372,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/28/pandas2data/" rel="next" title="pandas2data">
-                <i class="fa fa-chevron-left"></i> pandas2data
+              <a href="/2016/07/13/rinetd端口转发工具/" rel="next" title="rinetd端口转发工具">
+                <i class="fa fa-chevron-left"></i> rinetd端口转发工具
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/25/Dato-Machine-Learning/" rel="prev" title="Dato_Machine_Learning">
-                Dato_Machine_Learning <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -551,7 +563,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nosql之mongodb"><span class="nav-number">1.</span> <span class="nav-text">nosql之mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongo_ppt"><span class="nav-number">2.</span> <span class="nav-text">mongo ppt</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据批处理"><span class="nav-number">1.</span> <span class="nav-text">数据批处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批处理的数据被存到外部系统"><span class="nav-number">2.</span> <span class="nav-text">批处理的数据被存到外部系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附送python实例"><span class="nav-number">3.</span> <span class="nav-text">附送python实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -816,9 +828,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2016/05/09/mongodb基础/';
-      var disqus_title = 'mongodb基础';
-      var disqus_url = 'http://m2shad0w.com/2016/05/09/mongodb基础/';
+      var disqus_identifier = '2016/07/20/sparkStream持久化设计/';
+      var disqus_title = 'sparkStream持久化设计';
+      var disqus_url = 'http://m2shad0w.com/2016/07/20/sparkStream持久化设计/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
