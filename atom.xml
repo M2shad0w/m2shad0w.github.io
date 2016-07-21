@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-07-21T09:20:52.000Z</updated>
+  <updated>2016-07-21T09:39:29.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>tornado.web日志logger配置</title>
+    <link href="http://m2shad0w.com/2016/07/21/tornado-web%E6%97%A5%E5%BF%97logger%E9%85%8D%E7%BD%AE/"/>
+    <id>http://m2shad0w.com/2016/07/21/tornado-web日志logger配置/</id>
+    <published>2016-07-21T09:27:20.000Z</published>
+    <updated>2016-07-21T09:39:29.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;web_logger&quot;&gt;web logger&lt;/h3&gt;&lt;p&gt;提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;http://old.sebug.net/paper/books/tornado/#_10&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Tornado &lt;/a&gt; 是一个非阻塞式的web服务器。每秒可以处理数以千计的连接，在我的实际应用中主要是用来做数据api的(编程语言是python，比较轻快)。&lt;a href=&quot;http://www.tornadoweb.org/en/stable/web.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;简介&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;logger配置与每日分割&quot;&gt;logger配置与每日分割&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://guoze.me/2015/01/31/tornado-log-perday/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# logging.yaml&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;version: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;disable&lt;/span&gt;_existing_loggers: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;formatters:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  simple:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    format: &lt;span class=&quot;string&quot;&gt;&#39;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loggers:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  all:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    handlers: [all]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    propagate: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  tornado:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    handlers: [all]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    propagate: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;handlers:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    class: logging.StreamHandler&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    level: INFO&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    formatter: simple&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    stream: ext://sys.stdout&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  all:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    class: logging.handlers.TimedRotatingFileHandler&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    level: INFO&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    formatter: simple&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    when: midnight&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    filename: ./logs/server.log&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;root:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  level: INFO&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  handlers: [console, all]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  propagate: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;将配置文件放在web根目录下，在web server中引入 &lt;code&gt;import logging, yaml, logging.config&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果缺少什么，就按错误日志，安装相应的依赖包&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;web_logger&quot;&gt;web logger&lt;/h3&gt;&lt;p&gt;提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="web" scheme="http://m2shad0w.com/categories/web/"/>
+    
+    
+      <category term="data" scheme="http://m2shad0w.com/tags/data/"/>
+    
+  </entry>
   
   <entry>
     <title>sparkStream持久化设计</title>
@@ -629,39 +658,6 @@
     
     
       <category term="mysql" scheme="http://m2shad0w.com/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hdfs文件坏块</title>
-    <link href="http://m2shad0w.com/2016/02/19/hdfsBadBlock/"/>
-    <id>http://m2shad0w.com/2016/02/19/hdfsBadBlock/</id>
-    <published>2016-02-19T03:09:56.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;重启hadoop带来的问题&quot;&gt;重启hadoop带来的问题&lt;/h3&gt;&lt;p&gt;之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;错误&quot;&gt;错误&lt;/h3&gt;&lt;p&gt;spark 从hdfs上 load数据的时候出现错误&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cause:java.io.IOException: Cannot obtain block length &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; LocatedBlock&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;用 &lt;code&gt;hdfs fsck /&lt;/code&gt; 查看显示 &lt;code&gt;hadoop显示现在没有任何丢失的块&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;找出文件&lt;br&gt;&lt;code&gt;hadoop fsck / -openforwrite |egrep -v &amp;#39;^\.+$&amp;#39; |egrep &amp;quot;MISSING|OPENFORWRITE&amp;quot; |grep -o &amp;quot;/[^ ]*&amp;quot; |sed -e &amp;quot;s/:$//|sort |uniq&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/mw690/63fe561egw1f14hdula3mj20qk066q48.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;删除文件&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;hadoop fs -rm -skipTrash $file&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&quot;参考文章&quot;&gt;参考文章&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://ju.outofmemory.cn/entry/204699&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ju.outofmemory.cn/entry/204699&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;重启hadoop带来的问题&quot;&gt;重启hadoop带来的问题&lt;/h3&gt;&lt;p&gt;之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
-    
-    
-      <category term="hadoop" scheme="http://m2shad0w.com/tags/hadoop/"/>
     
   </entry>
   

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mongodb," />
+  <meta name="keywords" content="data," />
 
 
 
@@ -59,16 +59,16 @@
 
 
 
-<meta name="description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
+<meta name="description" content="web logger提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mongodb基础">
-<meta property="og:url" content="http://m2shad0w.com/2016/05/09/mongodb基础/index.html">
+<meta property="og:title" content="tornado.web日志logger配置">
+<meta property="og:url" content="http://m2shad0w.com/2016/07/21/tornado-web日志logger配置/index.html">
 <meta property="og:site_name" content="m2shad0w">
-<meta property="og:description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
-<meta property="og:updated_time" content="2016-07-21T09:20:52.000Z">
+<meta property="og:description" content="web logger提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。">
+<meta property="og:updated_time" content="2016-07-21T09:39:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mongodb基础">
-<meta name="twitter:description" content="nosql之mongodbmongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。">
+<meta name="twitter:title" content="tornado.web日志logger配置">
+<meta name="twitter:description" content="web logger提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。">
 
 
 
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> mongodb基础 | m2shad0w </title>
+  <title> tornado.web日志logger配置 | m2shad0w </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -245,7 +245,7 @@
             
             
               
-                mongodb基础
+                tornado.web日志logger配置
               
             
           </h1>
@@ -257,8 +257,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-05-09T09:34:40+08:00" content="2016-05-09">
-              2016-05-09
+            <time itemprop="dateCreated" datetime="2016-07-21T17:27:20+08:00" content="2016-07-21">
+              2016-07-21
             </time>
           </span>
 
@@ -271,8 +271,8 @@
               <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">mongodb</span>
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
                   </a>
                 </span>
 
@@ -287,8 +287,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/09/mongodb基础/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/09/mongodb基础/" itemprop="commentsCount"></span>
+                <a href="/2016/07/21/tornado-web日志logger配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/21/tornado-web日志logger配置/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -309,8 +309,13 @@
       
 
       
-        <h3 id="nosql之mongodb">nosql之mongodb</h3><p>mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。<br>在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。<br><a id="more"></a></p>
-<h3 id="mongo_ppt">mongo ppt</h3><p><iframe src="//www.slideshare.net/slideshow/embed_code/key/bCfioac6WeYuvY" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/JiahuaZhu3/mongo-61799349" title="Mongo基础" target="_blank">Mongo基础</a> </strong> from <strong><a href="//www.slideshare.net/JiahuaZhu3" target="_blank">Jiahua Zhu</a></strong> </div></p>
+        <h3 id="web_logger">web logger</h3><p>提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。</p>
+<a id="more"></a>
+<p><a href="http://old.sebug.net/paper/books/tornado/#_10" target="_blank" rel="external">Tornado </a> 是一个非阻塞式的web服务器。每秒可以处理数以千计的连接，在我的实际应用中主要是用来做数据api的(编程语言是python，比较轻快)。<a href="http://www.tornadoweb.org/en/stable/web.html" target="_blank" rel="external">简介</a></p>
+<h3 id="logger配置与每日分割">logger配置与每日分割</h3><p><a href="http://guoze.me/2015/01/31/tornado-log-perday/" target="_blank" rel="external">参考文章</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># logging.yaml</span></span><br><span class="line"></span><br><span class="line">version: <span class="number">1</span></span><br><span class="line"><span class="built_in">disable</span>_existing_loggers: <span class="literal">false</span></span><br><span class="line">formatters:</span><br><span class="line">  simple:</span><br><span class="line">    format: <span class="string">'%(asctime)s - %(name)s - %(levelname)s - %(message)s'</span></span><br><span class="line"></span><br><span class="line">loggers:</span><br><span class="line">  all:</span><br><span class="line">    handlers: [all]</span><br><span class="line">    propagate: <span class="literal">false</span></span><br><span class="line">  tornado:</span><br><span class="line">    handlers: [all]</span><br><span class="line">    propagate: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">handlers:</span><br><span class="line">  console:</span><br><span class="line">    class: logging.StreamHandler</span><br><span class="line">    level: INFO</span><br><span class="line">    formatter: simple</span><br><span class="line">    stream: ext://sys.stdout</span><br><span class="line">  all:</span><br><span class="line">    class: logging.handlers.TimedRotatingFileHandler</span><br><span class="line">    level: INFO</span><br><span class="line">    formatter: simple</span><br><span class="line">    when: midnight</span><br><span class="line">    filename: ./logs/server.log</span><br><span class="line"></span><br><span class="line">root:</span><br><span class="line">  level: INFO</span><br><span class="line">  handlers: [console, all]</span><br><span class="line">  propagate: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>将配置文件放在web根目录下，在web server中引入 <code>import logging, yaml, logging.config</code></p>
+<p>如果缺少什么，就按错误日志，安装相应的依赖包</p>
 
       
     </div>
@@ -319,7 +324,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mongodb/" rel="tag">#mongodb</a>
+            <a href="/tags/data/" rel="tag">#data</a>
           
         </div>
       
@@ -328,17 +333,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/28/pandas2data/" rel="next" title="pandas2data">
-                <i class="fa fa-chevron-left"></i> pandas2data
+              <a href="/2016/07/20/sparkStream持久化设计/" rel="next" title="sparkStream持久化设计">
+                <i class="fa fa-chevron-left"></i> sparkStream持久化设计
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/25/Dato-Machine-Learning/" rel="prev" title="Dato_Machine_Learning">
-                Dato_Machine_Learning <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -523,7 +524,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nosql之mongodb"><span class="nav-number">1.</span> <span class="nav-text">nosql之mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongo_ppt"><span class="nav-number">2.</span> <span class="nav-text">mongo ppt</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#web_logger"><span class="nav-number">1.</span> <span class="nav-text">web logger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logger配置与每日分割"><span class="nav-number">2.</span> <span class="nav-text">logger配置与每日分割</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -788,9 +789,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
-      var disqus_identifier = '2016/05/09/mongodb基础/';
-      var disqus_title = 'mongodb基础';
-      var disqus_url = 'http://m2shad0w.com/2016/05/09/mongodb基础/';
+      var disqus_identifier = '2016/07/21/tornado-web日志logger配置/';
+      var disqus_title = 'tornado.web日志logger配置';
+      var disqus_url = 'http://m2shad0w.com/2016/07/21/tornado-web日志logger配置/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
