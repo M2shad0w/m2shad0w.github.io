@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-07-21T03:30:29.000Z</updated>
+  <updated>2016-07-21T09:20:52.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://m2shad0w.com/2016/07/20/sparkStream%E6%8C%81%E4%B9%85%E5%8C%96%E8%AE%BE%E8%AE%A1/"/>
     <id>http://m2shad0w.com/2016/07/20/sparkStream持久化设计/</id>
     <published>2016-07-20T11:27:21.000Z</published>
-    <updated>2016-07-21T03:30:29.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;数据批处理&quot;&gt;数据批处理&lt;/h3&gt;&lt;p&gt;现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -59,7 +59,7 @@
     <link href="http://m2shad0w.com/2016/07/13/rinetd%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     <id>http://m2shad0w.com/2016/07/13/rinetd端口转发工具/</id>
     <published>2016-07-13T09:04:50.000Z</published>
-    <updated>2016-07-15T07:02:01.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;rinetd端口转发工具&quot;&gt;rinetd端口转发工具&lt;/h3&gt;&lt;p&gt;端口转发是比较实用的，内网服务器，某些机器并不想直接暴露在外边，就可以通过端口转发到跳板机上。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -95,7 +95,7 @@
     <link href="http://m2shad0w.com/2016/07/11/centos7%E5%AE%89%E8%A3%85nginx/"/>
     <id>http://m2shad0w.com/2016/07/11/centos7安装nginx/</id>
     <published>2016-07-11T07:21:19.000Z</published>
-    <updated>2016-07-11T07:27:43.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;centos7安装nginx&quot;&gt;centos7安装nginx&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;在yum的仓库中添加nginx的源&lt;/p&gt;
@@ -144,7 +144,7 @@
     <link href="http://m2shad0w.com/2016/07/09/%E7%BC%93%E5%AD%98jar%E6%8F%90%E9%AB%98spark-on-yarn%E7%9A%84%E4%B9%8B%E8%A1%8C%E9%80%9F%E5%BA%A6/"/>
     <id>http://m2shad0w.com/2016/07/09/缓存jar提高spark-on-yarn的之行速度/</id>
     <published>2016-07-09T07:44:23.000Z</published>
-    <updated>2016-07-09T08:22:44.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;spark-on-yarn&quot;&gt;spark-on-yarn&lt;/h3&gt;&lt;p&gt;将job提交到 &lt;code&gt;yarn&lt;/code&gt; 上，整个job的执行时间明显多了很多，想着优化一下。&lt;/p&gt;
 &lt;p&gt;从下面这张图可以看到，有一个上传&lt;code&gt;spark jar&lt;/code&gt;的过程，这个包很大170多M，必然会浪费时间。&lt;/p&gt;
@@ -185,7 +185,7 @@
     <link href="http://m2shad0w.com/2016/07/09/%E4%BF%AE%E6%94%B9yarn-web-ui%E6%97%B6%E5%8C%BA/"/>
     <id>http://m2shad0w.com/2016/07/09/修改yarn-web-ui时区/</id>
     <published>2016-07-09T06:05:20.000Z</published>
-    <updated>2016-07-09T06:40:14.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;yarn-web-ui时区显示不对&quot;&gt;yarn-web-ui时区显示不对&lt;/h3&gt;&lt;p&gt;在运行spark on yarn 程序中，job偶尔会失败，加上job量又比较多，web－ui的时区不矫正，简直对给定位问题带来了困难。&lt;/p&gt;
 &lt;p&gt;下面就是我实践校正时区的一个过程。&lt;/p&gt;
@@ -226,7 +226,7 @@
     <link href="http://m2shad0w.com/2016/06/21/mysql%E5%AF%BC%E5%85%A5%E4%B9%8B%E8%A1%8Csql%E8%AF%AD%E5%8F%A5/"/>
     <id>http://m2shad0w.com/2016/06/21/mysql导入之行sql语句/</id>
     <published>2016-06-21T12:14:57.000Z</published>
-    <updated>2016-06-21T12:20:39.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;mysql导入之行sql&quot;&gt;mysql导入之行sql&lt;/h3&gt;&lt;p&gt;一些常用的sql，写成文件形式，在mysql中导入，可以批量生成表&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -253,7 +253,7 @@
     <link href="http://m2shad0w.com/2016/06/08/flume%E5%A4%9Achannel%E3%80%81slink%E9%85%8D%E7%BD%AE/"/>
     <id>http://m2shad0w.com/2016/06/08/flume多channel、slink配置/</id>
     <published>2016-06-08T05:36:56.000Z</published>
-    <updated>2016-06-08T05:54:39.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h4 id=&quot;参考文章&quot;&gt;参考文章&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#configuration&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://flume.apache.org/FlumeUserGuide.html#configuration&lt;/a&gt;&lt;/p&gt;
 </content>
@@ -272,7 +272,7 @@
     <link href="http://m2shad0w.com/2016/06/06/%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BD%BF%E7%94%A8shadowsocks%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
     <id>http://m2shad0w.com/2016/06/06/在服务器上使用shadowsocks客户端/</id>
     <published>2016-06-06T02:14:53.000Z</published>
-    <updated>2016-06-06T02:30:14.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;ss客户端在centos上&quot;&gt;ss客户端在centos上&lt;/h3&gt;&lt;p&gt;因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -302,7 +302,7 @@
     <link href="http://m2shad0w.com/2016/06/03/hue%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
     <id>http://m2shad0w.com/2016/06/03/hue编译安装/</id>
     <published>2016-06-03T10:02:46.000Z</published>
-    <updated>2016-06-04T09:07:50.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;安装依赖&quot;&gt;安装依赖&lt;/h3&gt;&lt;p&gt;yum 安装依赖&lt;/p&gt;
 &lt;figure class=&quot;highlight cmake&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; gmp-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; libffi-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; krb5-devel cyrus-sasl-gssapi cyrus-sasl-deve libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel python-simplejson sqlite-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -332,7 +332,7 @@
     <link href="http://m2shad0w.com/2016/06/02/ambari-agent%E6%B3%A8%E5%86%8C%E5%A4%B1%E8%B4%A5/"/>
     <id>http://m2shad0w.com/2016/06/02/ambari-agent注册失败/</id>
     <published>2016-06-02T06:44:16.000Z</published>
-    <updated>2016-06-02T07:58:30.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;ambari&quot;&gt;ambari&lt;/h3&gt;&lt;p&gt;ambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -371,7 +371,7 @@
     <link href="http://m2shad0w.com/2016/06/02/python-pkg-resources/"/>
     <id>http://m2shad0w.com/2016/06/02/python-pkg-resources/</id>
     <published>2016-06-02T06:10:32.000Z</published>
-    <updated>2016-06-02T06:10:32.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html"></content>
     
@@ -387,7 +387,7 @@
     <link href="http://m2shad0w.com/2016/05/31/centos%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
     <id>http://m2shad0w.com/2016/05/31/centos网络配置/</id>
     <published>2016-05-31T07:45:23.000Z</published>
-    <updated>2016-05-31T08:00:58.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;centos-dvd-iso&quot;&gt;centos-dvd-iso&lt;/h3&gt;&lt;p&gt;安装了centos－dvd－iso镜像版本，默认boot up的时候竟然网卡没有驱动起来。配置的过程做一下纪录。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -422,7 +422,7 @@
     <link href="http://m2shad0w.com/2016/05/26/zeppelin-data-visualization/"/>
     <id>http://m2shad0w.com/2016/05/26/zeppelin-data-visualization/</id>
     <published>2016-05-26T11:41:24.000Z</published>
-    <updated>2016-05-28T09:35:05.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Multi-purpose_Notebook&quot;&gt;Multi-purpose Notebook&lt;/h3&gt;&lt;p&gt;正如zeppelin主页所说， zeppelin 是一个多目的的文本笔记。你的所有的数据需求都可以在这个笔记中完成。&lt;/p&gt;
 &lt;ul&gt;
@@ -458,7 +458,7 @@
     <link href="http://m2shad0w.com/2016/05/25/Dato-Machine-Learning/"/>
     <id>http://m2shad0w.com/2016/05/25/Dato-Machine-Learning/</id>
     <published>2016-05-25T07:01:23.000Z</published>
-    <updated>2016-05-25T07:05:56.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;dato&quot;&gt;dato&lt;/h3&gt;&lt;p&gt;Dato_Machine_Learning, 使用GraphLab来做一些机器学习。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;user_guide&quot;&gt;user guide&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://dato.com/learn/userguide/install.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://dato.com/learn/userguide/install.html&lt;/a&gt;&lt;/p&gt;
@@ -482,7 +482,7 @@
     <link href="http://m2shad0w.com/2016/05/09/mongodb%E5%9F%BA%E7%A1%80/"/>
     <id>http://m2shad0w.com/2016/05/09/mongodb基础/</id>
     <published>2016-05-09T01:34:40.000Z</published>
-    <updated>2016-05-09T01:39:38.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;nosql之mongodb&quot;&gt;nosql之mongodb&lt;/h3&gt;&lt;p&gt;mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。&lt;br&gt;在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;mongo_ppt&quot;&gt;mongo ppt&lt;/h3&gt;&lt;p&gt;&lt;iframe src=&quot;//www.slideshare.net/slideshow/embed_code/key/bCfioac6WeYuvY&quot; width=&quot;595&quot; height=&quot;485&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;//www.slideshare.net/JiahuaZhu3/mongo-61799349&quot; title=&quot;Mongo基础&quot; target=&quot;_blank&quot;&gt;Mongo基础&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&quot;//www.slideshare.net/JiahuaZhu3&quot; target=&quot;_blank&quot;&gt;Jiahua Zhu&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
@@ -506,7 +506,7 @@
     <link href="http://m2shad0w.com/2016/04/28/pandas2data/"/>
     <id>http://m2shad0w.com/2016/04/28/pandas2data/</id>
     <published>2016-04-28T03:46:39.000Z</published>
-    <updated>2016-04-28T06:32:46.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;pandas处理数据&quot;&gt;pandas处理数据&lt;/h3&gt;&lt;p&gt;一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;需求中有将几张表中的数据聚合&lt;/p&gt;
@@ -539,7 +539,7 @@
     <link href="http://m2shad0w.com/2016/04/25/go2mongo/"/>
     <id>http://m2shad0w.com/2016/04/25/go2mongo/</id>
     <published>2016-04-25T02:43:34.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;go操作mongo的好驱动&quot;&gt;go操作mongo的好驱动&lt;/h3&gt;&lt;p&gt;画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动&lt;strong&gt;mgo&lt;/strong&gt;。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -572,7 +572,7 @@
     <link href="http://m2shad0w.com/2016/04/24/openwrt-mount-usb/"/>
     <id>http://m2shad0w.com/2016/04/24/openwrt-mount-usb/</id>
     <published>2016-04-24T14:16:53.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;老路由刷上openwrt&quot;&gt;老路由刷上openwrt&lt;/h3&gt;&lt;p&gt;周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -606,7 +606,7 @@
     <link href="http://m2shad0w.com/2016/03/16/utf8mbOnRds/"/>
     <id>http://m2shad0w.com/2016/03/16/utf8mbOnRds/</id>
     <published>2016-03-16T10:23:09.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;数据存入rds&quot;&gt;数据存入rds&lt;/h3&gt;&lt;p&gt;记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -637,7 +637,7 @@
     <link href="http://m2shad0w.com/2016/02/19/hdfsBadBlock/"/>
     <id>http://m2shad0w.com/2016/02/19/hdfsBadBlock/</id>
     <published>2016-02-19T03:09:56.000Z</published>
-    <updated>2016-04-25T11:45:21.000Z</updated>
+    <updated>2016-07-21T09:20:52.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;重启hadoop带来的问题&quot;&gt;重启hadoop带来的问题&lt;/h3&gt;&lt;p&gt;之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
