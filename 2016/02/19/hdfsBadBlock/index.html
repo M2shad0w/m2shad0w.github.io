@@ -70,6 +70,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hdfs文件坏块">
 <meta name="twitter:description" content="重启hadoop带来的问题之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/mw690/63fe561egw1f14hdula3mj20qk066q48.jpg">
 
 
 
@@ -310,16 +311,16 @@
       
 
       
-        <h3 id="重启hadoop带来的问题">重启hadoop带来的问题</h3><p>之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。</p>
+        <h3 id="重启hadoop带来的问题"><a href="#重启hadoop带来的问题" class="headerlink" title="重启hadoop带来的问题"></a>重启hadoop带来的问题</h3><p>之前flume一直在往hadoop写数据，hadoop重启过程，flume送进来的文件被中断，但是hadoop依然认为这个文件是打开着的。解决方案是删除这个文件。</p>
 <a id="more"></a>
-<h3 id="错误">错误</h3><p>spark 从hdfs上 load数据的时候出现错误</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cause:java.io.IOException: Cannot obtain block length <span class="keyword">for</span> LocatedBlock</span><br></pre></td></tr></table></figure>
+<h3 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h3><p>spark 从hdfs上 load数据的时候出现错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cause:java.io.IOException: Cannot obtain block length <span class="keyword">for</span> LocatedBlock</div></pre></td></tr></table></figure>
 <p>用 <code>hdfs fsck /</code> 查看显示 <code>hadoop显示现在没有任何丢失的块</code></p>
 <p>找出文件<br><code>hadoop fsck / -openforwrite |egrep -v &#39;^\.+$&#39; |egrep &quot;MISSING|OPENFORWRITE&quot; |grep -o &quot;/[^ ]*&quot; |sed -e &quot;s/:$//|sort |uniq&quot;</code></p>
 <p><img src="http://ww4.sinaimg.cn/mw690/63fe561egw1f14hdula3mj20qk066q48.jpg" alt=""></p>
 <p>删除文件</p>
 <p><code>hadoop fs -rm -skipTrash $file</code></p>
-<h3 id="参考文章">参考文章</h3><p><a href="http://ju.outofmemory.cn/entry/204699" target="_blank" rel="external">http://ju.outofmemory.cn/entry/204699</a></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://ju.outofmemory.cn/entry/204699" target="_blank" rel="external">http://ju.outofmemory.cn/entry/204699</a></p>
 <p><a href="http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037" target="_blank" rel="external">http://stackoverflow.com/questions/19205057/how-to-fix-corrupt-hadoop-hdfs/19216037#19216037</a></p>
 
       

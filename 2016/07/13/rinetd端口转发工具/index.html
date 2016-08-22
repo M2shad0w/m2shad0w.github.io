@@ -309,7 +309,7 @@
       
 
       
-        <h3 id="rinetd端口转发工具">rinetd端口转发工具</h3><p>端口转发是比较实用的，内网服务器，某些机器并不想直接暴露在外边，就可以通过端口转发到跳板机上。</p>
+        <h3 id="rinetd端口转发工具"><a href="#rinetd端口转发工具" class="headerlink" title="rinetd端口转发工具"></a>rinetd端口转发工具</h3><p>端口转发是比较实用的，内网服务器，某些机器并不想直接暴露在外边，就可以通过端口转发到跳板机上。</p>
 <a id="more"></a>
 <p>从<a href="https://www.boutell.com/rinetd/" target="_blank" rel="external">工具地址</a> 下载</p>
 <p><code>wget $url</code></p>
@@ -317,12 +317,12 @@
 <p><code>sed -i &#39;s/65536/65535/g&#39; rinetd.c</code></p>
 <p>接着执行</p>
 <p><code>mkdir /usr/man&amp;&amp;make&amp;&amp;make install</code></p>
-<h3 id="创建配置文件">创建配置文件</h3><p><code>vi /etc/rinetd.conf</code></p>
+<h3 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h3><p><code>vi /etc/rinetd.conf</code></p>
 <p>输入</p>
 <p><code>$src $port $des $port</code></p>
 <p>启动</p>
 <p><code>rinetd</code></p>
-<h3 id="开机启动">开机启动</h3><p><code>echo rinetd &gt;&gt;/etc/rc.local</code></p>
+<h3 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h3><p><code>echo rinetd &gt;&gt;/etc/rc.local</code></p>
 
       
     </div>

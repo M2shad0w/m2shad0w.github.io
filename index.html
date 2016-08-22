@@ -320,7 +320,7 @@
 
       
         
-          <h3 id="web_logger">web logger</h3><p>提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，以供性能调优。</p>
+          <h3 id="web-logger"><a href="#web-logger" class="headerlink" title="web logger"></a>web logger</h3><p>提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，以供性能调优。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/21/tornado-web日志logger配置/#more" rel="contents">
               閱讀全文 &raquo;
@@ -432,7 +432,7 @@
 
       
         
-          <h3 id="数据批处理">数据批处理</h3><p>现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。</p>
+          <h3 id="数据批处理"><a href="#数据批处理" class="headerlink" title="数据批处理"></a>数据批处理</h3><p>现在有一种业务，数据需要在较短的时间内处理一下， spark Stream 是一个不错的选择。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/20/sparkStream持久化设计/#more" rel="contents">
               閱讀全文 &raquo;
@@ -544,7 +544,7 @@
 
       
         
-          <h3 id="rinetd端口转发工具">rinetd端口转发工具</h3><p>端口转发是比较实用的，内网服务器，某些机器并不想直接暴露在外边，就可以通过端口转发到跳板机上。</p>
+          <h3 id="rinetd端口转发工具"><a href="#rinetd端口转发工具" class="headerlink" title="rinetd端口转发工具"></a>rinetd端口转发工具</h3><p>端口转发是比较实用的，内网服务器，某些机器并不想直接暴露在外边，就可以通过端口转发到跳板机上。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/13/rinetd端口转发工具/#more" rel="contents">
               閱讀全文 &raquo;
@@ -656,10 +656,10 @@
 
       
         
-          <h3 id="centos7安装nginx">centos7安装nginx</h3><ul>
+          <h3 id="centos7安装nginx"><a href="#centos7安装nginx" class="headerlink" title="centos7安装nginx"></a>centos7安装nginx</h3><ul>
 <li><p>在yum的仓库中添加nginx的源</p>
 <p>  <code>cd /etc/yum.repos.d/</code><br>  <code>vi nginx.repo</code></p>
-  <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[nginx]</span></span><br><span class="line"><span class="setting">name=<span class="value">nginx repo</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://nginx.org/packages/centos/<span class="number">7</span>/<span class="variable">$basearch</span>/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">1</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/7/$basearch/</div><div class="line">gpgcheck=1</div><div class="line">enabled=1</div></pre></td></tr></table></figure>
 </li>
 </ul>
           <div class="post-more-link text-center">
@@ -773,7 +773,7 @@
 
       
         
-          <h3 id="spark-on-yarn">spark-on-yarn</h3><p>将job提交到 <code>yarn</code> 上，整个job的执行时间明显多了很多，想着优化一下。</p>
+          <h3 id="spark-on-yarn"><a href="#spark-on-yarn" class="headerlink" title="spark-on-yarn"></a>spark-on-yarn</h3><p>将job提交到 <code>yarn</code> 上，整个job的执行时间明显多了很多，想着优化一下。</p>
 <p>从下面这张图可以看到，有一个上传<code>spark jar</code>的过程，这个包很大170多M，必然会浪费时间。</p>
 <p>所以通过缓存jar来提高<code>spark on yarn</code>的执行速度。</p>
           <div class="post-more-link text-center">
@@ -887,7 +887,7 @@
 
       
         
-          <h3 id="yarn-web-ui时区显示不对">yarn-web-ui时区显示不对</h3><p>在运行spark on yarn 程序中，job偶尔会失败，加上job量又比较多，web－ui的时区不矫正，简直对给定位问题带来了困难。</p>
+          <h3 id="yarn-web-ui时区显示不对"><a href="#yarn-web-ui时区显示不对" class="headerlink" title="yarn-web-ui时区显示不对"></a>yarn-web-ui时区显示不对</h3><p>在运行spark on yarn 程序中，job偶尔会失败，加上job量又比较多，web－ui的时区不矫正，简直对给定位问题带来了困难。</p>
 <p>下面就是我实践校正时区的一个过程。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/09/修改yarn-web-ui时区/#more" rel="contents">
@@ -1000,7 +1000,7 @@
 
       
         
-          <h3 id="mysql导入之行sql">mysql导入之行sql</h3><p>一些常用的sql，写成文件形式，在mysql中导入，可以批量生成表</p>
+          <h3 id="mysql导入之行sql"><a href="#mysql导入之行sql" class="headerlink" title="mysql导入之行sql"></a>mysql导入之行sql</h3><p>一些常用的sql，写成文件形式，在mysql中导入，可以批量生成表</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/21/mysql导入之行sql语句/#more" rel="contents">
               閱讀全文 &raquo;
@@ -1094,7 +1094,7 @@
       
         
           
-            <h4 id="参考文章">参考文章</h4><p><a href="https://flume.apache.org/FlumeUserGuide.html#configuration" target="_blank" rel="external">https://flume.apache.org/FlumeUserGuide.html#configuration</a></p>
+            <h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a href="https://flume.apache.org/FlumeUserGuide.html#configuration" target="_blank" rel="external">https://flume.apache.org/FlumeUserGuide.html#configuration</a></p>
 
           
         
@@ -1203,7 +1203,7 @@
 
       
         
-          <h3 id="ss客户端在centos上">ss客户端在centos上</h3><p>因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。</p>
+          <h3 id="ss客户端在centos上"><a href="#ss客户端在centos上" class="headerlink" title="ss客户端在centos上"></a>ss客户端在centos上</h3><p>因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/06/在服务器上使用shadowsocks客户端/#more" rel="contents">
               閱讀全文 &raquo;
@@ -1327,8 +1327,8 @@
 
       
         
-          <h3 id="安装依赖">安装依赖</h3><p>yum 安装依赖</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> gmp-devel</span><br><span class="line">yum <span class="keyword">install</span> libffi-devel</span><br><span class="line">yum <span class="keyword">install</span> krb5-devel cyrus-sasl-gssapi cyrus-sasl-deve libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel python-simplejson sqlite-devel</span><br></pre></td></tr></table></figure>
+          <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>yum 安装依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install gmp-devel</div><div class="line">yum install libffi-devel</div><div class="line">yum install krb5-devel cyrus-sasl-gssapi cyrus-sasl-deve libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel python-simplejson sqlite-devel</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/03/hue编译安装/#more" rel="contents">
               閱讀全文 &raquo;

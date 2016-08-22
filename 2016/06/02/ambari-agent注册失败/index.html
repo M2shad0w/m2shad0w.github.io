@@ -309,9 +309,9 @@
       
 
       
-        <h3 id="ambari">ambari</h3><p>ambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录</p>
+        <h3 id="ambari"><a href="#ambari" class="headerlink" title="ambari"></a>ambari</h3><p>ambari是一个自动化的部署hadoop生态产品的好工具，这次在搭建线下测试环境的时候正好使用一下，下面将搭建过程中的坑，做一些简单的记录</p>
 <a id="more"></a>
-<h3 id="过程">过程</h3><p>搭建的过程首先参考<a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_start_the_ambari_server.html" target="_blank" rel="external">hortonworks.com的文章</a>的文章.<br>包括</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>搭建的过程首先参考<a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_start_the_ambari_server.html" target="_blank" rel="external">hortonworks.com的文章</a>的文章.<br>包括</p>
 <ol>
 <li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_set_up_password-less_ssh.html" target="_blank" rel="external">无密码登陆</a></li>
 <li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_enable_ntp_on_the_cluster_and_on_the_browser_host.html" target="_blank" rel="external">安装ntp服务，同步时间</a></li>
@@ -319,12 +319,12 @@
 <li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html" target="_blank" rel="external">设置FQDN, DNS</a></li>
 <li>[关闭防火墙, selinux]</li>
 </ol>
-<h3 id="坑">坑</h3><ul>
+<h3 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h3><ul>
 <li>在<code>ambari-server setup</code> 选择数据库时候没有选择默认的<code>postgres</code>, 而选择了<code>mysql</code>，后面<code>ambar-server reset</code> 想重新设置为<code>postgres</code>时候不起作用</li>
 <li>centos 的系统语言设置成中文，导致 <code>Registration with the server failed</code>, 将系统语言改成英文就好了</li>
 </ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Connection <span class="built_in">to</span> laboratorio.cetax.com closed.</span><br><span class="line">SSH <span class="command"><span class="keyword">command</span> <span class="title">execution</span> <span class="title">finished</span></span></span><br><span class="line">host=laboratorio.cetax.com, exitcode=<span class="number">0</span></span><br><span class="line">Command <span class="function"><span class="keyword">end</span> <span class="title">time</span> <span class="title">2016-04-29</span> <span class="title">11</span>:<span class="title">27</span>:<span class="title">04</span></span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">Registering <span class="operator">with</span> <span class="operator">the</span> server...</span><br><span class="line">Registration <span class="operator">with</span> <span class="operator">the</span> server failed.</span><br></pre></td></tr></table></figure>
-<h3 id="参考文章">参考文章</h3><p><a href="http://www.oschina.net/question/2684511_2159089" target="_blank" rel="external">http://www.oschina.net/question/2684511_2159089</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Connection to laboratorio.cetax.com closed.</div><div class="line">SSH command execution finished</div><div class="line">host=laboratorio.cetax.com, exitcode=0</div><div class="line">Command end time 2016-04-29 11:27:04</div><div class="line"> </div><div class="line"> </div><div class="line">Registering with the server...</div><div class="line">Registration with the server failed.</div></pre></td></tr></table></figure>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://www.oschina.net/question/2684511_2159089" target="_blank" rel="external">http://www.oschina.net/question/2684511_2159089</a></p>
 <p><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html" target="_blank" rel="external">http://docs.hortonworks.com/HDPDocuments/Ambari-2.2.2.0/bk_Installing_HDP_AMB/content/_edit_the_host_file.html</a></p>
 
       

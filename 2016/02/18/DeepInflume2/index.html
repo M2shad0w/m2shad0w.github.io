@@ -71,6 +71,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepInConfigflume">
 <meta name="twitter:description" content="flume深入配置想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg">
 
 
 
@@ -311,18 +312,18 @@
       
 
       
-        <h3 id="flume深入配置">flume深入配置</h3><p>想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。</p>
+        <h3 id="flume深入配置"><a href="#flume深入配置" class="headerlink" title="flume深入配置"></a>flume深入配置</h3><p>想只开一个端口, 通过配置, 将日志灵活地写在hdfs。通过时间、事件类型等隔离。</p>
 <a id="more"></a>
-<h3 id="读flume文档">读flume文档</h3><blockquote>
+<h3 id="读flume文档"><a href="#读flume文档" class="headerlink" title="读flume文档"></a>读flume文档</h3><blockquote>
 <p>Alias    Description<br>%{host}    Substitute value of event header named “host”. Arbitrary header names are supported.</p>
 </blockquote>
 <p><img src="http://ww1.sinaimg.cn/mw690/63fe561egw1f13k8osfxoj219y058gmq.jpg" alt=""></p>
 <p>因此，需要在post数据headers 中加上 <code>host</code> 字段.</p>
 <p>快速修改一下flume的配置文件，测试一下</p>
 <p>配置文件对应修改字段：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:<span class="number">9000</span>/user/hadoop/%&#123;host&#125;/%y-%m-%d/</span><br><span class="line">agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">agent1.sinks.hdfs-sink1.hdfs.path = hdfs://master:9000/user/hadoop/%&#123;host&#125;/%y-%m-%d/</div><div class="line">agent1.sinks.hdfs-sink1.hdfs.filePrefix = event_%y-%m-%d_%H_%M_%S</div></pre></td></tr></table></figure>
 <p>测试:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST <span class="operator">-d</span> <span class="string">'[&#123;"headers":&#123;"host" : "chat"&#125;,"body" : "hello random flume "&#125;]'</span> http://&#123;your ip&#125;:&#123;your port&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -X POST <span class="_">-d</span> <span class="string">'[&#123;"headers":&#123;"host" : "chat"&#125;,"body" : "hello random flume "&#125;]'</span> http://&#123;your ip&#125;:&#123;your port&#125;</div></pre></td></tr></table></figure>
 <p>成功:</p>
 <p><img src="http://ww4.sinaimg.cn/mw690/63fe561egw1f13kkyzbd3j20yq02s75h.jpg" alt=""></p>
 

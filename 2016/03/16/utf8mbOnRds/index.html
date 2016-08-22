@@ -71,6 +71,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="utf8mb4OnRds">
 <meta name="twitter:description" content="数据存入rds记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/mw690/63fe561egw1f23k82w2tbj20k40f641x.jpg">
 
 
 
@@ -311,14 +312,14 @@
       
 
       
-        <h3 id="数据存入rds">数据存入rds</h3><p>记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。</p>
+        <h3 id="数据存入rds"><a href="#数据存入rds" class="headerlink" title="数据存入rds"></a>数据存入rds</h3><p>记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。</p>
 <a id="more"></a>
-<h3 id="err">err</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.sql.SQLException: Incorrect string value: &#39;\xF0\x9F\x8E\x89\xF0\x9F...&#39; for column</span><br></pre></td></tr></table></figure>
-<h3 id="设置字符集为_utf8mb4">设置字符集为 utf8mb4</h3><p><code>mysql&gt; show variables like &#39;%char%&#39;;</code></p>
+<h3 id="err"><a href="#err" class="headerlink" title="err"></a>err</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java.sql.SQLException: Incorrect string value: &apos;\xF0\x9F\x8E\x89\xF0\x9F...&apos; for column</div></pre></td></tr></table></figure>
+<h3 id="设置字符集为-utf8mb4"><a href="#设置字符集为-utf8mb4" class="headerlink" title="设置字符集为 utf8mb4"></a>设置字符集为 utf8mb4</h3><p><code>mysql&gt; show variables like &#39;%char%&#39;;</code></p>
 <p><img src="http://ww3.sinaimg.cn/mw690/63fe561egw1f23k82w2tbj20k40f641x.jpg" alt=""></p>
 <p><img src="http://ww2.sinaimg.cn/mw690/63fe561egw1f23k8k1m52j213002at97.jpg" alt=""></p>
 <p><strong> 客户端上设置字符集为utf8mb4 重连不生效 需要在rds 控制台设置 </strong></p>
-<h3 id="参考">参考</h3><p><a href="http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc" target="_blank" rel="external">http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc" target="_blank" rel="external">http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc</a></p>
 <p><a href="https://help.aliyun.com/knowledge_detail/5990076.html" target="_blank" rel="external">https://help.aliyun.com/knowledge_detail/5990076.html</a></p>
 
       
@@ -532,7 +533,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存入rds"><span class="nav-number">1.</span> <span class="nav-text">数据存入rds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#err"><span class="nav-number">2.</span> <span class="nav-text">err</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置字符集为_utf8mb4"><span class="nav-number">3.</span> <span class="nav-text">设置字符集为 utf8mb4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存入rds"><span class="nav-number">1.</span> <span class="nav-text">数据存入rds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#err"><span class="nav-number">2.</span> <span class="nav-text">err</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置字符集为-utf8mb4"><span class="nav-number">3.</span> <span class="nav-text">设置字符集为 utf8mb4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

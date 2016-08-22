@@ -318,28 +318,28 @@
       
 
       
-        <h3 id="centos7安装nginx">centos7安装nginx</h3><ul>
+        <h3 id="centos7安装nginx"><a href="#centos7安装nginx" class="headerlink" title="centos7安装nginx"></a>centos7安装nginx</h3><ul>
 <li><p>在yum的仓库中添加nginx的源</p>
 <p>  <code>cd /etc/yum.repos.d/</code><br>  <code>vi nginx.repo</code></p>
-  <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[nginx]</span></span><br><span class="line"><span class="setting">name=<span class="value">nginx repo</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">http://nginx.org/packages/centos/<span class="number">7</span>/<span class="variable">$basearch</span>/</span></span></span><br><span class="line"><span class="setting">gpgcheck=<span class="value"><span class="number">1</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[nginx]</div><div class="line">name=nginx repo</div><div class="line">baseurl=http://nginx.org/packages/centos/7/$basearch/</div><div class="line">gpgcheck=1</div><div class="line">enabled=1</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <a id="more"></a>
 <ul>
 <li><p>添加签名</p>
-  <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">http:</span>//nginx<span class="preprocessor">.org</span>/keys/nginx_signing.key</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://nginx.org/keys/nginx_signing.key</div></pre></td></tr></table></figure>
 </li>
 <li><p>安装</p>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> nginx -y</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure>
 </li>
 <li><p>启动</p>
-  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> nginx</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start nginx</div></pre></td></tr></table></figure>
 </li>
 <li><p>使能开机启动</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx.service</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable nginx.service</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="参考文章">参考文章</h3><p><a href="https://mos.meituan.com/library/18/how-to-install-lnmp-on-centos7/" target="_blank" rel="external">美团－在CentOS 7上搭建LNMP环境</a></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://mos.meituan.com/library/18/how-to-install-lnmp-on-centos7/" target="_blank" rel="external">美团－在CentOS 7上搭建LNMP环境</a></p>
 
       
     </div>

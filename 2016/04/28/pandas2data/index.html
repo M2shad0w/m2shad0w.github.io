@@ -321,16 +321,16 @@
       
 
       
-        <h3 id="pandas处理数据">pandas处理数据</h3><p>一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…<br><a id="more"></a></p>
+        <h3 id="pandas处理数据"><a href="#pandas处理数据" class="headerlink" title="pandas处理数据"></a>pandas处理数据</h3><p>一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…<br><a id="more"></a></p>
 <p>需求中有将几张表中的数据聚合</p>
 <p>这几张表都有一个公共的key，但是没法通过一个简单的sql语句完成（跨裤，不在一个地方）<br>这时候就可以通过pandas的DataFrame 的聚合输出</p>
 <p><code>from pandas import DataFrame</code></p>
-<h3 id="pandas操作文档">pandas操作文档</h3><p><a href="http://pandas.pydata.org/pandas-docs/stable/merging.html#brief-primer-on-merge-methods-relational-algebra" target="_blank" rel="external">官方文档</a></p>
+<h3 id="pandas操作文档"><a href="#pandas操作文档" class="headerlink" title="pandas操作文档"></a>pandas操作文档</h3><p><a href="http://pandas.pydata.org/pandas-docs/stable/merging.html#brief-primer-on-merge-methods-relational-algebra" target="_blank" rel="external">官方文档</a></p>
 <p>将前面获得的从pymysql中list对象传入DataFrame</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df = DataFrame(result1)</span><br><span class="line">df2 = DataFrame(result2)</span><br><span class="line">df3 = DataFrame(result3)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dff = pd.merge(df, df2, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</span><br><span class="line">dff1 = pd.merge(dff, df3, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">df = DataFrame(result1)</div><div class="line">df2 = DataFrame(result2)</div><div class="line">df3 = DataFrame(result3)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dff = pd.merge(df, df2, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</div><div class="line">dff1 = pd.merge(dff, df3, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</div></pre></td></tr></table></figure>
 <p>聚合之后导出到xlsx</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dff1.to_excel(<span class="string">'foo.xlsx'</span>, sheet_name=<span class="string">'sheet1'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dff1.to_excel(<span class="string">'foo.xlsx'</span>, sheet_name=<span class="string">'sheet1'</span>)</div></pre></td></tr></table></figure>
       
     </div>
 

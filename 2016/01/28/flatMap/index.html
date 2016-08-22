@@ -309,7 +309,7 @@
       
 
       
-        <h3 id="区别">区别</h3><p>flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。</p>
+        <h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>flatMap与map是十分相似的, 但是一次使用的时候，我尽然把他们搞混了。</p>
 <a id="more"></a>
 <ul>
 <li><p>相同点</p>
@@ -319,17 +319,17 @@
 <p>  flatMap是只是返回一个对象（相比map多了一个步骤, 将结果对象合并为一个对象）</p>
 </li>
 </ul>
-<h3 id="实例">实例</h3><p>实例化 sc</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> findspark</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">findspark.init()</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pyspark</span><br><span class="line">sc = pyspark.SparkContext()</span><br><span class="line"><span class="keyword">print</span> sc</span><br></pre></td></tr></table></figure>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>实例化 sc</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> findspark</div><div class="line"><span class="keyword">import</span> os</div><div class="line">findspark.init()</div><div class="line"></div><div class="line"><span class="keyword">import</span> pyspark</div><div class="line">sc = pyspark.SparkContext()</div><div class="line"><span class="keyword">print</span> sc</div></pre></td></tr></table></figure>
 <p>文件路径<br><code>HDFS_PATH = &quot;hdfs://localhost:9000/user/m2shad0w/flume_data/*&quot;</code></p>
 <p>maplog</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">faltlog = sc.textFile(HDFS_PATH).map(<span class="keyword">lambda</span> line: line.split(<span class="string">"\01"</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">faltlog = sc.textFile(HDFS_PATH).map(<span class="keyword">lambda</span> line: line.split(<span class="string">"\01"</span>))</div></pre></td></tr></table></figure>
 <p>faltMap</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maplog = sc.textFile(HDFS_PATH).flatMap(<span class="keyword">lambda</span> line: line.split(<span class="string">"\01"</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">maplog = sc.textFile(HDFS_PATH).flatMap(<span class="keyword">lambda</span> line: line.split(<span class="string">"\01"</span>))</div></pre></td></tr></table></figure>
 <p>显示</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">faltlog.first()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">faltlog.first()</div></pre></td></tr></table></figure>
 <p><code>[u&#39;id&#39;, u&#39;2016-01-25 16:00:00&#39;, u&#39;28800&#39;, u&#39;0&#39;, u&#39;User&#39;, u&#39;1884292&#39;, u&#39;enter_background&#39;, u&#39;&#39;, u&#39;2&#39;, u&#39;1884292&#39;, u&#39;346643&#39;, u&#39;1&#39;, u&#39;0&#39;, u&#39;2016-01-25 15:43:52&#39;, u&#39;7686852&#39;, u&#39;&#39;]</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maplog.first()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">maplog.first()</div></pre></td></tr></table></figure>
 <p><code>u&#39;id&#39;</code></p>
 <p><strong>显示第一行，所以才只显示了id</strong></p>
 <p><a href="http://blog.csdn.net/samhacker/article/details/41927567" target="_blank" rel="external">CSDN参考文章</a></p>

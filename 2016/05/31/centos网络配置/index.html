@@ -70,6 +70,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos网络配置">
 <meta name="twitter:description" content="centos-dvd-iso安装了centos－dvd－iso镜像版本，默认boot up的时候竟然网卡没有驱动起来。配置的过程做一下纪录。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/63fe561egw1f4emdhg7r4j20s80pyade.jpg">
 
 
 
@@ -310,15 +311,15 @@
       
 
       
-        <h3 id="centos-dvd-iso">centos-dvd-iso</h3><p>安装了centos－dvd－iso镜像版本，默认boot up的时候竟然网卡没有驱动起来。配置的过程做一下纪录。</p>
+        <h3 id="centos-dvd-iso"><a href="#centos-dvd-iso" class="headerlink" title="centos-dvd-iso"></a>centos-dvd-iso</h3><p>安装了centos－dvd－iso镜像版本，默认boot up的时候竟然网卡没有驱动起来。配置的过程做一下纪录。</p>
 <a id="more"></a>
-<h3 id="配置sysconfig">配置sysconfig</h3><p>在<code>/etc/sysconfig/network-scripts</code> 修改 <code>ifcfg-enp3s0</code>文件</p>
+<h3 id="配置sysconfig"><a href="#配置sysconfig" class="headerlink" title="配置sysconfig"></a>配置sysconfig</h3><p>在<code>/etc/sysconfig/network-scripts</code> 修改 <code>ifcfg-enp3s0</code>文件</p>
 <p>ifcfg后缀名就是网卡的名<br>可以通过<code>ip add</code>获取</p>
-<h3 id="图形化配置">图形化配置</h3><p><code>nmtui edit 网卡名</code></p>
+<h3 id="图形化配置"><a href="#图形化配置" class="headerlink" title="图形化配置"></a>图形化配置</h3><p><code>nmtui edit 网卡名</code></p>
 <p>依次填写好</p>
 <p>ip、网关、dns 等</p>
 <p>如图<br><img src="http://ww4.sinaimg.cn/large/63fe561egw1f4emdhg7r4j20s80pyade.jpg" alt=""></p>
-<h3 id="重启网络服务生效">重启网络服务生效</h3><p><code>service network restart</code></p>
+<h3 id="重启网络服务生效"><a href="#重启网络服务生效" class="headerlink" title="重启网络服务生效"></a>重启网络服务生效</h3><p><code>service network restart</code></p>
 <p>或者</p>
 <p><code>systemctl restart network.service</code></p>
 <p>安装一些网络工具</p>

