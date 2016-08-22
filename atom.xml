@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-07-21T10:15:34.000Z</updated>
+  <updated>2016-08-22T09:17:48.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://m2shad0w.com/2016/07/21/tornado-web%E6%97%A5%E5%BF%97logger%E9%85%8D%E7%BD%AE/"/>
     <id>http://m2shad0w.com/2016/07/21/tornado-web日志logger配置/</id>
     <published>2016-07-21T09:27:20.000Z</published>
-    <updated>2016-07-21T10:15:34.000Z</updated>
+    <updated>2016-08-22T09:17:48.000Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;web_logger&quot;&gt;web logger&lt;/h3&gt;&lt;p&gt;提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;web_logger&quot;&gt;web logger&lt;/h3&gt;&lt;p&gt;提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，以供性能调优。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;&lt;a href=&quot;http://old.sebug.net/paper/books/tornado/#_10&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Tornado &lt;/a&gt; 是一个非阻塞式的web服务器。每秒可以处理数以千计的连接，在我的实际应用中主要是用来做数据api的(编程语言是python，比较轻快)。&lt;a href=&quot;http://www.tornadoweb.org/en/stable/web.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;简介&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;logger配置与每日分割&quot;&gt;logger配置与每日分割&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://guoze.me/2015/01/31/tornado-log-perday/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
@@ -33,7 +33,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;web_logger&quot;&gt;web logger&lt;/h3&gt;&lt;p&gt;提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，已供性能调优。&lt;/p&gt;
+      &lt;h3 id=&quot;web_logger&quot;&gt;web logger&lt;/h3&gt;&lt;p&gt;提供的用户画像api需要被业务调用，并发量就会比较高了。web容器必须将日志配好，以供性能调优。&lt;/p&gt;
     
     </summary>
     
@@ -169,11 +169,11 @@
   </entry>
   
   <entry>
-    <title>缓存jar提高spark-on-yarn的之行速度</title>
+    <title>缓存jar提高spark-on-yarn的执行速度</title>
     <link href="http://m2shad0w.com/2016/07/09/%E7%BC%93%E5%AD%98jar%E6%8F%90%E9%AB%98spark-on-yarn%E7%9A%84%E4%B9%8B%E8%A1%8C%E9%80%9F%E5%BA%A6/"/>
     <id>http://m2shad0w.com/2016/07/09/缓存jar提高spark-on-yarn的之行速度/</id>
     <published>2016-07-09T07:44:23.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
+    <updated>2016-08-22T09:17:36.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;spark-on-yarn&quot;&gt;spark-on-yarn&lt;/h3&gt;&lt;p&gt;将job提交到 &lt;code&gt;yarn&lt;/code&gt; 上，整个job的执行时间明显多了很多，想着优化一下。&lt;/p&gt;
 &lt;p&gt;从下面这张图可以看到，有一个上传&lt;code&gt;spark jar&lt;/code&gt;的过程，这个包很大170多M，必然会浪费时间。&lt;/p&gt;
