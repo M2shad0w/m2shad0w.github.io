@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-11-09T06:28:40.000Z</updated>
+  <updated>2016-11-09T08:36:30.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>各常用类源配置</title>
+    <link href="http://m2shad0w.com/2016/11/09/%E5%90%84%E5%B8%B8%E7%94%A8%E7%B1%BB%E6%BA%90%E9%85%8D%E7%BD%AE/"/>
+    <id>http://m2shad0w.com/2016/11/09/各常用类源配置/</id>
+    <published>2016-11-09T08:10:08.000Z</published>
+    <updated>2016-11-09T08:36:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>开发中，不免需要下载各种依赖包，这些包大多在墙外，现在配置下载源<a href="https://mirrors.ustc.edu.cn/" target="_blank" rel="external">中科大源－比较全</a>，加速开发。</p>
+<a id="more"></a>
+<h3 id="pypi-源"><a href="#pypi-源" class="headerlink" title="pypi 源"></a>pypi 源</h3><p>参考<a href="https://lug.ustc.edu.cn/wiki/mirrors/help/pypi" target="_blank" rel="external">科大 wiki</a></p>
+<p>在用户目录下 $HOME/ 创建 <code>.pip/pip.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(cobraenv)➜  webserver git:(master) cat ~/.pip/pip.conf</div><div class="line">[global]</div><div class="line">timeout = 60</div><div class="line">index-url = https://pypi.mirrors.ustc.edu.cn/simple</div></pre></td></tr></table></figure>
+<h3 id="brew-源"><a href="#brew-源" class="headerlink" title="brew 源"></a>brew 源</h3><p>参考<a href="https://lug.ustc.edu.cn/wiki/mirrors/help/brew.git" target="_blank" rel="external">科大 wiki</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd &quot;$(brew --repo)&quot; &amp;&amp; git remote set-url origin git://mirrors.ustc.edu.cn/brew.git</div></pre></td></tr></table></figure>
+<p>homebrew-core<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;</div><div class="line">git remote set-url origin git://mirrors.ustc.edu.cn/homebrew-core.git</div></pre></td></tr></table></figure></p>
+<h3 id="ruby-源"><a href="#ruby-源" class="headerlink" title="ruby 源"></a>ruby 源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(cobraenv)➜  Homebrew git:(stable) gem sources  #列出默认源</div><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">https://ruby.taobao.org/</div><div class="line">https://mirrors.ustc.edu.cn/rubygems/</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem sources --remove https://rubygems.org/  #移除默认源</div><div class="line">gem sources -a https://mirrors.ustc.edu.cn/rubygems/  #添加科大源</div></pre></td></tr></table></figure>
+<h3 id="maven-源"><a href="#maven-源" class="headerlink" title="maven 源"></a>maven 源</h3><p>vi ~/.m2/setting.xml 在 <code>section</code> <code>&lt;mirror&gt;</code> 中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;mirror&gt;  </div><div class="line">  &lt;id&gt;alimaven&lt;/id&gt;  </div><div class="line">  &lt;name&gt;aliyun maven&lt;/name&gt;  </div><div class="line">  &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;  </div><div class="line">  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;          </div><div class="line">&lt;/mirror&gt;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;开发中，不免需要下载各种依赖包，这些包大多在墙外，现在配置下载源&lt;a href=&quot;https://mirrors.ustc.edu.cn/&quot;&gt;中科大源－比较全&lt;/a&gt;，加速开发。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="data" scheme="http://m2shad0w.com/categories/data/"/>
+    
+      <category term="time" scheme="http://m2shad0w.com/categories/data/time/"/>
+    
+    
+      <category term="data" scheme="http://m2shad0w.com/tags/data/"/>
+    
+      <category term="source" scheme="http://m2shad0w.com/tags/source/"/>
+    
+  </entry>
   
   <entry>
     <title>presto_小试</title>
@@ -372,7 +409,7 @@
     <link href="http://m2shad0w.com/2016/06/06/%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BD%BF%E7%94%A8shadowsocks%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
     <id>http://m2shad0w.com/2016/06/06/在服务器上使用shadowsocks客户端/</id>
     <published>2016-06-06T02:14:53.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
+    <updated>2016-11-09T08:11:07.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="ss客户端在centos上"><a href="#ss客户端在centos上" class="headerlink" title="ss客户端在centos上"></a>ss客户端在centos上</h3><p>因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。</p>
 <a id="more"></a>
@@ -390,7 +427,7 @@
     
     </summary>
     
-      <category term="hue" scheme="http://m2shad0w.com/categories/hue/"/>
+      <category term="shadowssocks" scheme="http://m2shad0w.com/categories/shadowssocks/"/>
     
     
       <category term="shadowsocks" scheme="http://m2shad0w.com/tags/shadowsocks/"/>
@@ -662,40 +699,6 @@
     
     
       <category term="go" scheme="http://m2shad0w.com/tags/go/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>openwrt_mount_usb</title>
-    <link href="http://m2shad0w.com/2016/04/24/openwrt-mount-usb/"/>
-    <id>http://m2shad0w.com/2016/04/24/openwrt-mount-usb/</id>
-    <published>2016-04-24T14:16:53.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="老路由刷上openwrt"><a href="#老路由刷上openwrt" class="headerlink" title="老路由刷上openwrt"></a>老路由刷上openwrt</h3><p>周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。</p>
-<a id="more"></a>
-<p>这是一台老路由器，大亚db120，之前刷过dreambox的op，但是想要装一些新的ipk的时候不能装上，想想还是刷到最新的固件好了。</p>
-<p>在openwrt官网上找到db120芯片的固件（cpu是博通的brcm63xx），刷上<a href="https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/" target="_blank" rel="external">snapshots</a>的<strong>openwrt-brcm63xx-generic-RG100A-squashfs-cfe.bin</strong></p>
-<p>sysupdate   *bin</p>
-<p>等待片刻，升级成功</p>
-<h3 id="修改opkg源为ustc源"><a href="#修改opkg源为ustc源" class="headerlink" title="修改opkg源为ustc源"></a>修改opkg源为ustc源</h3><blockquote>
-<p>vi /etc/opkg.conf # 添加如下路径</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">src/gz barrier_breaker_base https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/base</div><div class="line">src/gz barrier_breaker_luci https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/luci</div><div class="line">src/gz barrier_breaker_management https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/management</div><div class="line">src/gz barrier_breaker_packages https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/packages</div><div class="line">src/gz barrier_breaker_routing https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/routing</div><div class="line">src/gz barrier_breaker_telephony https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/telephony</div><div class="line">src/gz barrier_breaker_kernel https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/kernel</div><div class="line">src/gz barrier_breaker_targets https://openwrt.mirrors.ustc.edu.cn/snapshots/trunk/brcm63xx/generic/packages/targets</div></pre></td></tr></table></figure>
-<h3 id="挂载u盘做外部存储"><a href="#挂载u盘做外部存储" class="headerlink" title="挂载u盘做外部存储"></a>挂载u盘做外部存储</h3><p>手头有16GB的金士顿优盘，挂载上去做外部存储，将opkg install 的软件包都安装在u盘中。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">安装usb支持：</div><div class="line">&gt;opkg install kmod-fs-ext4</div><div class="line">&gt;opkg install kmod-usb-storage</div><div class="line">&gt;opkg install block-mount</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;老路由刷上openwrt&quot;&gt;&lt;a href=&quot;#老路由刷上openwrt&quot; class=&quot;headerlink&quot; title=&quot;老路由刷上openwrt&quot;&gt;&lt;/a&gt;老路由刷上openwrt&lt;/h3&gt;&lt;p&gt;周末在家， 窗外下着淅淅沥沥的雨，没错，这就是江南的梅雨季节。所以闲来无事，决定倒腾一下路由器。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="hardware" scheme="http://m2shad0w.com/categories/hardware/"/>
-    
-    
-      <category term="openwrt" scheme="http://m2shad0w.com/tags/openwrt/"/>
     
   </entry>
   
