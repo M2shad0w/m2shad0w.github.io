@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-08-22T09:17:48.000Z</updated>
+  <updated>2016-11-09T06:28:40.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>presto_小试</title>
+    <link href="http://m2shad0w.com/2016/11/09/presto-%E5%B0%8F%E8%AF%95/"/>
+    <id>http://m2shad0w.com/2016/11/09/presto-小试/</id>
+    <published>2016-11-09T03:50:55.000Z</published>
+    <updated>2016-11-09T06:28:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><ul>
+<li>操作系统：<code>centos 7 x86_64 x86_64 x86_64 GNU/Linux</code> 3台</li>
+<li>hadoop 集群：<code>Hadoop 2.7.1.2.4.2.0-258</code></li>
+<li>jdk：<code>java version &quot;1.8.0_60&quot;</code></li>
+</ul>
+<a id="more"></a>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>参考 <a href="http://prestodb.io/docs/current/installation.html" target="_blank" rel="external">http://prestodb.io/docs/current/installation.html</a></p>
+<p>下载最新 <a href="https://repo1.maven.org/maven2/com/facebook/presto/presto-server/0.156/presto-server-0.156.tar.gz" target="_blank" rel="external">presto-server-0.156.tar.gz</a> 安装包。</p>
+<p>目录结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">presto-server-0.155</div><div class="line">├── bin</div><div class="line">├── etc</div><div class="line">├── lib</div><div class="line">├── NOTICE</div><div class="line">├── plugin</div><div class="line">├── presto</div><div class="line">└── README.txt</div></pre></td></tr></table></figure>
+<h3 id="配置-presto"><a href="#配置-presto" class="headerlink" title="配置 presto"></a>配置 presto</h3><p>目录 <code>etc</code> 中 <code>config.properties</code> 是 presto 的基本配置文件，有两种角色，协调器（coordinator）， workers</p>
+<p>3台机器，在一台机器上同时配置协调器和 workers， 另两台只配置 workers</p>
+<p>coordinator<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">coordinator=true</div><div class="line">node-scheduler.include-coordinator=true</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
+<p>workers<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">coordinator=true</div><div class="line">node-scheduler.include-coordinator=true</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
+<p>配置 <code>etc/node.properties</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">node.environment=production</div><div class="line">node.id=ffffffff-ffff-ffff-ffff-ffffffffffff</div><div class="line">node.data-dir=/var/presto/data</div></pre></td></tr></table></figure>
+<p>主意其中 <code>node-id</code> 的值， 每台应该是不一样的<br>可以用一下命令生成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  ~ uuidgen</div><div class="line">4a51e7b6-cc3b-4aeb-993c-33cbc2682fcf</div></pre></td></tr></table></figure>
+<p>jvm 配置 <code>etc/jvm.config</code> (直接推荐的配置)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-server</div><div class="line">-Xmx16G</div><div class="line">-XX:+UseG1GC</div><div class="line">-XX:G1HeapRegionSize=32M</div><div class="line">-XX:+UseGCOverheadLimit</div><div class="line">-XX:+ExplicitGCInvokesConcurrent</div><div class="line">-XX:+HeapDumpOnOutOfMemoryError</div><div class="line">-XX:OnOutOfMemoryError=kill -9 %p</div></pre></td></tr></table></figure>
+<p>设置 <code>connector</code></p>
+<p>因为主要是 <code>hive</code> 的查询，所以只配置了 <code>hive</code>，实际上 presto 支持多种</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">connector.name=hive-hadoop2</div><div class="line">hive.config.resources=/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml</div><div class="line">hive.metastore.uri=thrift://host:9083</div></pre></td></tr></table></figure>
+<h3 id="运行-presto"><a href="#运行-presto" class="headerlink" title="运行 presto"></a>运行 presto</h3><p>在三台机器上依次运行 <code>bin/launcher run</code>, 酷炫的界面出现了。可以实时的展示查询的情况。</p>
+<p><img src="http://ww2.sinaimg.cn/large/63fe561egw1f9ltx98rywj21kw0swdnq.jpg" alt=""></p>
+<h3 id="测试-Presto-CLI"><a href="#测试-Presto-CLI" class="headerlink" title="测试 Presto CLI"></a>测试 Presto CLI</h3><p>下载 <a href="https://repo1.maven.org/maven2/com/facebook/presto/presto-cli/0.156/presto-cli-0.156-executable.jar" target="_blank" rel="external">presto-cli-0.156-executable.jar</a>,<br>重命名为 <code>presto</code>, 加上可执行的权限 <code>chmod +x</code>, 执行。</p>
+<ol>
+<li>登陆 presto cli<br> <code>./presto --server hostname:28080 --catalog hive --schema default</code></li>
+<li>显示有那些现有的 <code>schema</code><br> <code>show schema;</code></li>
+<li>切换到对应的 <code>schema</code><br> <code>use track_event_data;</code></li>
+<li><p>查询(字符串单引号)</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select c.eventable_type, count(*) as top</div><div class="line">from track_event_2016_07_21 as c</div><div class="line">where c.eventable_type = &apos;Example&apos;</div><div class="line">group by c.eventable_type</div><div class="line">order by top</div><div class="line">desc;</div></pre></td></tr></table></figure>
+</li>
+<li><p>速度(多次查询有 cache)</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> eventable_type |  top</div><div class="line">----------------+-------</div><div class="line"> Example        | 26287</div><div class="line">(1 row)</div><div class="line"></div><div class="line">Query 20161104_084407_00087_c4yiu, FINISHED, 1 node</div><div class="line">Splits: 27 total, 27 done (100.00%)</div><div class="line">0:03 [4.51M rows, 790MB] [1.61M rows/s, 281MB/s]</div></pre></td></tr></table></figure>
+</li>
+<li><p>退出</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>感人的速度</p>
+<h3 id="哪些团队在使用-presto"><a href="#哪些团队在使用-presto" class="headerlink" title="哪些团队在使用 presto"></a>哪些团队在使用 presto</h3><p>airbnb, jd, meituan, facebook, hunliji etc</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>下一步在 presto 上套一个 <code>web ui</code>, 这样就可以给运营运行一些即时查询了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;安装环境&quot;&gt;&lt;a href=&quot;#安装环境&quot; class=&quot;headerlink&quot; title=&quot;安装环境&quot;&gt;&lt;/a&gt;安装环境&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;操作系统：&lt;code&gt;centos 7 x86_64 x86_64 x86_64 GNU/Linux&lt;/code&gt; 3台&lt;/li&gt;
+&lt;li&gt;hadoop 集群：&lt;code&gt;Hadoop 2.7.1.2.4.2.0-258&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;jdk：&lt;code&gt;java version &amp;quot;1.8.0_60&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="sql" scheme="http://m2shad0w.com/categories/sql/"/>
+    
+      <category term="dataMining" scheme="http://m2shad0w.com/categories/sql/dataMining/"/>
+    
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/tags/bigdata/"/>
+    
+  </entry>
   
   <entry>
     <title>tornado.web日志logger配置</title>
@@ -625,37 +696,6 @@
     
     
       <category term="openwrt" scheme="http://m2shad0w.com/tags/openwrt/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>utf8mb4OnRds</title>
-    <link href="http://m2shad0w.com/2016/03/16/utf8mbOnRds/"/>
-    <id>http://m2shad0w.com/2016/03/16/utf8mbOnRds/</id>
-    <published>2016-03-16T10:23:09.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="数据存入rds"><a href="#数据存入rds" class="headerlink" title="数据存入rds"></a>数据存入rds</h3><p>记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。</p>
-<a id="more"></a>
-<h3 id="err"><a href="#err" class="headerlink" title="err"></a>err</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java.sql.SQLException: Incorrect string value: &apos;\xF0\x9F\x8E\x89\xF0\x9F...&apos; for column</div></pre></td></tr></table></figure>
-<h3 id="设置字符集为-utf8mb4"><a href="#设置字符集为-utf8mb4" class="headerlink" title="设置字符集为 utf8mb4"></a>设置字符集为 utf8mb4</h3><p><code>mysql&gt; show variables like &#39;%char%&#39;;</code></p>
-<p><img src="http://ww3.sinaimg.cn/mw690/63fe561egw1f23k82w2tbj20k40f641x.jpg" alt=""></p>
-<p><img src="http://ww2.sinaimg.cn/mw690/63fe561egw1f23k8k1m52j213002at97.jpg" alt=""></p>
-<p><strong> 客户端上设置字符集为utf8mb4 重连不生效 需要在rds 控制台设置 </strong></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc" target="_blank" rel="external">http://stackoverflow.com/questions/10957238/incorrect-string-value-when-trying-to-insert-utf-8-into-mysql-via-jdbc</a></p>
-<p><a href="https://help.aliyun.com/knowledge_detail/5990076.html" target="_blank" rel="external">https://help.aliyun.com/knowledge_detail/5990076.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;数据存入rds&quot;&gt;&lt;a href=&quot;#数据存入rds&quot; class=&quot;headerlink&quot; title=&quot;数据存入rds&quot;&gt;&lt;/a&gt;数据存入rds&lt;/h3&gt;&lt;p&gt;记一次RDS上的坑，spark分析完的数据最后要存在RDS 上，遇到字段中有些表情😊，mysql 报错无法存储。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
-    
-    
-      <category term="mysql" scheme="http://m2shad0w.com/tags/mysql/"/>
     
   </entry>
   
