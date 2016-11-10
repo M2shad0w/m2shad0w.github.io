@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-11-09T08:36:30.000Z</updated>
+  <updated>2016-11-10T10:38:55.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -16,11 +16,56 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>自动增量的hive-PARTITION实践</title>
+    <link href="http://m2shad0w.com/2016/11/10/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%87%8F%E7%9A%84hive-PARTITION%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://m2shad0w.com/2016/11/10/自动增量的hive-PARTITION实践/</id>
+    <published>2016-11-10T09:51:22.000Z</published>
+    <updated>2016-11-10T10:38:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h3><p>所有的日志结构化，落地到 <code>HDFS</code> 之后，想着提供一个供运营查询的方式，上篇文章介绍了 facebook 的 <a href="http://m2shad0w.com/2016/11/09/presto-小试/index.html"><code>presto</code>链接</a>, 这篇就是数据源的自动化准备的一个过程。</p>
+<a id="more"></a>
+<h3 id="hive-创建外表与增加-partitions"><a href="#hive-创建外表与增加-partitions" class="headerlink" title="hive 创建外表与增加 partitions"></a>hive 创建外表与增加 partitions</h3><p>hive 可以创建外表与内表，创建内表的过程会从原来 <code>hdfs</code> 路径移动数据到 hive 的默认路径， 对于这些文件还要供 spark 等调用，期望是放在一个预先创建好的路径下，外表正符合要求。</p>
+<p>创建外表<br>关键字 <code>external</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CREATE external TABLE IF NOT EXISTS track_event ( id string, created_at string)</div><div class="line">LOCATION &apos;/user/root/external_table&apos;;</div></pre></td></tr></table></figure>
+<p>这个过程 Hive 甚至不会校验外部表的目录是否存在。因此可以在创建表格的时候在加载数据。</p>
+<p>如何将所有的日志放到一张表内，有能加速查询呢？</p>
+<p>hive 有个 <code>PARTITIONED</code> 的设计</p>
+<p>结构化的数据可以按时间(比如<code>天</code>间隔)成一个文件夹，</p>
+<p>比如加载数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> INPATH <span class="string">'path'</span></div><div class="line"><span class="keyword">INTO</span> <span class="keyword">TABLE</span> track_event</div><div class="line"><span class="keyword">PARTITION</span> (dt=<span class="string">'2001-01-01'</span>);</div></pre></td></tr></table></figure></p>
+<p>或者命令行加载数据(这个命令可以脚本调用自动化掉)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive -e &quot;alter table track_event add partition(dt=&apos;%s&apos;);&quot;</div></pre></td></tr></table></figure>
+<p>显示现有的表有多少 <code>PARTITIONS</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SHOW PARTITIONS track_event;</div><div class="line">1	dt=16-07-08</div><div class="line">2	dt=16-07-09</div><div class="line">3	dt=16-07-10</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>查询实例<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> eventable_id, user_id, created_at </div><div class="line"><span class="keyword">FROM</span> hive.track_event_data.track_event </div><div class="line"><span class="keyword">where</span> dt&gt;=<span class="string">'16-10-01'</span> // <span class="keyword">PARTITIONS</span> 条件</div></pre></td></tr></table></figure></p>
+<p><img src="http://ww3.sinaimg.cn/large/63fe561egw1f9n6gniox3j21kw0jl41u.jpg" alt="web ui 的 presto查询"></p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><script src="https://gist.github.com/M2shad0w/f08df53177f3dabe910725d5396cfbcb.js"></script>
+
+
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="http://blog.csdn.net/bingduanlbd/article/details/52076219" target="_blank" rel="external">http://blog.csdn.net/bingduanlbd/article/details/52076219</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;迁移&quot;&gt;&lt;a href=&quot;#迁移&quot; class=&quot;headerlink&quot; title=&quot;迁移&quot;&gt;&lt;/a&gt;迁移&lt;/h3&gt;&lt;p&gt;所有的日志结构化，落地到 &lt;code&gt;HDFS&lt;/code&gt; 之后，想着提供一个供运营查询的方式，上篇文章介绍了 facebook 的 &lt;a href=&quot;http://m2shad0w.com/2016/11/09/presto-小试/index.html&quot;&gt;&lt;code&gt;presto&lt;/code&gt;链接&lt;/a&gt;, 这篇就是数据源的自动化准备的一个过程。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="同步" scheme="http://m2shad0w.com/categories/%E5%90%8C%E6%AD%A5/"/>
+    
+      <category term="ETL" scheme="http://m2shad0w.com/categories/%E5%90%8C%E6%AD%A5/ETL/"/>
+    
+    
+      <category term="python" scheme="http://m2shad0w.com/tags/python/"/>
+    
+      <category term="hive" scheme="http://m2shad0w.com/tags/hive/"/>
+    
+  </entry>
+  
+  <entry>
     <title>各常用类源配置</title>
     <link href="http://m2shad0w.com/2016/11/09/%E5%90%84%E5%B8%B8%E7%94%A8%E7%B1%BB%E6%BA%90%E9%85%8D%E7%BD%AE/"/>
     <id>http://m2shad0w.com/2016/11/09/各常用类源配置/</id>
     <published>2016-11-09T08:10:08.000Z</published>
-    <updated>2016-11-09T08:36:30.000Z</updated>
+    <updated>2016-11-10T09:51:52.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>开发中，不免需要下载各种依赖包，这些包大多在墙外，现在配置下载源<a href="https://mirrors.ustc.edu.cn/" target="_blank" rel="external">中科大源－比较全</a>，加速开发。</p>
 <a id="more"></a>
@@ -409,7 +454,7 @@
     <link href="http://m2shad0w.com/2016/06/06/%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BD%BF%E7%94%A8shadowsocks%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
     <id>http://m2shad0w.com/2016/06/06/在服务器上使用shadowsocks客户端/</id>
     <published>2016-06-06T02:14:53.000Z</published>
-    <updated>2016-11-09T08:11:07.000Z</updated>
+    <updated>2016-11-10T09:51:59.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="ss客户端在centos上"><a href="#ss客户端在centos上" class="headerlink" title="ss客户端在centos上"></a>ss客户端在centos上</h3><p>因为在cenots上手动编译hue，需要下载大量的jar包，这段时间开源中国的maven库又维护，无奈只能在centos上也ss代理上网了。</p>
 <a id="more"></a>
@@ -666,39 +711,6 @@
     
     
       <category term="python" scheme="http://m2shad0w.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>go2mongo</title>
-    <link href="http://m2shad0w.com/2016/04/25/go2mongo/"/>
-    <id>http://m2shad0w.com/2016/04/25/go2mongo/</id>
-    <published>2016-04-25T02:43:34.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="go操作mongo的好驱动"><a href="#go操作mongo的好驱动" class="headerlink" title="go操作mongo的好驱动"></a>go操作mongo的好驱动</h3><p>画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动<strong>mgo</strong>。</p>
-<a id="more"></a>
-<p>在github 的 <code>go awesome</code> 项目下，搜索<code>mongo</code>，看到如下说明</p>
-<p><code>MongoDB driver for the Go language that implements a rich and well tested selection of features under a very simple API following standard Go idioms</code></p>
-<h3 id="安装mgo驱动"><a href="#安装mgo驱动" class="headerlink" title="安装mgo驱动"></a>安装mgo驱动</h3><p>按照mgo的介绍页<a href="http://labix.org/mgo" target="_blank" rel="external">http://labix.org/mgo</a></p>
-<p><code>go get gopkg.in/mgo.v2</code></p>
-<h3 id="快速实现例子"><a href="#快速实现例子" class="headerlink" title="快速实现例子"></a>快速实现例子</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">        <span class="string">"fmt"</span></div><div class="line">	<span class="string">"log"</span></div><div class="line">        <span class="string">"gopkg.in/mgo.v2"</span></div><div class="line">        <span class="string">"gopkg.in/mgo.v2/bson"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</div><div class="line">        Name <span class="keyword">string</span></div><div class="line">        Phone <span class="keyword">string</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">        session, err := mgo.Dial(<span class="string">"server1.example.com,server2.example.com"</span>)</div><div class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">                <span class="built_in">panic</span>(err)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">defer</span> session.Close()</div><div class="line"></div><div class="line">        <span class="comment">// Optional. Switch the session to a monotonic behavior.</span></div><div class="line">        session.SetMode(mgo.Monotonic, <span class="literal">true</span>)</div><div class="line"></div><div class="line">        c := session.DB(<span class="string">"test"</span>).C(<span class="string">"people"</span>)</div><div class="line">        err = c.Insert(&amp;Person&#123;<span class="string">"Ale"</span>, <span class="string">"+55 53 8116 9639"</span>&#125;,</div><div class="line">	               &amp;Person&#123;<span class="string">"Cla"</span>, <span class="string">"+55 53 8402 8510"</span>&#125;)</div><div class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">                log.Fatal(err)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        result := Person&#123;&#125;</div><div class="line">        err = c.Find(bson.M&#123;<span class="string">"name"</span>: <span class="string">"Ale"</span>&#125;).One(&amp;result)</div><div class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">                log.Fatal(err)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        fmt.Println(<span class="string">"Phone:"</span>, result.Phone)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://ww3.sinaimg.cn/large/63fe561egw1f38rh2u41zj20ea05074u.jpg" alt=""></p>
-<p>好了，去写接口了…</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;go操作mongo的好驱动&quot;&gt;&lt;a href=&quot;#go操作mongo的好驱动&quot; class=&quot;headerlink&quot; title=&quot;go操作mongo的好驱动&quot;&gt;&lt;/a&gt;go操作mongo的好驱动&lt;/h3&gt;&lt;p&gt;画像一类的数据存放在NOSQL中，一个文档就可以了解这个生物的特性，现在尝试用go读写mongo。发现go下一个好的mongo驱动&lt;strong&gt;mgo&lt;/strong&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="mongo" scheme="http://m2shad0w.com/categories/mongo/"/>
-    
-      <category term="go" scheme="http://m2shad0w.com/categories/mongo/go/"/>
-    
-    
-      <category term="go" scheme="http://m2shad0w.com/tags/go/"/>
     
   </entry>
   
