@@ -72,7 +72,7 @@ sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.
 sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.
 
 正如官网所说, sbt是一个为 scala、java 而生的构建工具，在mac上安装十分的方便。">
-<meta property="og:updated_time" content="2016-07-21T09:20:52.000Z">
+<meta property="og:updated_time" content="2016-11-14T06:50:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sbt仓库设置">
 <meta name="twitter:description" content="sbt 构建 scala 应用
@@ -305,8 +305,8 @@ sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
-              2016-07-21
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T14:50:39+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -383,8 +383,14 @@ sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.
 <p>在根目录 <code>touch build.sbt</code>, 设置 build.sbt 配置应用依赖的库。</p>
 <p>在 console 中键入 <code>sbt run</code>, 代码就被编译运行起来了</p>
 <h3 id="默认仓库下载依赖慢"><a href="#默认仓库下载依赖慢" class="headerlink" title="默认仓库下载依赖慢"></a>默认仓库下载依赖慢</h3><p>sbt 默认下载库文件很慢, 还时不时被打断</p>
-<p>我们可以在用户目录下创建  <code>touch ~/.sbt/repositories</code>, 填上开源中国的镜像</p>
+<p>开源中国的 maven 仓库已经不可用</p>
+<p>这里可以使用 ali 的仓库</p>
+<p>我们可以在用户目录下创建  <code>touch ~/.sbt/repositories</code>, <del>填上开源中国的镜像</del></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[repositories]</div><div class="line"><span class="built_in">local</span></div><div class="line">osc: http://maven.oschina.net/content/groups/public/</div><div class="line">typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[<span class="built_in">type</span>]s/[artifact](-[classifier]).[ext], bootOnly</div><div class="line">sonatype-oss-releases</div><div class="line">maven-central</div></pre></td></tr></table></figure>
+<p>填上 ali 的仓库地址 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[repositories]</div><div class="line"><span class="built_in">local</span></div><div class="line">osc: http://maven.aliyun.com/nexus/content/groups/public/</div><div class="line">typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[<span class="built_in">type</span>]s/[artifact](-[classifier]).[ext], bootOnly</div><div class="line">sonatype-oss-releases</div><div class="line">maven-central</div><div class="line">sonatype-oss-snapshots</div></pre></td></tr></table></figure>
+<p>vi ~/.m2/settings.xml</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;mirror&gt;</div><div class="line">  &lt;id&gt;alimaven&lt;/id&gt;</div><div class="line">  &lt;name&gt;aliyun maven&lt;/name&gt;</div><div class="line">  &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</div><div class="line">  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line">&lt;/mirror&gt;</div></pre></td></tr></table></figure>
 <p><a href="http://www.scala-sbt.org/0.13.2/docs/Detailed-Topics/Library-Management.html#override-all-resolvers-for-all-builds" target="_blank" rel="external">参考官网说明</a></p>
 <h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>一定要严格按格式来, local <code> </code> 后面不要有空格。</p>
 
