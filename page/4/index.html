@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-hk">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,19 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -52,7 +53,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -71,19 +72,33 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
     sidebar: {"position":"left","display":"hide"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
     }
   };
 </script>
+
+
+
+
+
+
 
   <title> m2shad0w </title>
 </head>
@@ -112,6 +127,8 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
 
 
 
@@ -154,13 +171,13 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首頁
           </a>
@@ -170,7 +187,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分類
           </a>
@@ -180,7 +197,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             關於
           </a>
@@ -190,7 +207,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             歸檔
           </a>
@@ -200,7 +217,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             標籤
           </a>
@@ -208,13 +225,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -225,16 +242,9 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
-  
   
 
   
@@ -242,6 +252,20 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2016/01/15/sbt仓库设置/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -267,9 +291,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-15T17:56:24+08:00" content="2016-01-15">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-15T17:56:24+08:00">
               2016-01-15
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -280,7 +314,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/bigdata/" itemprop="url" rel="index">
                     <span itemprop="name">bigdata</span>
                   </a>
@@ -298,7 +332,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2016/01/15/sbt仓库设置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/15/sbt仓库设置/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/15/sbt仓库设置/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -308,6 +342,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -324,14 +363,25 @@
 <p>sbt is a build tool for Scala, Java, and more. It requires Java 1.6 or later.</p>
 </blockquote>
 <p>正如官网所说, sbt是一个为 scala、java 而生的构建工具，在mac上安装十分的方便。</p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/15/sbt仓库设置/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -350,13 +400,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2016/01/09/sqoop导数据/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -382,9 +445,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-09T13:57:26+08:00" content="2016-01-09">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-09T13:57:26+08:00">
               2016-01-09
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -395,7 +468,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/bigdata/" itemprop="url" rel="index">
                     <span itemprop="name">bigdata</span>
                   </a>
@@ -413,7 +486,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2016/01/09/sqoop导数据/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/09/sqoop导数据/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/09/sqoop导数据/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -423,6 +496,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -436,14 +514,25 @@
       
         
           <h3 id="sqoop-简介"><a href="#sqoop-简介" class="headerlink" title="sqoop 简介"></a><strong>sqoop 简介</strong></h3><p>sqoop 是 apache 基金会提供的用于 RDBMS 和 HDFS 互导数据的工具, 以下是我从 mysql 导数据到 hdfs 过程的一个纪录。</p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/09/sqoop导数据/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -462,13 +551,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2016/01/06/flume00/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -494,9 +596,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-06T21:10:24+08:00" content="2016-01-06">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-06T21:10:24+08:00">
               2016-01-06
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -507,7 +619,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/bigdata/" itemprop="url" rel="index">
                     <span itemprop="name">bigdata</span>
                   </a>
@@ -525,7 +637,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2016/01/06/flume00/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/06/flume00/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/06/flume00/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -535,6 +647,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -548,14 +665,25 @@
       
         
           <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a><strong>起因</strong></h3><p>用spark分析数据时, 希望源数据能够写到HDFS上, 在前端数据采集的选择有kalfa 和flume, 了解了各自的特性, 打算使用flume 将数据聚合起来。</p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/06/flume00/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -574,13 +702,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2015/12/28/spark002/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -606,9 +747,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-12-28T19:35:13+08:00" content="2015-12-28">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-28T19:35:13+08:00">
               2015-12-28
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -619,7 +770,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/bigdata/" itemprop="url" rel="index">
                     <span itemprop="name">bigdata</span>
                   </a>
@@ -637,7 +788,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2015/12/28/spark002/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/28/spark002/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/28/spark002/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -647,6 +798,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -662,14 +818,25 @@
           <h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a><strong>DataFrame</strong></h3><blockquote>
 <p>Spark SQL是Spark的一个组件，用于结构化数据的计算。Spark SQL提供了一个称为DataFrames的编程抽象，DataFrames可以充当分布式SQL查询引擎。</p>
 </blockquote>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/12/28/spark002/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -688,13 +855,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2015/12/24/spark001/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -720,9 +900,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-12-24T15:30:18+08:00" content="2015-12-24">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-24T15:30:18+08:00">
               2015-12-24
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -733,7 +923,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/bigdata/" itemprop="url" rel="index">
                     <span itemprop="name">bigdata</span>
                   </a>
@@ -751,7 +941,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2015/12/24/spark001/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/24/spark001/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/24/spark001/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -761,6 +951,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -774,14 +969,25 @@
       
         
           <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a><strong>起因</strong></h3><p>学习spark udf的功能，在网络上看到有同学拿spark分析2013年某酒店泄露出来2000千万的开房数据。</p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/12/24/spark001/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -800,13 +1006,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2015/12/21/how_to_use_spark_00/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -832,9 +1051,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T10:04:35+08:00" content="2015-12-21">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-21T10:04:35+08:00">
               2015-12-21
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -845,7 +1074,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/bigdata/" itemprop="url" rel="index">
                     <span itemprop="name">bigdata</span>
                   </a>
@@ -863,7 +1092,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2015/12/21/how_to_use_spark_00/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/21/how_to_use_spark_00/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/21/how_to_use_spark_00/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -873,6 +1102,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -886,14 +1120,25 @@
       
         
           <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Apache Spark 是一个快速、通用的计算机集群系统。它提供高度优化 Java, Scala, Python and R 的高级接口来支持一般的执行流程，同时支持丰富的高层及的工具集合，包括 <a href="#">Spark SQL</a>来处理关系型数据，<a href="#">MLlib</a>来处理机器学习，<a href="#">GraphX</a>来处理图运算，<a href="#">Spark Streaming</a><br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/12/21/how_to_use_spark_00/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -912,13 +1157,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2015/09/06/TheBigData/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -944,9 +1202,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-09-06T13:46:34+08:00" content="2015-09-06">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-06T13:46:34+08:00">
               2015-09-06
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -957,7 +1225,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/bigdata/" itemprop="url" rel="index">
                     <span itemprop="name">bigdata</span>
                   </a>
@@ -975,7 +1243,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2015/09/06/TheBigData/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/06/TheBigData/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/06/TheBigData/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -985,6 +1253,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -998,14 +1271,25 @@
       
         
           <h3 id="用户数据"><a href="#用户数据" class="headerlink" title="用户数据"></a>用户数据</h3><p>大数据好处多，对于一个公司来说，数据是支撑商业的最有力说服工具。</p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/09/06/TheBigData/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -1024,13 +1308,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2015/07/07/SetupShadowSocks/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -1056,9 +1353,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-07-07T19:25:32+08:00" content="2015-07-07">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-07T19:25:32+08:00">
               2015-07-07
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -1069,7 +1376,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/server/" itemprop="url" rel="index">
                     <span itemprop="name">server</span>
                   </a>
@@ -1087,7 +1394,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2015/07/07/SetupShadowSocks/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/07/SetupShadowSocks/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/07/SetupShadowSocks/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1097,6 +1404,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -1110,14 +1422,25 @@
       
         
           <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a><strong>起因</strong></h3><p>某博士给我们搭建的科学上网，服务了广大码农。今天突然想到之前github推出的<a href="https://education.github.com/pack">学生计划</a>，在<a href="https://www.digitalocean.com/?refcode=73470081618f">digitalocean</a>拿到了100$的代金券，于是就琢磨着自己搭建一个ShadowSocks服务器，现将搭建过程做一下纪录。</p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/07/SetupShadowSocks/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -1136,13 +1459,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2015/07/03/battery-discharge/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -1168,9 +1504,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2015-07-03T13:32:49+08:00" content="2015-07-03">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-03T13:32:49+08:00">
               2015-07-03
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -1181,7 +1527,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/dataMining/" itemprop="url" rel="index">
                     <span itemprop="name">dataMining</span>
                   </a>
@@ -1199,7 +1545,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2015/07/03/battery-discharge/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/03/battery-discharge/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/03/battery-discharge/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1209,6 +1555,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -1222,14 +1573,25 @@
       
         
           <h3 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a><strong>OverView</strong></h3><p><strong>要求 电池曲线最后拟合函数百分比大致连续 精度2%</strong></p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/03/battery-discharge/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -1245,7 +1607,6 @@
 
 
     
-
   </section>
 
   
@@ -1280,7 +1641,7 @@
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg"
@@ -1295,7 +1656,7 @@
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
-          
+
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
@@ -1329,26 +1690,29 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/m2shad0w" target="_blank">
+                <a href="https://github.com/m2shad0w" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/712310784" target="_blank">
+                <a href="http://weibo.com/712310784" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-weibo"></i> Weibo
+                    <i class="fa fa-fw fa-weibo"></i>
                   
+                  Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="" target="_blank">
+                <a href="" target="_blank" title="Others">
                   
-                    <i class="fa fa-globe"></i> Others
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  Others
                 </a>
               </span>
             
@@ -1358,36 +1722,37 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name"></p>
-            
-              <span class="links-of-author-item">
-                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://tang3w.com/" target="_blank">Matt</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://onevcat.com/" target="_blank">Onevcat</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://zhaojin97.cn/" target="_blank">赵的小窝</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://dbanotes.net/" target="_blank">Fenng</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.xlab.wang/" target="_blank">m2shadow</a>
-              </span>
-            
-          
-        </div>
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://onevcat.com/" title="Onevcat" target="_blank">Onevcat</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaojin97.cn/" title="赵的小窝" target="_blank">赵的小窝</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.xlab.wang/" title="m2shadow" target="_blank">m2shadow</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
 
       </section>
 
@@ -1408,75 +1773,88 @@
   &copy;  2010 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Apollo Zhu</span>
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
-</div>
-
-<div class="theme-info">
-  主題 -
-  <a class="theme-link" href="https://github.com/XLabWang/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
 
 
+        
 
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
 
 
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
   
 
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -1489,10 +1867,11 @@
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
       var disqus_identifier = 'page/4/index.html';
-      var disqus_title = '';
-      var disqus_url = '';
 
-      function run_disqus_script(disqus_script){
+      var disqus_title = "";
+
+
+      function run_disqus_script(disqus_script) {
         var dsq = document.createElement('script');
         dsq.type = 'text/javascript';
         dsq.async = true;
@@ -1501,16 +1880,25 @@
       }
 
       run_disqus_script('count.js');
+
       
+
     </script>
   
 
 
 
+
+
   
   
 
   
+
+  
+
+  
+
   
 
 

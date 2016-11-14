@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-hk">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,19 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -52,7 +53,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -71,19 +72,33 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
     sidebar: {"position":"left","display":"hide"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
     }
   };
 </script>
+
+
+
+
+
+
 
   <title> 分類: mongo | m2shad0w </title>
 </head>
@@ -112,6 +127,8 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
 
 
 
@@ -152,13 +169,13 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首頁
           </a>
@@ -168,7 +185,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分類
           </a>
@@ -178,7 +195,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             關於
           </a>
@@ -188,7 +205,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             歸檔
           </a>
@@ -198,7 +215,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             標籤
           </a>
@@ -206,13 +223,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -291,7 +308,7 @@
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg"
@@ -306,7 +323,7 @@
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
-          
+
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
@@ -340,26 +357,29 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/m2shad0w" target="_blank">
+                <a href="https://github.com/m2shad0w" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/712310784" target="_blank">
+                <a href="http://weibo.com/712310784" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-weibo"></i> Weibo
+                    <i class="fa fa-fw fa-weibo"></i>
                   
+                  Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="" target="_blank">
+                <a href="" target="_blank" title="Others">
                   
-                    <i class="fa fa-globe"></i> Others
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  Others
                 </a>
               </span>
             
@@ -369,36 +389,37 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name"></p>
-            
-              <span class="links-of-author-item">
-                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://tang3w.com/" target="_blank">Matt</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://onevcat.com/" target="_blank">Onevcat</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://zhaojin97.cn/" target="_blank">赵的小窝</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://dbanotes.net/" target="_blank">Fenng</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.xlab.wang/" target="_blank">m2shadow</a>
-              </span>
-            
-          
-        </div>
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://onevcat.com/" title="Onevcat" target="_blank">Onevcat</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaojin97.cn/" title="赵的小窝" target="_blank">赵的小窝</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.xlab.wang/" title="m2shadow" target="_blank">m2shadow</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
 
       </section>
 
@@ -419,75 +440,88 @@
   &copy;  2010 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Apollo Zhu</span>
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
-</div>
-
-<div class="theme-info">
-  主題 -
-  <a class="theme-link" href="https://github.com/XLabWang/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
 
 
+        
 
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
-  
-  
 
 
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
 
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
 
 
 
   
 
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -500,10 +534,11 @@
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
       var disqus_identifier = 'categories/mongo/index.html';
-      var disqus_title = '';
-      var disqus_url = '';
 
-      function run_disqus_script(disqus_script){
+      var disqus_title = "";
+
+
+      function run_disqus_script(disqus_script) {
         var dsq = document.createElement('script');
         dsq.type = 'text/javascript';
         dsq.async = true;
@@ -512,16 +547,25 @@
       }
 
       run_disqus_script('count.js');
+
       
+
     </script>
   
 
 
 
+
+
   
   
 
   
+
+  
+
+  
+
   
 
 

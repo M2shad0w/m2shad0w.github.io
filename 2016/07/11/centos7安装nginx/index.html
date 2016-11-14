@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-hk">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,19 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="centos," />
@@ -52,7 +53,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -81,19 +82,33 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
     sidebar: {"position":"left","display":"hide"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
     }
   };
 </script>
+
+
+
+
+
+
 
   <title> centos7安装nginx | m2shad0w </title>
 </head>
@@ -122,6 +137,8 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
 
 
 
@@ -162,13 +179,13 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首頁
           </a>
@@ -178,7 +195,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分類
           </a>
@@ -188,7 +205,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             關於
           </a>
@@ -198,7 +215,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             歸檔
           </a>
@@ -208,7 +225,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             標籤
           </a>
@@ -216,13 +233,13 @@
       
 
       
-      
-      
     </ul>
   
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -237,13 +254,26 @@
     
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://m2shad0w.com/2016/07/11/centos7安装nginx/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Apollo Zhu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="m2shad0w">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="m2shad0w" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -266,9 +296,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-07-11T15:21:19+08:00" content="2016-07-11">
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-11T15:21:19+08:00">
               2016-07-11
             </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-07-21T17:20:52+08:00">
+              2016-07-21
+            </time>
+            
           </span>
 
           
@@ -279,7 +319,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/nginx/" itemprop="url" rel="index">
                     <span itemprop="name">nginx</span>
                   </a>
@@ -297,7 +337,7 @@
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2016/07/11/centos7安装nginx/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/11/centos7安装nginx/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/11/centos7安装nginx/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -307,6 +347,11 @@
 
           
           
+
+          
+          
+          
+
         </div>
       </header>
     
@@ -344,11 +389,52 @@
       
     </div>
 
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://ww2.sinaimg.cn/large/63fe561egw1f9rlr081oqj2076076gm2.jpg" alt="Apollo Zhu wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎大家关注：M2's微信公众号</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ww3.sinaimg.cn/large/63fe561egw1f9rhiexoq8j208w0bqwet.jpg" alt="Apollo Zhu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ww3.sinaimg.cn/large/63fe561egw1f9rkhw7t1nj20go0p0ab5.jpg" alt="Apollo Zhu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/centos/" rel="tag">#centos</a>
+            <a href="/tags/centos/" rel="tag"># centos</a>
           
         </div>
       
@@ -362,6 +448,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -431,7 +519,7 @@
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww4.sinaimg.cn/large/63fe561egw1f63s97fgzuj20sg0sgacp.jpg"
@@ -446,7 +534,7 @@
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
-          
+
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
@@ -480,26 +568,29 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/m2shad0w" target="_blank">
+                <a href="https://github.com/m2shad0w" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/712310784" target="_blank">
+                <a href="http://weibo.com/712310784" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-weibo"></i> Weibo
+                    <i class="fa fa-fw fa-weibo"></i>
                   
+                  Weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="" target="_blank">
+                <a href="" target="_blank" title="Others">
                   
-                    <i class="fa fa-globe"></i> Others
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  Others
                 </a>
               </span>
             
@@ -509,56 +600,56 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name"></p>
-            
-              <span class="links-of-author-item">
-                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://tang3w.com/" target="_blank">Matt</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://onevcat.com/" target="_blank">Onevcat</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://zhaojin97.cn/" target="_blank">赵的小窝</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://dbanotes.net/" target="_blank">Fenng</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.xlab.wang/" target="_blank">m2shadow</a>
-              </span>
-            
-          
-        </div>
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://onevcat.com/" title="Onevcat" target="_blank">Onevcat</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaojin97.cn/" title="赵的小窝" target="_blank">赵的小窝</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.xlab.wang/" title="m2shadow" target="_blank">m2shadow</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
 
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos7安装nginx"><span class="nav-number">1.</span> <span class="nav-text">centos7安装nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">2.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
       
 
     </div>
@@ -576,236 +667,92 @@
   &copy;  2010 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Apollo Zhu</span>
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
-</div>
-
-<div class="theme-info">
-  主題 -
-  <a class="theme-link" href="https://github.com/XLabWang/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
 
 
+        
 
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
 
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
-
-
-
-  
-  
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
-        }
-      }
-    };
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
+
+
+
+
+
+
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -818,10 +765,11 @@
     <script type="text/javascript">
       var disqus_shortname = 'm2shad0w';
       var disqus_identifier = '2016/07/11/centos7安装nginx/';
-      var disqus_title = 'centos7安装nginx';
-      var disqus_url = 'http://m2shad0w.com/2016/07/11/centos7安装nginx/';
 
-      function run_disqus_script(disqus_script){
+      var disqus_title = "centos7安装nginx";
+
+
+      function run_disqus_script(disqus_script) {
         var dsq = document.createElement('script');
         dsq.type = 'text/javascript';
         dsq.async = true;
@@ -830,18 +778,32 @@
       }
 
       run_disqus_script('count.js');
+
       
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
         run_disqus_script('embed.js');
       
+
     </script>
   
 
 
 
+
+
   
   
 
   
+
+  
+
+  
+
   
 
 
