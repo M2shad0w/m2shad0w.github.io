@@ -73,7 +73,7 @@ jdk：java version &amp;quot;1.8.0_60&amp;quot;">
 hadoop 集群：Hadoop 2.7.1.2.4.2.0-258
 jdk：java version &amp;quot;1.8.0_60&amp;quot;">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/63fe561egw1f9ltx98rywj21kw0swdnq.jpg">
-<meta property="og:updated_time" content="2016-11-09T06:28:40.000Z">
+<meta property="og:updated_time" content="2017-01-09T08:33:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="presto_小试">
 <meta name="twitter:description" content="安装环境
@@ -307,8 +307,8 @@ jdk：java version &amp;quot;1.8.0_60&amp;quot;">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-09T14:28:40+08:00">
-              2016-11-09
+            <time title="Post modified" itemprop="dateModified" datetime="2017-01-09T16:33:57+08:00">
+              2017-01-09
             </time>
             
           </span>
@@ -399,7 +399,7 @@ jdk：java version &amp;quot;1.8.0_60&amp;quot;">
 <h3 id="配置-presto"><a href="#配置-presto" class="headerlink" title="配置 presto"></a>配置 presto</h3><p>目录 <code>etc</code> 中 <code>config.properties</code> 是 presto 的基本配置文件，有两种角色，协调器（coordinator）， workers</p>
 <p>3台机器，在一台机器上同时配置协调器和 workers， 另两台只配置 workers</p>
 <p>coordinator<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">coordinator=true</div><div class="line">node-scheduler.include-coordinator=true</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
-<p>workers<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">coordinator=true</div><div class="line">node-scheduler.include-coordinator=true</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
+<p>workers<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">coordinator=false</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
 <p>配置 <code>etc/node.properties</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">node.environment=production</div><div class="line">node.id=ffffffff-ffff-ffff-ffff-ffffffffffff</div><div class="line">node.data-dir=/var/presto/data</div></pre></td></tr></table></figure>
 <p>主意其中 <code>node-id</code> 的值， 每台应该是不一样的<br>可以用一下命令生成</p>
@@ -574,7 +574,7 @@ jdk：java version &amp;quot;1.8.0_60&amp;quot;">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">41</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -582,7 +582,7 @@ jdk：java version &amp;quot;1.8.0_60&amp;quot;">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -709,7 +709,7 @@ jdk：java version &amp;quot;1.8.0_60&amp;quot;">
         <div class="copyright" >
   
   &copy;  2010 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

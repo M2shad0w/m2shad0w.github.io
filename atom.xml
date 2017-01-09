@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2016-11-10T10:38:55.000Z</updated>
+  <updated>2017-01-09T09:26:29.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,110 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hbase初探</title>
+    <link href="http://m2shad0w.com/2017/01/09/hbase%E5%88%9D%E6%8E%A2/"/>
+    <id>http://m2shad0w.com/2017/01/09/hbase初探/</id>
+    <published>2017-01-09T08:28:40.000Z</published>
+    <updated>2017-01-09T09:26:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="hbase"><a href="#hbase" class="headerlink" title="hbase"></a>hbase</h3><p>一种列式的 NoSql, 是基于 Bigtable 的开源实践</p>
+<a id="more"></a>
+<p><strong>痛点</strong></p>
+<ul>
+<li>实现对单个用户任意时间维度的轨迹查询</li>
+<li>日志量大</li>
+</ul>
+<p>rdbms 已经不适合了</p>
+<h3 id="Hbase"><a href="#Hbase" class="headerlink" title="Hbase"></a>Hbase</h3><p>Hbase 是一个基于列存储的非关系型数据库，适合存储非结构化的数据 <a href="https://zh.wikipedia.org/wiki/Apache_HBase" target="_blank" rel="external">wikipedia</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">所用语言： Java</div><div class="line">特点：支持数十亿行X上百万列</div><div class="line">使用许可： Apache</div><div class="line">协议：HTTP/REST （支持 Thrift，见编注4）</div><div class="line">在 BigTable之后建模</div><div class="line">采用分布式架构 Map/reduce</div><div class="line">对实时查询进行优化</div><div class="line">高性能 Thrift网关</div><div class="line">通过在server端扫描及过滤实现对查询操作预判</div><div class="line">支持 XML, Protobuf, 和binary的HTTP</div><div class="line">Cascading, hive, and pig source and sink modules</div><div class="line">基于 Jruby（ JIRB）的shell</div><div class="line">对配置改变和较小的升级都会重新回滚</div><div class="line">不会出现单点故障</div><div class="line">堪比MySQL的随机访问性能</div></pre></td></tr></table></figure>
+<h3 id="什么时候需要-Hbase"><a href="#什么时候需要-Hbase" class="headerlink" title="什么时候需要 Hbase"></a>什么时候需要 Hbase</h3><ul>
+<li>数据结构字段不确定，很难按一个概念抽取数据，业务发展过程中增加存储时需要 <code>rdbms</code> 停机维护，hbase 支持动态增加</li>
+<li>记录稀疏，<code>rdbms</code> 的行有多少列是确定的，<code>null</code> 值浪费了存储，列式存储的 <strong>hbase</strong> <code>null</code> 不会被存储，节省空间，提高读的性能 </li>
+<li>多版本数据</li>
+<li>超大数据量，HBase 会自动水平切分扩展，跟Hadoop的无缝集成保障了其数据可靠性（HDFS）和海量数据分析的高性能（MapReduce），<code>rdbms</code> 可能就需要分库分表了</li>
+</ul>
+<h3 id="Hbase-的一些重点概念"><a href="#Hbase-的一些重点概念" class="headerlink" title="Hbase 的一些重点概念"></a>Hbase 的一些重点概念</h3><ul>
+<li>Row key <a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E5%85%B8%E5%BA%8F" target="_blank" rel="external">按字典序排列</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">行主键， HBase 不支持条件查询和 Order by 等查询，</div><div class="line">读取记录只能按 Row key（及其range）或全表扫描，因此 Row key 设计很重要</div></pre></td></tr></table></figure>
+<ul>
+<li>Column Family（列族）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在表创建时声明，每个Column Family为一个存储单元</div></pre></td></tr></table></figure>
+<ul>
+<li>Column（列）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">HBase 的每个列都属于一个列族，以列族名为前缀，</div><div class="line">如列 article:title 和 article:content 属于 article 列族，</div><div class="line">author:name 和 author:nickname 属于 author 列族</div></pre></td></tr></table></figure>
+<ul>
+<li>Timestamp</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">HBase 通过 row 和column 确定一份数据，这份数据的值可能有多个版本，</div><div class="line">不同版本的值按照时间倒序排序，即最新的数据排在最前面，查询时默认返回最新版本。</div><div class="line">Timestamp 默认为系统当前时间（精确到毫秒），也可以在写入数据时指定该值。</div></pre></td></tr></table></figure>
+<ul>
+<li>Value</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">每个值通过 4 个键唯一索引，tableName+RowKey+ColumnKey+Timestamp=&gt;value</div></pre></td></tr></table></figure>
+<ul>
+<li>存储类型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">TableName 是字符串</div><div class="line">RowKey 和 ColumnName 是二进制值（Java 类型 byte[]）</div><div class="line">Timestamp 是一个 64 位整数（Java 类型 long）</div><div class="line">value 是一个字节数组（Java类型 byte[]）</div></pre></td></tr></table></figure>
+<h3 id="Hbase-线上集群的搭建"><a href="#Hbase-线上集群的搭建" class="headerlink" title="Hbase 线上集群的搭建"></a>Hbase 线上集群的搭建</h3><ul>
+<li>环境变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># hbase config</div><div class="line">export HBASE_HOME=/opt/hbase</div><div class="line">export PATH=$PATH:$HBASE_HOME/bin</div></pre></td></tr></table></figure>
+<ul>
+<li>配置hbase-site</li>
+</ul>
+<h3 id="Hbase-shell-基本操作"><a href="#Hbase-shell-基本操作" class="headerlink" title="Hbase shell 基本操作"></a>Hbase shell 基本操作</h3><p>基于 Jruby（ JIRB）的shell<br>常见的操作有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">create,describe,disable,drop,list,scan,</div><div class="line">put,get,delete,deleteall,count,status</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">hbase(main):001:0&gt; list //查看表</div><div class="line">TABLE</div><div class="line">ambarismoketest</div><div class="line">prodFocus</div><div class="line"><span class="built_in">test</span></div><div class="line">user_track</div><div class="line">4 row(s) <span class="keyword">in</span> 0.2370 seconds</div><div class="line"></div><div class="line">=&gt; [<span class="string">"ambarismoketest"</span>, <span class="string">"prodFocus"</span>, <span class="string">"test"</span>, <span class="string">"user_track"</span>]</div><div class="line">hbase(main):003:0&gt; create <span class="string">'t1'</span>, <span class="string">'cf1'</span> //创建表 t1，cf1 列族</div><div class="line">0 row(s) <span class="keyword">in</span> 2.3760 seconds</div><div class="line"></div><div class="line">=&gt; Hbase::Table - t1</div><div class="line">hbase(main):008:0&gt; describe <span class="string">'user_track'</span> //查看表 user_track 的描述</div><div class="line">Table user_track is ENABLED</div><div class="line">user_track</div><div class="line">COLUMN FAMILIES DESCRIPTION</div><div class="line">&#123;NAME =&gt; <span class="string">'e'</span>, BLOOMFILTER =&gt; <span class="string">'ROW'</span>, VERSIONS =&gt;</div><div class="line"> <span class="string">'1'</span>, IN_MEMORY =&gt; <span class="string">'false'</span>, KEEP_DELETED_CELLS</div><div class="line">=&gt; <span class="string">'FALSE'</span>, DATA_BLOCK_ENCODING =&gt; <span class="string">'NONE'</span>, TTL</div><div class="line">=&gt; <span class="string">'FOREVER'</span>, COMPRESSION =&gt; <span class="string">'NONE'</span>, MIN_VERSIO</div><div class="line">NS =&gt; <span class="string">'0'</span>, BLOCKCACHE =&gt; <span class="string">'true'</span>, BLOCKSIZE =&gt; <span class="string">'</span></div><div class="line">65536', REPLICATION_SCOPE =&gt; <span class="string">'0'</span>&#125;</div><div class="line">1 row(s) <span class="keyword">in</span> 0.0400 seconds</div><div class="line"></div><div class="line">hbase(main):016:0&gt; put <span class="string">'t1'</span>,<span class="string">'rowkey001'</span>, <span class="string">'cf1:col1'</span>, <span class="string">'value01'</span> //增</div><div class="line">0 row(s) <span class="keyword">in</span> 0.0640 seconds</div><div class="line"></div><div class="line">hbase(main):017:0&gt; get <span class="string">'t1'</span>, <span class="string">'rowkey001'</span>, <span class="string">'cf1:col1'</span> //查</div><div class="line">COLUMN                  CELL</div><div class="line"> cf1:col1               timestamp=1482803105761, value=value01</div><div class="line">1 row(s) <span class="keyword">in</span> 0.0550 seconds</div><div class="line"></div><div class="line">hbase(main):018:0&gt; scan <span class="string">'t1'</span>, &#123;LIMIT=&gt;5&#125; //查</div><div class="line">ROW                     COLUMN+CELL</div><div class="line"> rowkey001              column=cf1:col1, timestamp=1482803105761, value=value01</div><div class="line">1 row(s) <span class="keyword">in</span> 0.0170 seconds</div><div class="line"></div><div class="line">hbase(main):019:0&gt; count <span class="string">'t1'</span>, &#123;INTERVAL =&gt; 100, CACHE =&gt; 500&#125; //查</div><div class="line">1 row(s) <span class="keyword">in</span> 0.0130 seconds</div><div class="line"></div><div class="line">=&gt; 1</div></pre></td></tr></table></figure>
+<h3 id="通过-thrift-访问-hbase"><a href="#通过-thrift-访问-hbase" class="headerlink" title="通过 thrift 访问 hbase"></a>通过 <a href="https://zh.wikipedia.org/wiki/Thrift" target="_blank" rel="external">thrift</a> 访问 hbase</h3><blockquote>
+<p>Thrift是一种接口描述语言和二进制通讯协议，[1]它被用来定义和创建跨语言的服务。[2]它被当作一个远程过程调用（RPC）框架来使用.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可以使用C#、C++（基于POSIX兼容系统[3]）、Cappuccino、[4]Cocoa、Delphi、Erlang、Go、Haskell、Java、Node.js、OCaml、Perl、PHP、Python、Ruby和Smalltalk。</div></pre></td></tr></table></figure>
+<p>下面介绍 <code>python</code>， <code>php</code>， <code>go</code> <a href="https://git-wip-us.apache.org/repos/asf/thrift/?p=thrift.git;a=tree;f=tutorial" target="_blank" rel="external">其他</a>通过 thrift 操作 hbase </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;</div></pre></td></tr></table></figure>
+<h3 id="python-driver"><a href="#python-driver" class="headerlink" title="python driver"></a>python driver</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">root@master  /data1  tree gen-py -L 2                                                                     ✓  ⚡  2666  11:29:45</div><div class="line">gen-py</div><div class="line">├── hbase</div><div class="line">│   ├── constants.py</div><div class="line">│   ├── __init__.py</div><div class="line">│   ├── THBaseService.py //增删改查等一系列接口</div><div class="line">│   ├── THBaseService-remote</div><div class="line">│   └── ttypes.py //类型定义</div><div class="line">└── __init__.py</div><div class="line"></div><div class="line">1 directory, 6 files</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;hbase&quot;&gt;&lt;a href=&quot;#hbase&quot; class=&quot;headerlink&quot; title=&quot;hbase&quot;&gt;&lt;/a&gt;hbase&lt;/h3&gt;&lt;p&gt;一种列式的 NoSql, 是基于 Bigtable 的开源实践&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="nosql" scheme="http://m2shad0w.com/categories/nosql/"/>
+    
+      <category term="dataMining" scheme="http://m2shad0w.com/categories/nosql/dataMining/"/>
+    
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/tags/bigdata/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>贝叶斯公式推导</title>
+    <link href="http://m2shad0w.com/2016/11/18/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/"/>
+    <id>http://m2shad0w.com/2016/11/18/贝叶斯公式推导/</id>
+    <published>2016-11-18T10:10:32.000Z</published>
+    <updated>2017-01-09T08:32:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="推导一下"><a href="#推导一下" class="headerlink" title="推导一下"></a>推导一下</h3><p>如图推导一下</p>
+<a id="more"></a>
+<p><img src="http://ww3.sinaimg.cn/large/63fe561egw1fbkgmgk18rj20zk0zkwhn.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;推导一下&quot;&gt;&lt;a href=&quot;#推导一下&quot; class=&quot;headerlink&quot; title=&quot;推导一下&quot;&gt;&lt;/a&gt;推导一下&lt;/h3&gt;&lt;p&gt;如图推导一下&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
+    
+    
+      <category term="data" scheme="http://m2shad0w.com/tags/data/"/>
+    
+  </entry>
   
   <entry>
     <title>自动增量的hive-PARTITION实践</title>
@@ -102,7 +206,7 @@
     <link href="http://m2shad0w.com/2016/11/09/presto-%E5%B0%8F%E8%AF%95/"/>
     <id>http://m2shad0w.com/2016/11/09/presto-小试/</id>
     <published>2016-11-09T03:50:55.000Z</published>
-    <updated>2016-11-09T06:28:40.000Z</updated>
+    <updated>2017-01-09T08:33:57.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><ul>
 <li>操作系统：<code>centos 7 x86_64 x86_64 x86_64 GNU/Linux</code> 3台</li>
@@ -117,7 +221,7 @@
 <h3 id="配置-presto"><a href="#配置-presto" class="headerlink" title="配置 presto"></a>配置 presto</h3><p>目录 <code>etc</code> 中 <code>config.properties</code> 是 presto 的基本配置文件，有两种角色，协调器（coordinator）， workers</p>
 <p>3台机器，在一台机器上同时配置协调器和 workers， 另两台只配置 workers</p>
 <p>coordinator<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">coordinator=true</div><div class="line">node-scheduler.include-coordinator=true</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
-<p>workers<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">coordinator=true</div><div class="line">node-scheduler.include-coordinator=true</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
+<p>workers<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">coordinator=false</div><div class="line">http-server.http.port=28080</div><div class="line">query.max-memory=6GB</div><div class="line">query.max-memory-per-node=2GB</div><div class="line">discovery-server.enabled=true</div><div class="line">discovery.uri=http://hostname:28080</div></pre></td></tr></table></figure></p>
 <p>配置 <code>etc/node.properties</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">node.environment=production</div><div class="line">node.id=ffffffff-ffff-ffff-ffff-ffffffffffff</div><div class="line">node.data-dir=/var/presto/data</div></pre></td></tr></table></figure>
 <p>主意其中 <code>node-id</code> 的值， 每台应该是不一样的<br>可以用一下命令生成</p>
@@ -654,63 +758,6 @@
     
     
       <category term="machine_learning" scheme="http://m2shad0w.com/tags/machine-learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mongodb基础</title>
-    <link href="http://m2shad0w.com/2016/05/09/mongodb%E5%9F%BA%E7%A1%80/"/>
-    <id>http://m2shad0w.com/2016/05/09/mongodb基础/</id>
-    <published>2016-05-09T01:34:40.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="nosql之mongodb"><a href="#nosql之mongodb" class="headerlink" title="nosql之mongodb"></a>nosql之mongodb</h3><p>mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。<br>在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。<br><a id="more"></a></p>
-<h3 id="mongo-ppt"><a href="#mongo-ppt" class="headerlink" title="mongo ppt"></a>mongo ppt</h3><p><iframe src="//www.slideshare.net/slideshow/embed_code/key/bCfioac6WeYuvY" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/JiahuaZhu3/mongo-61799349" title="Mongo基础" target="_blank">Mongo基础</a> </strong> from <strong><a href="//www.slideshare.net/JiahuaZhu3" target="_blank">Jiahua Zhu</a></strong> </div></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;nosql之mongodb&quot;&gt;&lt;a href=&quot;#nosql之mongodb&quot; class=&quot;headerlink&quot; title=&quot;nosql之mongodb&quot;&gt;&lt;/a&gt;nosql之mongodb&lt;/h3&gt;&lt;p&gt;mongodb其实是介于关系型数据库与Nosql 之间的一种数据库, 由于工作需要，正好接触了一下。到现在也有点时间了。&lt;br&gt;在网上找kail的源的时候，看到中科大同学的分享，总结的挺基础的，分享一下。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="mongodb" scheme="http://m2shad0w.com/categories/mongodb/"/>
-    
-    
-      <category term="mongodb" scheme="http://m2shad0w.com/tags/mongodb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pandas2data</title>
-    <link href="http://m2shad0w.com/2016/04/28/pandas2data/"/>
-    <id>http://m2shad0w.com/2016/04/28/pandas2data/</id>
-    <published>2016-04-28T03:46:39.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="pandas处理数据"><a href="#pandas处理数据" class="headerlink" title="pandas处理数据"></a>pandas处理数据</h3><p>一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…<br><a id="more"></a></p>
-<p>需求中有将几张表中的数据聚合</p>
-<p>这几张表都有一个公共的key，但是没法通过一个简单的sql语句完成（跨裤，不在一个地方）<br>这时候就可以通过pandas的DataFrame 的聚合输出</p>
-<p><code>from pandas import DataFrame</code></p>
-<h3 id="pandas操作文档"><a href="#pandas操作文档" class="headerlink" title="pandas操作文档"></a>pandas操作文档</h3><p><a href="http://pandas.pydata.org/pandas-docs/stable/merging.html#brief-primer-on-merge-methods-relational-algebra" target="_blank" rel="external">官方文档</a></p>
-<p>将前面获得的从pymysql中list对象传入DataFrame</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">df = DataFrame(result1)</div><div class="line">df2 = DataFrame(result2)</div><div class="line">df3 = DataFrame(result3)</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dff = pd.merge(df, df2, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</div><div class="line">dff1 = pd.merge(dff, df3, how=<span class="string">'left'</span>, on=<span class="string">"id"</span>)</div></pre></td></tr></table></figure>
-<p>聚合之后导出到xlsx</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dff1.to_excel(<span class="string">'foo.xlsx'</span>, sheet_name=<span class="string">'sheet1'</span>)</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;pandas处理数据&quot;&gt;&lt;a href=&quot;#pandas处理数据&quot; class=&quot;headerlink&quot; title=&quot;pandas处理数据&quot;&gt;&lt;/a&gt;pandas处理数据&lt;/h3&gt;&lt;p&gt;一些数据需要通过pandas聚合，很快就可以给到运营了，少写代码…&lt;br&gt;
-    
-    </summary>
-    
-      <category term="pandas" scheme="http://m2shad0w.com/categories/pandas/"/>
-    
-      <category term="dataMining" scheme="http://m2shad0w.com/categories/pandas/dataMining/"/>
-    
-    
-      <category term="python" scheme="http://m2shad0w.com/tags/python/"/>
     
   </entry>
   
