@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2017-08-29T07:58:27.000Z</updated>
+  <updated>2017-08-29T08:27:00.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://m2shad0w.com/2017/08/28/%E5%86%85%E7%BD%91dns%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
     <id>http://m2shad0w.com/2017/08/28/内网dns服务搭建/</id>
     <published>2017-08-28T08:44:17.000Z</published>
-    <updated>2017-08-29T07:58:27.000Z</updated>
+    <updated>2017-08-29T08:27:00.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>在内网部署了很多服务，且在不同的机器端口上，不同的服务又要给其他同事访问。ip访问就十分的麻烦，所以就在内网搭建了一下内网 dns 服务。以下是小记。</p>
 <a id="more"></a>
@@ -37,7 +37,10 @@
 <p>/var/named/192.168.0.zone文件内容，请注意named用户需要有读的权限</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$TTL 1D</div><div class="line">@       IN SOA  hunliji.cn. hunliji.cn. (</div><div class="line">                                        0       ; serial</div><div class="line">                                        1D      ; refresh</div><div class="line">                                        1H      ; retry</div><div class="line">                                        1W      ; expire</div><div class="line">                                        3H )    ; minimum</div><div class="line">        NS      @</div><div class="line">        AAAA    ::1</div><div class="line">18		PTR     s.hunliji.cn.</div><div class="line">16      PTR		www.hunliji.cn.</div><div class="line">16      PTR     docs.hunliji.cn.</div><div class="line">16      PTR     master.hunliji.cn.</div></pre></td></tr></table></figure>
 <p>启动bind</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start named-chroot</div></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start named-chroot</div></pre></td></tr></table></figure>
+<p>查看 dns</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">➜  ~ nslookup master.hunliji.cn</div><div class="line">Server:		172.16.10.16</div><div class="line">Address:	172.16.10.16#53</div><div class="line"></div><div class="line">Name:	master.hunliji.cn</div><div class="line">Address: 172.16.10.16</div></pre></td></tr></table></figure>
+]]></content>
     
     <summary type="html">
     
