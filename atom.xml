@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://m2shad0w.com/"/>
-  <updated>2017-01-09T09:26:29.000Z</updated>
+  <updated>2017-08-29T07:58:27.000Z</updated>
   <id>http://m2shad0w.com/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>内网dns服务搭建</title>
+    <link href="http://m2shad0w.com/2017/08/28/%E5%86%85%E7%BD%91dns%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>http://m2shad0w.com/2017/08/28/内网dns服务搭建/</id>
+    <published>2017-08-28T08:44:17.000Z</published>
+    <updated>2017-08-29T07:58:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>在内网部署了很多服务，且在不同的机器端口上，不同的服务又要给其他同事访问。ip访问就十分的麻烦，所以就在内网搭建了一下内网 dns 服务。以下是小记。</p>
+<a id="more"></a>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>在 centos 7 机器上运行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install bind-chroot -y # 安装 bind 服务</div><div class="line">systemctl enable named-chroot # 设置开机启动</div></pre></td></tr></table></figure>
+<p>修改 bind 默认配置<br>path <code>/etc/named.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">listen-on port 53 &#123; any; &#125;表示监听任何ip对53端口的请求</div><div class="line">allow-query &#123; any; &#125;表示接收任何来源查询dns记录</div></pre></td></tr></table></figure>
+<h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><p>在配置尾部添加需要解析的一级域名, 具体解析规则在/var/named/a.com.zone里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zone &quot;a.com&quot; IN &#123;</div><div class="line">    type master;</div><div class="line">    file &quot;a.com.zone&quot;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>增加一个反解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zone &quot;0.168.192.in-addr.arpa&quot; IN &#123;</div><div class="line">    type master;</div><div class="line">    file &quot;192.168.0.zone&quot;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>/var/named/a.com.zone文件内容，请注意named用户有读的权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">root@master  /var/named  cat hunliji.cn.zone</div><div class="line">$TTL 1D</div><div class="line">@	IN SOA	@ hunliji.cn. (</div><div class="line">					0	; serial</div><div class="line">					1D	; refresh</div><div class="line">					1H	; retry</div><div class="line">					1W	; expire</div><div class="line">					3H )	; minimum</div><div class="line">		NS			@</div><div class="line">		AAAA	    ::1</div><div class="line">		A           127.0.0.1</div><div class="line">s		A	    	172.16.10.18</div><div class="line">master	A	    	172.16.10.16</div><div class="line">slave01 A 	    	172.16.10.17</div><div class="line">@       MX    10    mx.hunliji.cn.</div></pre></td></tr></table></figure>
+<p>/var/named/192.168.0.zone文件内容，请注意named用户需要有读的权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$TTL 1D</div><div class="line">@       IN SOA  hunliji.cn. hunliji.cn. (</div><div class="line">                                        0       ; serial</div><div class="line">                                        1D      ; refresh</div><div class="line">                                        1H      ; retry</div><div class="line">                                        1W      ; expire</div><div class="line">                                        3H )    ; minimum</div><div class="line">        NS      @</div><div class="line">        AAAA    ::1</div><div class="line">18		PTR     s.hunliji.cn.</div><div class="line">16      PTR		www.hunliji.cn.</div><div class="line">16      PTR     docs.hunliji.cn.</div><div class="line">16      PTR     master.hunliji.cn.</div></pre></td></tr></table></figure>
+<p>启动bind</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start named-chroot</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x01&quot;&gt;&lt;a href=&quot;#0x01&quot; class=&quot;headerlink&quot; title=&quot;0x01&quot;&gt;&lt;/a&gt;0x01&lt;/h2&gt;&lt;p&gt;在内网部署了很多服务，且在不同的机器端口上，不同的服务又要给其他同事访问。ip访问就十分的麻烦，所以就在内网搭建了一下内网 dns 服务。以下是小记。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="dns" scheme="http://m2shad0w.com/categories/dns/"/>
+    
+      <category term="yum" scheme="http://m2shad0w.com/categories/dns/yum/"/>
+    
+    
+      <category term="sys" scheme="http://m2shad0w.com/tags/sys/"/>
+    
+  </entry>
   
   <entry>
     <title>hbase初探</title>
@@ -734,30 +773,6 @@
     
     
       <category term="data" scheme="http://m2shad0w.com/tags/data/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Dato_Machine_Learning</title>
-    <link href="http://m2shad0w.com/2016/05/25/Dato-Machine-Learning/"/>
-    <id>http://m2shad0w.com/2016/05/25/Dato-Machine-Learning/</id>
-    <published>2016-05-25T07:01:23.000Z</published>
-    <updated>2016-07-21T09:20:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="dato"><a href="#dato" class="headerlink" title="dato"></a>dato</h3><p>Dato_Machine_Learning, 使用GraphLab来做一些机器学习。<br><a id="more"></a></p>
-<h3 id="user-guide"><a href="#user-guide" class="headerlink" title="user guide"></a>user guide</h3><p><a href="https://dato.com/learn/userguide/install.html" target="_blank" rel="external">https://dato.com/learn/userguide/install.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;dato&quot;&gt;&lt;a href=&quot;#dato&quot; class=&quot;headerlink&quot; title=&quot;dato&quot;&gt;&lt;/a&gt;dato&lt;/h3&gt;&lt;p&gt;Dato_Machine_Learning, 使用GraphLab来做一些机器学习。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="bigdata" scheme="http://m2shad0w.com/categories/bigdata/"/>
-    
-    
-      <category term="machine_learning" scheme="http://m2shad0w.com/tags/machine-learning/"/>
     
   </entry>
   
